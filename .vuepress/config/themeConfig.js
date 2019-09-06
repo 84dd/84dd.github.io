@@ -7,6 +7,7 @@ module.exports = {
   navbar: true, 
   editLinks: true,
   editLinkText: '在 GitHub 上编辑此页',
+  docsBranch: 'dev',
   lastUpdated: '更新于',
   tags: true,
   sidebar,

@@ -1,7 +1,19 @@
 module.exports = [
   require('../plugins/my-router'),
   require('../plugins/my-loader'),
-  '@vuepress/back-to-top',
+  ['@vuepress/active-header-links'],
+  ['@vuepress/back-to-top'],
+  ['@vuepress/nprogress']
+  [
+    '@vuepress/medium-zoom',
+    {
+    selector: 'img.zoom-custom-imgs',
+      // See: https://github.com/francoischalifour/medium-zoom#options
+      options: {
+      margin: 16
+    }
+  }
+  ],
   [
     '@vuepress/pwa',
     {

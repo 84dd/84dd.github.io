@@ -7,13 +7,10 @@ export default ({pages})=> {
 
   //只有在isNotPage是false的时候才会显示评论
   if (dist.frontmatter && dist.frontmatter.comment === false) {
-    console.log(1)
     return
   }
 
-  console.log(1111)
-
-  const page =document.querySelector('.page')
+  const page = document.querySelector('.page')
   const linkGitalk = document.createElement('link');
   linkGitalk.href = 'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css';
   linkGitalk.rel = 'stylesheet';
@@ -27,13 +24,13 @@ export default ({pages})=> {
     let gitalk = document.createElement('div')
     gitalk.id = 'gitalk-container'
     page.appendChild(gitalk)
-    var _gitalk = new Gitalk({
+    let _gitalk = new Gitalk({
       clientID: '3524c96df10d11b79e2a',
       clientSecret: 'a4ae09ef29487a56d0ef9ee7b74a885cb9cd67a3',
       repo: '84dd.github.io', // 存储评论的仓库名字
       owner: '84dd',
       admin: ['84dd'],  //仓库的管理员，可以有多个
-      id: decodeURI(path),      // 每个页面根据url生成对应的issue，保证页面之间的评论都是独立的
+      id: path
     })
     _gitalk.render('gitalk-container')
   }

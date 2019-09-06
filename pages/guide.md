@@ -42,7 +42,6 @@ export default {
     this.posts = this.$site.pages.filter(item => {
       return !item.frontmatter || !item.frontmatter.isNotPage
     })
-    console.log( this.posts )
     this.num = this.posts.length
   },
 
@@ -58,12 +57,13 @@ export default {
 
       return this.posts
         .map(post => {
+        console.log(post)
           const execs = re.exec(post.relativePath)
           return {
             ...post,
             updateTimestamp: (new Date(post.lastUpdated)).getTime(),
             filename: execs ? execs['1'] : '',
-            formatDay: this.formatDate(new Date(post.lastUpdated))
+            formatDay: post.lastUpdated
           }
         })
         .sort((a, b) => b.updateTimestamp - a.updateTimestamp)
