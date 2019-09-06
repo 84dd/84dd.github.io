@@ -11,13 +11,7 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
-
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-});
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
@@ -27,23 +21,23 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "c5d54ce3d8c2fc2d75b80435ee08e723"
+    "revision": "d2777186602e755bd950b4606efd1ef9"
   },
   {
     "url": "about/index.html",
-    "revision": "bcf10538453056adecd8257be656f3b6"
+    "revision": "6006becbba5af76997acbf1db189f746"
   },
   {
-    "url": "assets/css/0.styles.238b805d.css",
-    "revision": "4d1e526314005599fc460632baa5d679"
+    "url": "assets/css/0.styles.80c246b4.css",
+    "revision": "7d73819979a2dd33853bbd5c24b761ba"
   },
   {
     "url": "assets/img/search.83621669.svg",
     "revision": "83621669651b9a3d4bf64d1a670ad856"
   },
   {
-    "url": "assets/js/10.7aaa463e.js",
-    "revision": "d04ec3dd134d1eb34fa6d3f576409d9d"
+    "url": "assets/js/10.91fff157.js",
+    "revision": "5249483b7f1dacd179d43105855db48e"
   },
   {
     "url": "assets/js/11.130d58ac.js",
@@ -54,40 +48,40 @@ self.__precacheManifest = [
     "revision": "c19fe4a5396ee31ac4c3a265a0da4a86"
   },
   {
-    "url": "assets/js/3.103c2f1a.js",
-    "revision": "558894fa02cd7923e12775045774c0ca"
+    "url": "assets/js/3.dc3a9c68.js",
+    "revision": "0969e9416d4ef711040be439a485ade1"
   },
   {
-    "url": "assets/js/4.52512be8.js",
-    "revision": "a2312409b9715d7cfe2ab700c6ad91c8"
+    "url": "assets/js/4.e4bc3329.js",
+    "revision": "a4fb4df93cd183936e5f3bdb8ede1df5"
   },
   {
-    "url": "assets/js/5.987718df.js",
-    "revision": "efd2c573069d9a7a500bdbdda0ed2c4b"
+    "url": "assets/js/5.7663da06.js",
+    "revision": "84a94bfc5e648d6406f9f21866ba8ea1"
   },
   {
     "url": "assets/js/6.94715d9f.js",
     "revision": "13501f49afa10dee3a6be012e35ad07b"
   },
   {
-    "url": "assets/js/7.e3b71d52.js",
-    "revision": "4ea78cba97ca2fc8806fff844198f95f"
+    "url": "assets/js/7.7ad2741a.js",
+    "revision": "91c19f6a3d56f7f370742f45bf777a42"
   },
   {
     "url": "assets/js/8.1308dfca.js",
     "revision": "f7fcc50828f188d07b2dcb777641e385"
   },
   {
-    "url": "assets/js/9.19ee3c0c.js",
-    "revision": "1d3aa2a323479c69cbc2012b0114f904"
+    "url": "assets/js/9.0e9fe00a.js",
+    "revision": "736e9ec9f6fa04edde5219f30744b213"
   },
   {
-    "url": "assets/js/app.a003390b.js",
-    "revision": "dbca39bcb4a1c2e7e89a28d98201086b"
+    "url": "assets/js/app.c634cac8.js",
+    "revision": "096e21b7113a7b9fb84b4902735de748"
   },
   {
     "url": "docs/en/index.html",
-    "revision": "3c5922ac4f5be7ed6e482e44471c7497"
+    "revision": "089c603b81ab77efe32484d6ede35690"
   },
   {
     "url": "fish_logo.png",
@@ -95,17 +89,18 @@ self.__precacheManifest = [
   },
   {
     "url": "guide/index.html",
-    "revision": "59b989045e415afc39a6a4b00021ccd0"
+    "revision": "93ee83636f9fbec6e538c97e54ff3dab"
   },
   {
     "url": "index.html",
-    "revision": "bc03e307e631460c1bfec7e0b2efdc60"
+    "revision": "1fc6eefbdd36fb39a294795ea2677d7a"
   },
   {
     "url": "passages/2019-09-01-browser/index.html",
-    "revision": "701e0df5106352b6344dd45f6542f198"
+    "revision": "0938e2642dfae8cfad1b33acb09f7fd2"
   }
 ].concat(self.__precacheManifest || []);
+workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 addEventListener('message', event => {
   const replyPort = event.ports[0]
