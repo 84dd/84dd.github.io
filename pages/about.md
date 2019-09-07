@@ -13,7 +13,7 @@ single: true
 
 #### 联系我`email` 744177242@qq.com 
 ***
-<div style="height: 360px;overflow: hidden">
-  <img src="/wechat.jpg" width="300" align="left">
-  <img src="/qq.jpg" width="300" align="right">
+<div class="about-me-container">
+  <img src="/wechat.jpg" width="300">
+  <img src="/qq.jpg" width="300">
 </div>

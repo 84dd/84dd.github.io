@@ -13,3 +13,12 @@
 .search-box input:focus {
   width: 20em;
 }
+
+.about-me-container {
+  height: 360px;
+  overflow: hidden;
+  @media (max-width: $MQMobileNarrow) {
+    height: auto;
+    overflow: auto;
+  }
+}
