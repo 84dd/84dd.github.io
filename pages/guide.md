@@ -6,8 +6,6 @@ comment: true
 single: true
 ---
 
-> 最近更新了下面这些文章
-
 <ul class="page-guide-ul">
   <li 
     class="page-guide-row"
@@ -57,7 +55,6 @@ export default {
 
       return this.posts
         .map(post => {
-        console.log(post)
           const execs = re.exec(post.relativePath)
           return {
             ...post,

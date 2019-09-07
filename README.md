@@ -5,8 +5,8 @@ comment: false
 single: true
 heroImage: "./fish_logo.png"
 tagline: 子非鱼，安知鱼之乐？
-actionText: 进入吃鱼
-actionLink: "/guide/"
+actionText: 关于我
+actionLink: "/about/"
 features:
   - title: 前端
     details: Vue / 小程序 / jQuery
@@ -17,11 +17,23 @@ features:
 footer: MIT Licensed | Copyright © 2019 84dd
 ---
 
-### 像数 1, 2, 3 一样容易
+### [84dd] 像数 1, 2, 3 一样容易
 
 ``` javascript
-/* 84dd */
 console.log('蓝'.charCodeAt().toString(16));
+```
+
+``` java
+System.out.println(Integer.toHexString("蓝".charAt(0)));
+```
+
+``` python
+import json
+print json.dumps('蓝')
+```
+
+``` sql
+SELECT HEX(ORD(CONVERT('蓝' USING ucs2)))
 ```
 
 ::: warning 注意
