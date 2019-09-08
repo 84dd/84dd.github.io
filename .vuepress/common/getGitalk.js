@@ -1,3 +1,5 @@
+//const clientSecret = process.env.clientSecret;
+
 export default ({pages})=> {
   const path = window.location.pathname
   // 获取当前页面信息
@@ -26,7 +28,7 @@ export default ({pages})=> {
     page.appendChild(gitalk)
     let _gitalk = new Gitalk({
       clientID: '3524c96df10d11b79e2a',
-      clientSecret: 'a4ae09ef29487a56d0ef9ee7b74a885cb9cd67a3',
+      clientSecret: '7531fb5aaa5560499ff382d6233b18cd6d8291e2',
       repo: '84dd.github.io', // 存储评论的仓库名字
       owner: '84dd',
       admin: ['84dd'],  //仓库的管理员，可以有多个

@@ -14,6 +14,7 @@ module.exports = {
   themeConfig: themeConfig,
   plugins: plugins,
   head:[
-    ['link', { rel: 'shortcut icon', href: '/favorite.icon', type: 'image/png' }]
-    ]
+    ['link', { rel: 'shortcut icon', href: '/favorite.icon', type: 'image/png' }],
+    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
+    ],
 }
