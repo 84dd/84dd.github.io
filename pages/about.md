@@ -15,5 +15,5 @@ single: true
 ***
 <div class="about-me-container">
   <img src="/wechat.jpg" width="300">
-  <img src="/qq.jpg" width="300">
+  <img src="/qq.jpg" width="300" class="qq-jpg">
 </div>

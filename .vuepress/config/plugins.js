@@ -3,16 +3,10 @@ module.exports = [
   require('../plugins/my-loader'),
   ['@vuepress/active-header-links'],
   ['@vuepress/back-to-top'],
-  ['@vuepress/nprogress']
+  ['@vuepress/nprogress'],
   [
-    '@vuepress/medium-zoom',
-    {
-    selector: 'img.zoom-custom-imgs',
-      // See: https://github.com/francoischalifour/medium-zoom#options
-      options: {
-      margin: 16
-    }
-  }
+    '@vuepress/medium-zoom'
+
   ],
   [
     '@vuepress/pwa',

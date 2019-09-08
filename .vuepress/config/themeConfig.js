@@ -2,10 +2,9 @@ const sidebar = require('./sidebar')
 const nav = require('./nav')
 
 module.exports = {
-  port: 10086,
   navbar: true,
   repo: '84dd/84dd.github.io',
-  repoLabel: '查看源码',
+  repoLabel: '源码',
   editLinks: true,
   editLinkText: '在 GitHub 上编辑此页',
   // 假如文档放在一个特定的分支下：
