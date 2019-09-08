@@ -34,5 +34,4 @@ print json.dumps('蓝')
 
 ``` sql
 SELECT HEX(ORD(CONVERT('蓝' USING ucs2)))
-```e.log('蓝'.charCodeAt().toString(16));
 ```
