@@ -1,8 +1,8 @@
 
-const frontend = [
+const chrome = [
   '插件推荐',
 ]
 
 module.exports = {
-  frontend
+  chrome
 }

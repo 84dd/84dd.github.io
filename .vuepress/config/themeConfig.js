@@ -2,6 +2,7 @@ const sidebar = require('./sidebar')
 const nav = require('./nav')
 
 module.exports = {
+  sidebarDepth: 4,
   navbar: true,
   repo: '84dd/84dd.github.io',
   repoLabel: '源码',

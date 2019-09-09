@@ -13,7 +13,7 @@ single: true
     :key="index"
     href="post"
   >
-    <a :href="post.path">《{{post.title}}》</a>
+    <a :href="post.path">{{post.title}}</a>
     <span>{{ post.formatDay }}</span>
   </li>
 </ul>
