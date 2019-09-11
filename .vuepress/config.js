@@ -9,7 +9,7 @@ module.exports = {
   port: 8888,
   dest: 'dist',
   lastUpdated: '上次更新',
-  locales: locales,
+  // locales: locales,
   markdown: markdown,
   themeConfig: themeConfig,
   plugins: plugins,

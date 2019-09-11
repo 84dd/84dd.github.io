@@ -1,4 +1,17 @@
 module.exports = [
   { text: '最新', link: '/guide/' },
-  { text: '关于我', link: '/about/' },
+  { text: '最真我', link: '/about/' },
+  {
+    text: "工具",
+    items: [
+      {
+        text: "Chrome",
+        link: "/docs/chrome/"
+      },
+      {
+        text: "IntelliJ IDEA",
+        link: "/docs/idea/"
+      },
+    ]
+  },
 ]

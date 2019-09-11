@@ -63,7 +63,7 @@ export default {
             formatDay: post.lastUpdated
           }
         })
-        .sort((a, b) => b.updateTimestamp - a.updateTimestamp)
+        .sort((a, b) => a.updateTimestamp - b.updateTimestamp ? 1 : -1)
         .slice(0, num)
     },
     
