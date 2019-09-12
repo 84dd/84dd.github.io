@@ -21,11 +21,11 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "621f7c9d1222409cd8af3d9f914caf9c"
+    "revision": "565c850072a7c238bdf1fbddd20abac5"
   },
   {
     "url": "about/index.html",
-    "revision": "f3c957f239dce23b7737f0954df4ac8b"
+    "revision": "49d62910f3e55ee7f8d25a7afa3b42f1"
   },
   {
     "url": "assets/css/0.styles.bf87837d.css",
@@ -36,20 +36,20 @@ self.__precacheManifest = [
     "revision": "83621669651b9a3d4bf64d1a670ad856"
   },
   {
-    "url": "assets/js/10.82d9a4ed.js",
-    "revision": "473946aaea5774ecdc6f86082d3cb52a"
+    "url": "assets/js/10.79ee8123.js",
+    "revision": "a0595949e94359d8e1f5f96d915d977f"
   },
   {
-    "url": "assets/js/11.1fe81e23.js",
-    "revision": "e6977f74b23fa74d803c90308a0c8d5e"
+    "url": "assets/js/11.5ed80b7f.js",
+    "revision": "541c3f27ecf924f628ef75edf0a36f66"
   },
   {
-    "url": "assets/js/12.4c26ca8f.js",
-    "revision": "f9535850ad2d3c12bf60fd7f6394f258"
+    "url": "assets/js/12.eaba20b9.js",
+    "revision": "71c6d6f3d89777800749c4cf9c78dc13"
   },
   {
-    "url": "assets/js/13.e24bdb0a.js",
-    "revision": "d0218ec0116420ad661750bd5e3928b7"
+    "url": "assets/js/13.3407408e.js",
+    "revision": "7ee23fefcc5ad3e00fbb4d8183d566ca"
   },
   {
     "url": "assets/js/14.fd616c98.js",
@@ -80,36 +80,36 @@ self.__precacheManifest = [
     "revision": "ecece08a5f6e8b11f0ab15c8e348112f"
   },
   {
-    "url": "assets/js/8.53114db1.js",
-    "revision": "58fbc8fc95beb78c5ad168c814ccb357"
+    "url": "assets/js/8.861600fb.js",
+    "revision": "6a261483c74fda9be100cfd824d092b6"
   },
   {
-    "url": "assets/js/9.e463aa5e.js",
-    "revision": "ad40c252cc3486be27f3e5cb9665f5b1"
+    "url": "assets/js/9.a5eb4b75.js",
+    "revision": "71104308a38716255564a28c7669a3e8"
   },
   {
-    "url": "assets/js/app.3afb5b12.js",
-    "revision": "935b67798fdfff3393dfd1b79e13d4c7"
+    "url": "assets/js/app.79b8faf8.js",
+    "revision": "a1a8241fc591a4467908511ee4072e7c"
   },
   {
     "url": "docs/chrome/index.html",
-    "revision": "cd25fa623257e9949f16f242bcdc0f9a"
+    "revision": "665812572c34ffa9d844f3665df143b7"
   },
   {
     "url": "docs/en/index.html",
-    "revision": "7cc2ce35d56610967573c1887fa56cc5"
+    "revision": "ee4526d14749c96545fb0e924cec3bdb"
   },
   {
     "url": "docs/idea/index.html",
-    "revision": "40708c284a07075862ef2294d5fe132c"
+    "revision": "28f843b7573f3f89a748e900e98a9d64"
   },
   {
     "url": "docs/idea/技巧.html",
-    "revision": "63ee2b728edc7382a2ac472f878d1c59"
+    "revision": "0ff025609a8917d209a5f42fb5a027fe"
   },
   {
     "url": "docs/idea/插件.html",
-    "revision": "2829d39ee5c9d84efd501e5d5509b934"
+    "revision": "ad1cf07a37eb79f8c861b0a1f80a2020"
   },
   {
     "url": "fish_logo.png",
@@ -117,7 +117,7 @@ self.__precacheManifest = [
   },
   {
     "url": "guide/index.html",
-    "revision": "c222c1d3252f93192abb16e34067c568"
+    "revision": "898a5cf70c1ad3e1c32abb2634ceacbb"
   },
   {
     "url": "idea/BackgroundImagePlus.png",
@@ -128,8 +128,16 @@ self.__precacheManifest = [
     "revision": "1a46563ff3458f61f0fab4cb6f2a36e6"
   },
   {
+    "url": "idea/Darcula.png",
+    "revision": "bd86d3f3cfaa6dd8c52d645e2a569221"
+  },
+  {
     "url": "idea/GrepConsole.png",
     "revision": "467375a5789bd3af57f57c58f9ac9646"
+  },
+  {
+    "url": "idea/import.png",
+    "revision": "f32a56aae37773874f502bd2ea5f1848"
   },
   {
     "url": "idea/JRebel.png",
@@ -148,16 +156,24 @@ self.__precacheManifest = [
     "revision": "c14ace48938506f00a96fd3155fe62fe"
   },
   {
-    "url": "idea/NyanProgressBar.png",
-    "revision": "a855ca398e2cd4d3b5aefe2bb887f7bb"
+    "url": "idea/NyanProgressBar.gif",
+    "revision": "426def825d600aa73af353620aa22dfe"
   },
   {
     "url": "idea/RestfulToolkit.png",
     "revision": "ea673e18984f7289367d12e16704ebeb"
   },
   {
+    "url": "idea/showMemory.png",
+    "revision": "7838bbb9693c1bf9e653c0dc7e4949e3"
+  },
+  {
+    "url": "idea/vm.png",
+    "revision": "f37eb3f1aeb5fdde275b94c2eaa7eb71"
+  },
+  {
     "url": "index.html",
-    "revision": "2a2f29748933443509a7345dd2ffad29"
+    "revision": "bcd8a517231f4dcf74c1168ca192ec2c"
   },
   {
     "url": "qq.jpg",
