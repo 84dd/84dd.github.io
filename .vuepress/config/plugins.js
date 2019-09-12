@@ -4,7 +4,12 @@ module.exports = [
   ['@vuepress/active-header-links'],
   ['@vuepress/back-to-top'],
   ['@vuepress/nprogress'],
-  ['@vuepress/medium-zoom'],
+  ['@vuepress/medium-zoom', {
+    selector: 'img.medium-zoom-image',
+    options: {
+      margin: 16
+    }
+  }],
   [
     '@vuepress/pwa',
     {
