@@ -21,11 +21,11 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "d3d4bb23964f0a45b874fbe550877228"
+    "revision": "621f7c9d1222409cd8af3d9f914caf9c"
   },
   {
     "url": "about/index.html",
-    "revision": "03564d5c37551c63ae4742f569e8e1ca"
+    "revision": "f3c957f239dce23b7737f0954df4ac8b"
   },
   {
     "url": "assets/css/0.styles.bf87837d.css",
@@ -36,20 +36,20 @@ self.__precacheManifest = [
     "revision": "83621669651b9a3d4bf64d1a670ad856"
   },
   {
-    "url": "assets/js/10.ca6c864a.js",
-    "revision": "45e7eff2d8570febc6e6120a8a46b3d4"
+    "url": "assets/js/10.82d9a4ed.js",
+    "revision": "473946aaea5774ecdc6f86082d3cb52a"
   },
   {
-    "url": "assets/js/11.cca1d4b5.js",
-    "revision": "992398084d3548703b102695680c567f"
+    "url": "assets/js/11.1fe81e23.js",
+    "revision": "e6977f74b23fa74d803c90308a0c8d5e"
   },
   {
-    "url": "assets/js/12.7d0309ab.js",
-    "revision": "d285a4e719d73129175e94a6ee5b6bf7"
+    "url": "assets/js/12.4c26ca8f.js",
+    "revision": "f9535850ad2d3c12bf60fd7f6394f258"
   },
   {
-    "url": "assets/js/13.7cc5de8c.js",
-    "revision": "460972f8d5d228542831e5a532aea895"
+    "url": "assets/js/13.e24bdb0a.js",
+    "revision": "d0218ec0116420ad661750bd5e3928b7"
   },
   {
     "url": "assets/js/14.fd616c98.js",
@@ -80,36 +80,36 @@ self.__precacheManifest = [
     "revision": "ecece08a5f6e8b11f0ab15c8e348112f"
   },
   {
-    "url": "assets/js/8.861600fb.js",
-    "revision": "6a261483c74fda9be100cfd824d092b6"
+    "url": "assets/js/8.53114db1.js",
+    "revision": "58fbc8fc95beb78c5ad168c814ccb357"
   },
   {
-    "url": "assets/js/9.916be0bc.js",
-    "revision": "2232cddee1808d544bfe275cdc530c17"
+    "url": "assets/js/9.e463aa5e.js",
+    "revision": "ad40c252cc3486be27f3e5cb9665f5b1"
   },
   {
-    "url": "assets/js/app.8e2bd645.js",
-    "revision": "f731eb37070df7faf3fd577ed6ab7ecd"
+    "url": "assets/js/app.3afb5b12.js",
+    "revision": "935b67798fdfff3393dfd1b79e13d4c7"
   },
   {
     "url": "docs/chrome/index.html",
-    "revision": "fab4390b8e5e093e92f00bb0074377c1"
+    "revision": "cd25fa623257e9949f16f242bcdc0f9a"
   },
   {
     "url": "docs/en/index.html",
-    "revision": "76a202e47b369b44d465a75f1bc0733e"
+    "revision": "7cc2ce35d56610967573c1887fa56cc5"
   },
   {
     "url": "docs/idea/index.html",
-    "revision": "f45b22ce983e08c145c7b49b3ae8ccec"
+    "revision": "40708c284a07075862ef2294d5fe132c"
   },
   {
     "url": "docs/idea/技巧.html",
-    "revision": "2c38f67ce816cc732b4a3470e61c8731"
+    "revision": "63ee2b728edc7382a2ac472f878d1c59"
   },
   {
     "url": "docs/idea/插件.html",
-    "revision": "6ea2b381bc9d38a7c871626904bc3853"
+    "revision": "2829d39ee5c9d84efd501e5d5509b934"
   },
   {
     "url": "fish_logo.png",
@@ -117,19 +117,47 @@ self.__precacheManifest = [
   },
   {
     "url": "guide/index.html",
-    "revision": "6f805f0522188c14544851eaf11ccfb4"
+    "revision": "c222c1d3252f93192abb16e34067c568"
   },
   {
     "url": "idea/BackgroundImagePlus.png",
     "revision": "6a98c488409a1d1ae181e98db85a2038"
   },
   {
+    "url": "idea/CodeGlance.png",
+    "revision": "1a46563ff3458f61f0fab4cb6f2a36e6"
+  },
+  {
+    "url": "idea/GrepConsole.png",
+    "revision": "467375a5789bd3af57f57c58f9ac9646"
+  },
+  {
+    "url": "idea/JRebel.png",
+    "revision": "b9db2a8cc96fa12e496ea08a262020f2"
+  },
+  {
+    "url": "idea/MavenHelper.jpg",
+    "revision": "ca1c9e904d7f762bba38819dc087a3e3"
+  },
+  {
+    "url": "idea/MavenHelper.png",
+    "revision": "8e81aad8c76e7472401daec88dc10fc8"
+  },
+  {
+    "url": "idea/MyBatisLogPlugin.gif",
+    "revision": "c14ace48938506f00a96fd3155fe62fe"
+  },
+  {
     "url": "idea/NyanProgressBar.png",
     "revision": "a855ca398e2cd4d3b5aefe2bb887f7bb"
   },
   {
+    "url": "idea/RestfulToolkit.png",
+    "revision": "ea673e18984f7289367d12e16704ebeb"
+  },
+  {
     "url": "index.html",
-    "revision": "a4f26072ae44ddb22d364eb8728fa279"
+    "revision": "2a2f29748933443509a7345dd2ffad29"
   },
   {
     "url": "qq.jpg",
