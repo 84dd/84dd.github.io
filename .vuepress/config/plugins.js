@@ -5,7 +5,7 @@ module.exports = [
   ['@vuepress/back-to-top'],
   ['@vuepress/nprogress'],
   ['@vuepress/medium-zoom', {
-    selector: 'img.medium-zoom-image',
+    selector: 'img',
     options: {
       margin: 16
     }
