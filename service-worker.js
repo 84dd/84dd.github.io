@@ -21,11 +21,11 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "565c850072a7c238bdf1fbddd20abac5"
+    "revision": "a115796c258f33bf6a1d21e63908e9e1"
   },
   {
     "url": "about/index.html",
-    "revision": "49d62910f3e55ee7f8d25a7afa3b42f1"
+    "revision": "a45ddc71df78c6e398d37d0debfe276f"
   },
   {
     "url": "assets/css/0.styles.bf87837d.css",
@@ -36,24 +36,36 @@ self.__precacheManifest = [
     "revision": "83621669651b9a3d4bf64d1a670ad856"
   },
   {
-    "url": "assets/js/10.79ee8123.js",
-    "revision": "a0595949e94359d8e1f5f96d915d977f"
+    "url": "assets/js/10.6eecdbc9.js",
+    "revision": "bf319893dd2d90b1a35b39fda9a8e165"
   },
   {
-    "url": "assets/js/11.5ed80b7f.js",
-    "revision": "541c3f27ecf924f628ef75edf0a36f66"
+    "url": "assets/js/11.a1deaca8.js",
+    "revision": "6eb5fac9f7ca2ccc60b53e2e26936fdc"
   },
   {
-    "url": "assets/js/12.eaba20b9.js",
-    "revision": "71c6d6f3d89777800749c4cf9c78dc13"
+    "url": "assets/js/12.87fa4de3.js",
+    "revision": "273d8e2e3f362cf6c8214713eb5aae3b"
   },
   {
-    "url": "assets/js/13.3407408e.js",
-    "revision": "7ee23fefcc5ad3e00fbb4d8183d566ca"
+    "url": "assets/js/13.8720a1af.js",
+    "revision": "c29aff91beffdb3dcdac9845a39bcbc8"
   },
   {
-    "url": "assets/js/14.fd616c98.js",
-    "revision": "fd2cfbf19ef24a434f19b7e0366b0856"
+    "url": "assets/js/14.8d3d19bf.js",
+    "revision": "c982b9b4bad7a95625ccfaa1bb9a7c15"
+  },
+  {
+    "url": "assets/js/15.fcd4a29f.js",
+    "revision": "8f7bb3335c6763308e5b7a1ecee93c01"
+  },
+  {
+    "url": "assets/js/16.60a59263.js",
+    "revision": "2196c20d9d5836335c4a52c1ac28919a"
+  },
+  {
+    "url": "assets/js/17.5ae42f79.js",
+    "revision": "016e8800a4cae8334775da138fbe2d4a"
   },
   {
     "url": "assets/js/2.3a598e34.js",
@@ -76,40 +88,52 @@ self.__precacheManifest = [
     "revision": "a79b6c71bc8c19f59e10ee42ced5362b"
   },
   {
-    "url": "assets/js/7.fb928adc.js",
-    "revision": "ecece08a5f6e8b11f0ab15c8e348112f"
+    "url": "assets/js/7.bb4db1d7.js",
+    "revision": "0b99039a2a89533b52b1962d7c8c72dd"
   },
   {
-    "url": "assets/js/8.861600fb.js",
-    "revision": "6a261483c74fda9be100cfd824d092b6"
+    "url": "assets/js/8.cec090e0.js",
+    "revision": "787e442b2228861255adfaded337d7bf"
   },
   {
-    "url": "assets/js/9.a5eb4b75.js",
-    "revision": "71104308a38716255564a28c7669a3e8"
+    "url": "assets/js/9.046bb754.js",
+    "revision": "fec7f54faefa054217c044ef2835a558"
   },
   {
-    "url": "assets/js/app.79b8faf8.js",
-    "revision": "a1a8241fc591a4467908511ee4072e7c"
+    "url": "assets/js/app.af035520.js",
+    "revision": "4077d9fa645b1307d8cdfa78dcac3c34"
   },
   {
     "url": "docs/chrome/index.html",
-    "revision": "665812572c34ffa9d844f3665df143b7"
+    "revision": "ed1c1fb1341e254fddfd0f620bce874e"
   },
   {
     "url": "docs/en/index.html",
-    "revision": "ee4526d14749c96545fb0e924cec3bdb"
+    "revision": "9b4c3e6a8ae74ce00939322500c055e2"
   },
   {
     "url": "docs/idea/index.html",
-    "revision": "28f843b7573f3f89a748e900e98a9d64"
+    "revision": "f68c7812ae141a36e80cc7c0f3e75658"
   },
   {
     "url": "docs/idea/技巧.html",
-    "revision": "0ff025609a8917d209a5f42fb5a027fe"
+    "revision": "71e8e7bd88b45f745b689c71d5ca4acd"
   },
   {
     "url": "docs/idea/插件.html",
-    "revision": "ad1cf07a37eb79f8c861b0a1f80a2020"
+    "revision": "0335d83dca104ecdb5e812091c2bafb8"
+  },
+  {
+    "url": "docs/WebStorm/index.html",
+    "revision": "a3b259dc8b40c1aeb88d31b5f9344c43"
+  },
+  {
+    "url": "docs/WebStorm/技巧.html",
+    "revision": "2c17df7d4f3c461afc3366e8cfe07d39"
+  },
+  {
+    "url": "docs/WebStorm/插件.html",
+    "revision": "b4819fddaf3958b25b6726d17bd38eca"
   },
   {
     "url": "fish_logo.png",
@@ -117,7 +141,7 @@ self.__precacheManifest = [
   },
   {
     "url": "guide/index.html",
-    "revision": "898a5cf70c1ad3e1c32abb2634ceacbb"
+    "revision": "f8959fd8ee8475a8f922fb39bc153f02"
   },
   {
     "url": "idea/BackgroundImagePlus.png",
@@ -173,11 +197,27 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "bcd8a517231f4dcf74c1168ca192ec2c"
+    "revision": "18549fe22c3c99da57dcabf5be7a8015"
   },
   {
     "url": "qq.jpg",
     "revision": "a2148b58c2753f7c69d4f7a6256ec7b1"
+  },
+  {
+    "url": "WebStorm/CamelCase.gif",
+    "revision": "d310e762136f2fd1cfdab4d67aadf587"
+  },
+  {
+    "url": "WebStorm/es6.png",
+    "revision": "8fa903f00bb3625ed696b3d68504033d"
+  },
+  {
+    "url": "WebStorm/less.png",
+    "revision": "cfcc7c973bf56543c6728b87dc8b1184"
+  },
+  {
+    "url": "WebStorm/vue.png",
+    "revision": "303f7dba2ad96a19fc68a427af740032"
   },
   {
     "url": "wechat.jpg",
