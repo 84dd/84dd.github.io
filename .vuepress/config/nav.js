@@ -11,6 +11,10 @@ module.exports = [
         text: "IntelliJ IDEA",
         link: "/docs/idea/"
       },
+      {
+        text: "WebStorm",
+        link: "/docs/WebStorm/"
+      },
     ]
   },
 ]
