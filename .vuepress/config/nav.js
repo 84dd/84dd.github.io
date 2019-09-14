@@ -17,4 +17,8 @@ module.exports = [
       },
     ]
   },
+  {
+    text: "Java插件",
+    link: "/docs/JavaPlugin/"
+  },
 ]

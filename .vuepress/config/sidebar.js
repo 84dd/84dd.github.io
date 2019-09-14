@@ -24,7 +24,20 @@ const WebStorm = [
   }
 ];
 
+const JavaPlugin = [
+  {
+    title: 'Java插件推荐',
+    collapsable: false,
+    sidebarDepth: 3,
+    children: [
+      '',
+      'Hutool'
+    ]
+  }
+];
+
 module.exports = {
   '/docs/idea/': idea,
   '/docs/WebStorm/': WebStorm,
+  '/docs/JavaPlugin/': JavaPlugin,
 };

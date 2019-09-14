@@ -14,7 +14,7 @@ The world's most popular userscript manager
 
 ### Octotree Pro
 GitHub code tree on steroids
-> 我们在浏览github仓库时，时常需要进入到不同的目录，而Octotree Pro就是一款显示仓库目录结构，并能够让你快速切换目录的插件
+> 我们在浏览github仓库时，时常需要进入到不同的目录，而Octotree Pro就是一款显示仓库目录结构，并能够让你快速切换目录的插件，如果暂时不想用付费功能，那么可以试下使用Octotree
 
 ### OneTab
 > 官宣：节省高达95％的内存，并减轻标签页混乱现象
