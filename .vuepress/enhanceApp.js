@@ -1,5 +1,6 @@
 import getGitalk from "./common/getGitalk"
 import copy from './common/copy'
+import MyConsole from './common/MyConsole'
 
 export default ({
                   Vue, // VuePress 正在使用的 Vue 构造函数
@@ -12,6 +13,7 @@ export default ({
       document && (() => { //对document的判断是防止编译的时候报错
         getGitalk.call(this, siteData)
         copy()
+        MyConsole()
       })()
     } catch (e) {
       console.error(e.message)
