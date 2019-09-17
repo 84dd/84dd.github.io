@@ -21,4 +21,8 @@ module.exports = [
     text: "Java插件",
     link: "/docs/JavaPlugin/"
   },
+  {
+    text: "Python",
+    link: "/docs/Python/"
+  },
 ]

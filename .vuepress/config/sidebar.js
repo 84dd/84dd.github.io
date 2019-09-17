@@ -36,8 +36,21 @@ const JavaPlugin = [
   }
 ];
 
+const Python = [
+  {
+    title: 'Python',
+    collapsable: false,
+    sidebarDepth: 3,
+    children: [
+      '',
+      '环境'
+    ]
+  }
+];
+
 module.exports = {
   '/docs/idea/': idea,
   '/docs/WebStorm/': WebStorm,
   '/docs/JavaPlugin/': JavaPlugin,
+  '/docs/Python/': Python,
 };
