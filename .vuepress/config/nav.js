@@ -8,6 +8,10 @@ module.exports = [
         link: "/docs/chrome/"
       },
       {
+        text: "iTerm2",
+        link: "/docs/iTerm2/"
+      },
+      {
         text: "IntelliJ IDEA",
         link: "/docs/idea/"
       },
