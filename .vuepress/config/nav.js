@@ -4,12 +4,16 @@ module.exports = [
     text: "工具",
     items: [
       {
-        text: "Chrome",
-        link: "/docs/chrome/"
+        text: "Mac",
+        link: "/docs/Mac/"
       },
       {
         text: "iTerm2",
         link: "/docs/iTerm2/"
+      },
+      {
+        text: "Chrome",
+        link: "/docs/chrome/"
       },
       {
         text: "IntelliJ IDEA",
@@ -28,5 +32,9 @@ module.exports = [
   {
     text: "Python",
     link: "/docs/Python/"
+  },
+  {
+    text: "命令行",
+    link: "/docs/Shell/"
   },
 ]

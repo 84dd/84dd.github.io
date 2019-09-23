@@ -49,9 +49,22 @@ const Python = [
   }
 ];
 
+const Shell = [
+  {
+    title: 'Shell',
+    collapsable: false,
+    sidebarDepth: 3,
+    children: [
+      '',
+      'man',
+    ]
+  }
+];
+
 module.exports = {
   '/docs/idea/': idea,
   '/docs/WebStorm/': WebStorm,
   '/docs/JavaPlugin/': JavaPlugin,
   '/docs/Python/': Python,
+  '/docs/Shell/': Shell,
 };

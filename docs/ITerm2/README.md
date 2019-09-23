@@ -30,6 +30,10 @@ sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install
 安装好之后，需要把 Zsh 设置为当前用户的默认 Shell（这样新建标签的时候才会使用 Zsh）
 ```sh
 chsh -s /bin/zsh
+
+# 查看当前使用的shell
+echo $SHELL
+# /bin/zsh  如果输出这个就是设置正确了
 ```
 好了，现在可以搭载你喜欢的主题的，zsh [主题列表](https://github.com/robbyrussell/oh-my-zsh/wiki/themes)
 ```sh
