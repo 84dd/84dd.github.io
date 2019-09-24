@@ -12,7 +12,7 @@ export default ({
     try {
       document && (() => { //对document的判断是防止编译的时候报错
         getGitalk.call(this, siteData)
-        copy()
+        //copy()
         MyConsole()
       })()
     } catch (e) {
