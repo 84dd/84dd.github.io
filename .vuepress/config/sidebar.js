@@ -61,10 +61,23 @@ const Shell = [
   }
 ];
 
+const diverse = [
+  {
+    title: '杂项',
+    collapsable: false,
+    sidebarDepth: 3,
+    children: [
+      '',
+      'Markdown',
+    ]
+  }
+];
+
 module.exports = {
   '/docs/idea/': idea,
   '/docs/WebStorm/': WebStorm,
   '/docs/JavaPlugin/': JavaPlugin,
   '/docs/Python/': Python,
   '/docs/Shell/': Shell,
+  '/docs/diverse/': diverse,
 };

@@ -37,4 +37,8 @@ module.exports = [
     text: "命令行",
     link: "/docs/Shell/"
   },
+  {
+    text: "杂项",
+    link: "/docs/diverse/"
+  },
 ]
