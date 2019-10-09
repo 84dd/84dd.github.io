@@ -43,7 +43,8 @@ const Python = [
     sidebarDepth: 3,
     children: [
       '',
-      '环境',
+      'Mac环境',
+      'WIN环境',
       'pip'
     ]
   }
