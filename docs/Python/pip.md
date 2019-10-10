@@ -4,6 +4,15 @@
 pip 是一个安装和管理 Python 包的工具，python安装包的工具有easy_install, setuptools, pip，distribute等。distribute是setuptools的替代品，是对标准库disutils模块的增强，我们知道disutils主要是用来更加容易的打包和分发包，特别是对其他的包有依赖的包。distribute被创建是因为Setuptools包不再维护了。而pip是easy_install的替代品。
 > Python 2.7.9 + 或 Python 3.4+ 以上版本都自带 pip 工具
 
+## Windows下的pip
+如果是新装的Python3.x，并在安装的时候默认安装，那么pip就是默认的pip3，无需额外设置，验证一下
+```cmd
+pip -V
+# pip 19.0.3 from c:\users\lym\appdata\local\programs\python\python37\lib\site-packages\pip (python 3.7)
+```
+![pip版本](/python/win_pip_v.png)
+> 由于Python2.x不在提供维护，所以Windows环境下不介绍pip2和pip3的兼容
+
 ## 版本
 ```sh
 pip -V
