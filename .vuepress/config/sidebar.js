@@ -46,7 +46,7 @@ const Python = [
       'Mac环境',
       'WIN环境',
       'pip',
-      '小猪佩奇'
+      'demo'
     ]
   }
 ];
