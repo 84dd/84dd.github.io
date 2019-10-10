@@ -21,11 +21,11 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "a043d515bcdd78e25746ff7ceec56c14"
+    "revision": "5aea9107215a7597faef277d62ae2c54"
   },
   {
     "url": "about/index.html",
-    "revision": "41295ead4e9740714ce2ee8b2ad0c7c8"
+    "revision": "0e1b66c5baec5ecef77121b0be72c2b7"
   },
   {
     "url": "assets/css/0.styles.bf87837d.css",
@@ -56,12 +56,12 @@ self.__precacheManifest = [
     "revision": "352bb66234d22be2d7e2af8995dbe95c"
   },
   {
-    "url": "assets/js/15.381eb7a9.js",
-    "revision": "1aa122dab52aa84afda1bc3c91507e4b"
+    "url": "assets/js/15.4a48b18f.js",
+    "revision": "31a753378ca26c5ff73cbc373c9cc19b"
   },
   {
-    "url": "assets/js/16.39153778.js",
-    "revision": "47b2efef08f679295031b8009313ae1a"
+    "url": "assets/js/16.5fa8fe6f.js",
+    "revision": "f580e7b23d6cf01eaf6ef2b36dd44340"
   },
   {
     "url": "assets/js/17.9af0d6cc.js",
@@ -92,24 +92,24 @@ self.__precacheManifest = [
     "revision": "1878e6423447f3be28ce03af7c2043fa"
   },
   {
-    "url": "assets/js/23.6e9c399c.js",
-    "revision": "c2890ddb23d41cf6ac7aa57af050507c"
+    "url": "assets/js/23.e0ebb0a9.js",
+    "revision": "5b00b770bff5bca2e1758e9b9bbc24d1"
   },
   {
-    "url": "assets/js/24.bc1b3696.js",
-    "revision": "aeb9223cfa8921690baffa0b32a5a139"
+    "url": "assets/js/24.7e03b5ab.js",
+    "revision": "f66e303b97f75c14a80fa5d5f1544fac"
   },
   {
     "url": "assets/js/25.99a42eef.js",
     "revision": "93a8ff224af98d08e380d2896ef0dea8"
   },
   {
-    "url": "assets/js/26.73134f26.js",
-    "revision": "75d47bf9c3505ee64789d25c213331a6"
+    "url": "assets/js/26.3b6bbeda.js",
+    "revision": "c0b5d04da21d6e878fe504262fde967c"
   },
   {
-    "url": "assets/js/27.59e35c6e.js",
-    "revision": "f419e01a471c5262e4d93db668f0fbee"
+    "url": "assets/js/27.df4beaa3.js",
+    "revision": "90747712cae04df727cb99add779c8c1"
   },
   {
     "url": "assets/js/28.1d78ec73.js",
@@ -152,92 +152,92 @@ self.__precacheManifest = [
     "revision": "8e52bba450eca85c5d6c5f1bbcfd3bcf"
   },
   {
-    "url": "assets/js/app.a856e084.js",
-    "revision": "8ae0a5aa422923875a41e1e8d8c7404b"
+    "url": "assets/js/app.c687b480.js",
+    "revision": "39e00f23a75fc62bf10fb6238b11e5b6"
   },
   {
     "url": "docs/chrome/index.html",
-    "revision": "33e1c61e1d3d854cf5a4cb4de71cace6"
+    "revision": "ab5cfc00e6848ba89f6e689a14ae53ec"
   },
   {
     "url": "docs/diverse/index.html",
-    "revision": "aa8037719ff3d2a48e8033a1b687b12f"
+    "revision": "49744739e086236baa0b581228c34a25"
   },
   {
     "url": "docs/diverse/Markdown.html",
-    "revision": "fe4f5d558e2c491e5cde0686fcb59daf"
+    "revision": "8cf43be70b023b99467645b091ea5255"
   },
   {
     "url": "docs/en/index.html",
-    "revision": "0de812b9151cd53d2f46da5a6764edda"
+    "revision": "a3a325ee37d5bd7c97ffc71a166f53bc"
   },
   {
     "url": "docs/idea/index.html",
-    "revision": "d91306ff1c5a42ea56c1341a4c8529ab"
+    "revision": "d8c1a14a305b99ae465b446fe204d04a"
   },
   {
     "url": "docs/idea/技巧.html",
-    "revision": "e8fc8c1e1ff24fab7e11e1716f77a77c"
+    "revision": "3befee20953f57676e581711af130a4f"
   },
   {
     "url": "docs/idea/插件.html",
-    "revision": "7b4dddde520bfdadb194abba28c7458b"
+    "revision": "88368ed3fecb0097db3dacc72025e853"
   },
   {
     "url": "docs/ITerm2/index.html",
-    "revision": "165e0f6507ef8ba99bcaae385f44f251"
+    "revision": "a88f7db496424638516975d2c50832e5"
   },
   {
     "url": "docs/JavaPlugin/Hutool.html",
-    "revision": "81f5398c11cfff58e8652b53582d686a"
+    "revision": "248151b9ddb1f713dacc72b5ac54893d"
   },
   {
     "url": "docs/JavaPlugin/index.html",
-    "revision": "298e0c16b807ba53568cf867fad235a1"
+    "revision": "71268a4c167c1269268356dae2374d2b"
   },
   {
     "url": "docs/Mac/index.html",
-    "revision": "f02085e380a69c23597d0eaf751052d9"
+    "revision": "d4b4e4899390e641b45167a338a19f59"
+  },
+  {
+    "url": "docs/Python/demo.html",
+    "revision": "e266dd27ce1e9628103fae31687958ff"
   },
   {
     "url": "docs/Python/index.html",
-    "revision": "dbc71ea83da3fd1ac439c8947f089318"
+    "revision": "6ee9525cd2cc84c45be3d5d6eaf1cfd2"
   },
   {
     "url": "docs/Python/Mac环境.html",
-    "revision": "d65cad173450e023838d4ddda43946e5"
+    "revision": "dd70ccc5ee11990c2468edda9f774ea1"
   },
   {
     "url": "docs/Python/pip.html",
-    "revision": "1ca85b7ca36194fd1d831e6cc9a52c9c"
+    "revision": "f6e2b2da63a5114a9e9d725cbe18c1c3"
   },
   {
     "url": "docs/Python/WIN环境.html",
-    "revision": "7e30e6a35eb6a310c376469d13f61cc0"
-  },
-  {
-    "url": "docs/Python/小猪佩奇.html",
-    "revision": "cc81e67229be3d72df0269dad9c1873d"
+    "revision": "4ca00190640277373670c64029a3aea4"
   },
   {
     "url": "docs/Shell/index.html",
-    "revision": "a8dccffcb2e6fbea36299f32100a34e4"
+    "revision": "43daa29a72bfecccbef588f9f98b6f6a"
   },
   {
     "url": "docs/Shell/man.html",
-    "revision": "e2f58285f1c62a559393777ac2b72196"
+    "revision": "e15fe6887f818212630f6334006cde34"
   },
   {
     "url": "docs/WebStorm/index.html",
-    "revision": "fefd331e9ff876c3caf746f62b513a20"
+    "revision": "b23ea0e80a6a66a97157fc8b3f06eeae"
   },
   {
     "url": "docs/WebStorm/技巧.html",
-    "revision": "a756fa1f8229ab3042eed02b06191bf8"
+    "revision": "6269c89046f760d8df992db376177d50"
   },
   {
     "url": "docs/WebStorm/插件.html",
-    "revision": "eef41dd38e805e51db8ec2b2eb191e15"
+    "revision": "7e4834f28cee557d23b44a63b27d5eae"
   },
   {
     "url": "fish_logo.png",
@@ -245,7 +245,7 @@ self.__precacheManifest = [
   },
   {
     "url": "guide/index.html",
-    "revision": "67a20fa9c4d0774bb33a0fd3b3be70db"
+    "revision": "83d509d7693b3883f6892fa9a17e84f4"
   },
   {
     "url": "idea/BackgroundImagePlus.png",
@@ -301,7 +301,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "261133865e2989ed0870138e0d080c1b"
+    "revision": "eb6b6268d2886aa937a601e0d39ad786"
   },
   {
     "url": "iTerm2/iTerm2_res.png",
