@@ -46,7 +46,8 @@ const Python = [
       'Mac环境',
       'WIN环境',
       'pip',
-      'demo'
+      'demo',
+      '开发工具',
     ]
   }
 ];

@@ -35,5 +35,4 @@ print 'Hello World'
 
 ::: tip
 好了，Windows下的环境也安装好了，是不是so easy？  
-安利一本入门级书籍《Python编程：从入门到实践》如需电子书，可以给我留言或者通过社交方式联系我
 :::
