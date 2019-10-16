@@ -1,4 +1,5 @@
 # pip
+>建议先阅读[优雅的环境](/docs/Python/conda)  
 
 ## 介绍
 pip 是一个安装和管理 Python 包的工具，python安装包的工具有easy_install, setuptools, pip，distribute等。distribute是setuptools的替代品，是对标准库disutils模块的增强，我们知道disutils主要是用来更加容易的打包和分发包，特别是对其他的包有依赖的包。distribute被创建是因为Setuptools包不再维护了。而pip是easy_install的替代品。

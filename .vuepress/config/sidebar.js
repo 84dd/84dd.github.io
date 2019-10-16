@@ -45,6 +45,7 @@ const Python = [
       '',
       'Mac环境',
       'WIN环境',
+      'conda',
       'pip',
       'demo',
       '开发工具',
