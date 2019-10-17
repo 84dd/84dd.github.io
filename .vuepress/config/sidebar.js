@@ -61,6 +61,7 @@ const Shell = [
     children: [
       '',
       'man',
+      'ln',
     ]
   }
 ];
