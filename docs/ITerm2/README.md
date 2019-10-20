@@ -100,3 +100,75 @@ ctrl + f/b  前进后退
 ctrl + p    上一条命令
 ctrl + r    搜索命令历史
 ```
+
+## 搭建类似SecureCRT的工具
+由于系统从`macOs Mojave`10.14升级到`macOs Catalina`10.15，SecureCRT只能sz，无法rz，官方也贴出了问题
+![crt](/iTerm2/catalina_crt.png)
+知道问题所在，但是不知道原因，我们难道静等官方更新吗？恐怕我们管理的那些生产环境就不同意了，当然你会说现在都是Jenkins管理，但总有一些东西需要rz的。废话不多说，我们开始搭建环境。
+### 安装sshpass
+brew不知道为什么无法安装sshpass，我们去[官网](https://sourceforge.net/projects/sshpass/)下载最新源码来安装吧
+``` sh
+wget https://sourceforge.net/projects/sshpass/files/sshpass/1.06/sshpass-1.06.tar.gz
+tar -zxvf sshpass-1.06.tar.gz
+cd sshpass-1.06
+./configure
+make
+make install
+
+# 如果无法安装，是因为mac系统升级后，自动卸载xcode命令行工具，执行下面命令即可
+xcode-select --install
+
+# 检查是否安装成功
+sshpass -p 123456 ssh -p22 root@192.168.0.105
+```
+### 配置iTerm2
+![iterm_sshpass](/iterm2/iterm_sshpass.png)
+`sshpass`有三种方式输入密码
+```sh
+# 通过-p传入密码
+sshpass -p 123456 ssh -p22 root@192.168.0.105
+
+# 将密码写入文件中，通过-f调用，只读取第一行
+echo '123456' > /Users/lym/pwd/centos_105
+sshpass -f /Users/lym/pwd/centos_105 ssh -p22 root@192.168.0.105
+
+# 通过-e导入环境变量中的密码，貌似只能设置一个环境变量，并且名字只能为 SSHPASS
+export SSHPASS=123456
+sshpass -e SSHPASS ssh -p22 root@192.168.0.105
+
+# 骚操作 -p 环境变量，这个原理就是明文密码
+export CENTOS_105=123456
+sshpass -p $CENTOS_105 ssh -p22 root@192.168.0.105
+```
+### 安装lrzsz，支持rz，sz
+lrzsz是对zmodem协议实现的软件包
+``` sh
+brew install lrzsz
+```
+下载zmodem文件，由于[原作者](https://github.com/mmastrac/)闭源了该项目，所以我在交友网站上找了个自认靠谱的fork了过来，我们去下载吧
+``` sh
+git clone https://github.com/84dd/iterm2-zmodem.git
+cd iterm2-zmodem
+cp iterm2-*.sh /usr/local/bin
+chmod 777 /usr/local/bin/iterm2-*.sh
+cd ../
+rm -rf iterm2-zmodem
+```
+设置Iterm2的Tirgger特性，profiles->虚拟机105（每个tag管理各自的Tirgger）->editProfiles->Advanced中的Tirgger，
+添加两条trigger，分别设置 Regular expression，Action，Parameters，Instant如下
+- 第一条
+   - `Regular expression` rz waiting to receive.\*\*B0100
+   - `Action` Run Silent Coprocess
+   - `Parameters` /usr/local/bin/iterm2-send-zmodem.sh
+   - `Instant` checked
+- 第二条
+   - `Regular expression` \*\*B00000000000000
+   - `Action` Run Silent Coprocess
+   - `Parameters` /usr/local/bin/iterm2-recv-zmodem.sh
+   - `Instant` checked
+![iterm_triggers](/iTerm2/iterm_triggers.png)
+> 不足：这个iTerm2的上传下载插件没有进度条功能，值得注意的是，zmodem协议不能处理超过4G的文件。
+![105rz](/iTerm2/105rz.png)
+::: tip
+介绍到这里，类似SecureCRT的工具就搭建完成了，如果有多个服务器，添加多个Tag即可，记得为每个tag设置不同的Tirgger
+:::

@@ -1,5 +1,5 @@
 module.exports = [
-  { text: '最真我', link: '/about/' },
+  { text: 'Me', link: '/about/' },
   {
     text: "工具",
     items: [
