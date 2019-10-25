@@ -76,8 +76,12 @@ conda create -n learningpy python=3.5
 activate 环境名
 # linux和mac用户的命令不一样
 source activate 环境名
+# 或者
+conda activate 环境名
 # 切换回默认环境
 conda activate base
+# 或者
+conda deactivate
 
 
 # 创建一个新环境想克隆一部分旧的环境
