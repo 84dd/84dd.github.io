@@ -74,6 +74,7 @@ const diverse = [
     children: [
       '',
       'Markdown',
+      'Git',
     ]
   }
 ];
