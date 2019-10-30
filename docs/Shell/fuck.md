@@ -13,7 +13,7 @@ pip install thefuck
 ```
 
 ## 使用
-![fuck](/shell/fuck.gif)
+![fuck](http://q04rnakch.bkt.clouddn.com/shell/fuck.gif!84dd)
 
 ::: danger
 文明上网，暴力编码！

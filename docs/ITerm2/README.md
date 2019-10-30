@@ -6,7 +6,7 @@ title: Mac OS 终端利器
 # Mac OS 终端利器 iTerm2 + Oh My Zsh
 ***
 一个为命令行而诞生的终端，我们需要敬仰，更需要拥有！
-![iTerm2](/iTerm2/iTerm2.jpg)
+![iTerm2](http://q04rnakch.bkt.clouddn.com/iTerm2/iTerm2.jpg!84dd)
 
 ## 安装iTerm2
 可以在[官网](https://www.iterm2.com/downloads.html)下载安装包，也可以用Homebrew安装
@@ -103,7 +103,7 @@ ctrl + r    搜索命令历史
 
 ## 搭建类似SecureCRT的工具
 由于系统从`macOs Mojave`10.14升级到`macOs Catalina`10.15，SecureCRT只能sz，无法rz，官方也贴出了问题
-![crt](/iTerm2/catalina_crt.png)
+![crt](http://q04rnakch.bkt.clouddn.com/iTerm2/catalina_crt.png!84dd)
 知道问题所在，但是不知道原因，我们难道静等官方更新吗？恐怕我们管理的那些生产环境就不同意了，当然你会说现在都是Jenkins管理，但总有一些东西需要rz的。废话不多说，我们开始搭建环境。
 ### 安装sshpass
 brew不知道为什么无法安装sshpass，我们去[官网](https://sourceforge.net/projects/sshpass/)下载最新源码来安装吧
@@ -122,7 +122,7 @@ xcode-select --install
 sshpass -p 123456 ssh -p22 root@192.168.0.105
 ```
 ### 配置iTerm2
-![iterm_sshpass](/iterm2/iterm_sshpass.png)
+![iterm_sshpass](http://q04rnakch.bkt.clouddn.com/iTerm2/iterm_sshpass.png!84dd)
 `sshpass`有三种方式输入密码
 ```sh
 # 通过-p传入密码
@@ -166,9 +166,9 @@ rm -rf iterm2-zmodem
    - `Action` Run Silent Coprocess
    - `Parameters` /usr/local/bin/iterm2-recv-zmodem.sh
    - `Instant` checked
-![iterm_triggers](/iTerm2/iterm_triggers.png)
+![iterm_triggers](http://q04rnakch.bkt.clouddn.com/iTerm2/iterm_triggers.png!84dd)
 > 不足：这个iTerm2的上传下载插件没有进度条功能，值得注意的是，zmodem协议不能处理超过4G的文件。
-![105rz](/iTerm2/105rz.png)
+![105rz](http://q04rnakch.bkt.clouddn.com/iTerm2/105rz.jpg!84dd)
 ::: tip
 介绍到这里，类似SecureCRT的工具就搭建完成了，如果有多个服务器，添加多个Tag即可，记得为每个tag设置不同的Tirgger
 :::

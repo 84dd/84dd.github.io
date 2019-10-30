@@ -23,13 +23,13 @@ gem install told
 ## 使用
 安装成功后，我们最好更新一下缓存`tldr --update`或`tldr -u`，当然不更新也没问题，查找命令的时候会自己下载的。  
 我们看一下`tldr`怎么使用
-![tldr](/shell/tldr.jpg)
+![tldr](http://q04rnakch.bkt.clouddn.com/shell/tldr.jpg!84dd)
 命令很简单吧，tldr 后面直接带上想查的命令就可以了。下面我们试一下常用的`curl`命令
-![curl](/shell/tldr_curl.png)
+![curl](http://q04rnakch.bkt.clouddn.com/shell/tldr_curl.png!84dd)
 
 ## 网页版
 如果不方便安装，也可以使用网页版<https://tldr.ostera.io>
-![tldr](/shell/tldr_web.png)
+![tldr](http://q04rnakch.bkt.clouddn.com/shell/tldr_web.png!84dd)
 
 ::: tip
 如此好的工具真的是相见恨晚阿，不过迟到总比不到好。这么好的项目，当然要去[交友网站](https://github.com/ostera/tldr.jsx/)Star支持一下

@@ -8,7 +8,7 @@
  ```sh
 man ls
 ```
-![ls](/man/manls.png)
+![ls](http://q04rnakch.bkt.clouddn.com/man/manls.png!84dd)
 
 ## 安装man中文版
 由于英语水平天花板比较高，我们先安装一下中文版的帮助文档
@@ -29,7 +29,7 @@ brew install groff
 # 打开/etc/man.conf，在文件最后加上如下代码
 # NROFF preconv -e UTF8 | /usr/local/bin/nroff -Tutf8 -mandoc -c
 ```
-![ls](/man/cmanls.png)
+![ls](http://q04rnakch.bkt.clouddn.com/man/cmanls.jpg!84dd)
 > 友情提示：减少依赖中文翻译，尽量阅读英文文档才是进步的王道！
 
 ## 在预览中查看

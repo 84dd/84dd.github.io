@@ -11,9 +11,9 @@ print("Hello world!")
 ## 小猪佩奇
 我们需要保持童心，有时候又要有少女心，咳咳，你可是个汉子啊！  
 下载[源码](https://github.com/84dd/happy/blob/master/peppaPig.py)，将代码保存在任意目录，如下
-![下载文件](/python/demo_file_ls.png)
+![下载文件](http://q04rnakch.bkt.clouddn.com/python/demo_file_ls.png!84dd)
 命令行进入该目录，并执行下面代码
 ```sh
 python peppaPig.py
 ```
-![小猪佩奇](/python/demo_pig.png)
+![小猪佩奇](http://q04rnakch.bkt.clouddn.com/python/demo_pig.png!84dd)

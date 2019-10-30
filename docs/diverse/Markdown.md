@@ -201,7 +201,7 @@ ___粗斜体文本___
 ::: tip
 `单行代码`
 :::
-![代码块](/markdown/markdown_code.png)
+![代码块](http://q04rnakch.bkt.clouddn.com/markdown/markdown_code.png!84dd)
 
 ## 链接
 ```markdown
@@ -224,7 +224,7 @@ ___粗斜体文本___
 ```
 ::: tip
 ![logo](/fish_logo.png)  
-![微信](/wechat.jpg '鼠标移上去看到这段文字')
+![微信](http://q04rnakch.bkt.clouddn.com/wechat.jpg!84dd '鼠标移上去看到这段文字')
 :::
 
 ## 表格
