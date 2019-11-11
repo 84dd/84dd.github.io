@@ -14,6 +14,6 @@ single: true
 #### 联系我`email` 744177242@qq.com 
 ***
 <div class="about-me-container">
-  <img src="http://q04rnakch.bkt.clouddn.com/wechat.jpg!84dd" width="300">
-  <img src="http://q04rnakch.bkt.clouddn.com/qq.jpg!84dd" width="300" class="qq-jpg">
+  <img src="http://qiniu.84dd.xyz/wechat.jpg!84dd" width="300">
+  <img src="http://qiniu.84dd.xyz/qq.jpg!84dd" width="300" class="qq-jpg">
 </div>

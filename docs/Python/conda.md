@@ -9,7 +9,7 @@
 一路默认安装即可，不过建议勾选以下选项  
 - 第一项指将Anaconda的默认环境设置添加到系统环境，也就是说如果你之前安装过python并添加到了环境，选了这一项之后原来的python会被覆盖掉，默认使用Anaconda的默认环境。
 - 第二项指设置Anaconda的默认环境为python3.7.
-![conda](http://q04rnakch.bkt.clouddn.com/python/conda_add_path.png!84dd)
+![conda](http://qiniu.84dd.xyz/python/conda_add_path.png!84dd)
 > 安装完成后Anaconda会创建一个叫base的默认环境，如果你不切换到其他指定环境，就会一直在默认环境运行。
 
 ## 查看
@@ -25,7 +25,7 @@ conda -V
 ```
 
 ## pip && conda
-![pip_conda](http://q04rnakch.bkt.clouddn.com/python/pip_conda.webp!84dd)
+![pip_conda](http://qiniu.84dd.xyz/python/pip_conda.webp!84dd)
 ### pip
 - 仅Python包。
 - 编译源码中的所有内容。 编辑：点子现在安装二进制轮子，如果它们可用。

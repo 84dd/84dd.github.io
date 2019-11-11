@@ -5,7 +5,7 @@
 
 ## Linux命令搜索引擎 
 <https://git.io/linux>网站支持通过命令或者中文检索，改站收录了568个Linux命令
-![linux](http://q04rnakch.bkt.clouddn.com/shell/git.io.linux.png!84dd)
+![linux](http://qiniu.84dd.xyz/shell/git.io.linux.png!84dd)
 ::: tip
 通过作者Github，我们了解到他还有一个有趣的[收集](https://github.com/jaywcjlove/awesome-mac)
 :::

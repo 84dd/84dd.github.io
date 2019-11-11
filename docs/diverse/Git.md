@@ -75,7 +75,7 @@ git checkout test
 # 我们再看一下有什么分支
 git branch -a
 ```
-![git_branch_a](http://q04rnakch.bkt.clouddn.com/git/git_branch_a.png!84dd)
+![git_branch_a](http://qiniu.84dd.xyz/git/git_branch_a.png!84dd)
 如上图
 - `dev`本地存在的一个分支，如果从未执行过 git checkout dev 则这行不会存在
 - `master`本地存在的一个分支，一般为默认分支
