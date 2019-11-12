@@ -172,3 +172,7 @@ rm -rf iterm2-zmodem
 ::: tip
 介绍到这里，类似SecureCRT的工具就搭建完成了，如果有多个服务器，添加多个Tag即可，记得为每个tag设置不同的Tirgger
 :::
+
+## 拖拽文件解决rz
+其实解决上一个问题还有更简单的方法，把文件拖拽进SecureCRT，然后选择上传。由于sz功能不影响，所以我们解决rz就可以了
+![拖拽](http://qiniu.84dd.xyz/01Shmi.png)
