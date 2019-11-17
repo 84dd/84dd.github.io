@@ -7,7 +7,7 @@ pip 是一个安装和管理 Python 包的工具，python安装包的工具有ea
 
 ## Windows下的pip
 如果是新装的Python3.x，并在安装的时候默认安装，那么pip就是默认的pip3，无需额外设置，验证一下
-```cmd
+```
 pip -V
 # pip 19.0.3 from c:\users\lym\appdata\local\programs\python\python37\lib\site-packages\pip (python 3.7)
 ```

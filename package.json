@@ -10,7 +10,7 @@
     "@vuepress/plugin-medium-zoom": "^1.0.0-rc.1",
     "@vuepress/plugin-nprogress": "^1.0.0-rc.1",
     "moment": "^2.24.0",
-    "vuepress": "^1.0.3"
+    "vuepress": "^1.2.0"
   },
   "devDependencies": {
     "gh-pages": "^2.1.1"

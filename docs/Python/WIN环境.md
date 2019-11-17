@@ -4,7 +4,7 @@
 由于博主使用的是Mac，所以Window下的环境是在虚拟机上完成的。如有差异，请在留言中反馈。
 
 ## 查看是否已安装
-```cmd
+```
 python -V
 # 'python' 不是内部或外部命令，也不是可运行的程序或批处理文件。
 ```
@@ -20,7 +20,7 @@ Windows 下的安装包可以去[官网](https://www.python.org/)下载最新版
 ![win_py_install](http://qiniu.84dd.xyz/python/win_py_install_1.png!84dd)
 
 ## 再次查看
-```cmd
+```
 python -V
 # Python 3.7.4
 ```
@@ -28,7 +28,7 @@ python -V
 
 ## Hello World
 我们在cmd中简单显示一下吧
-```cmd
+```
 python
 
 print 'Hello World'
