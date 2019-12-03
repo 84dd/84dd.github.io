@@ -80,6 +80,16 @@ cd fonts
 ```
 > 安装好字体库之后，我们来设置iTerm2的字体，具体的操作是iTerm2 -> Preferences -> Profiles -> Text，在Font区域选中Change Font，然后找到Meslo LG字体。有L、M、S可选，看个人喜好
 
+## 自动提示命令
+> 当我们输入命令时，终端会自动提示你接下来可能要输入的命令，这时按 → 便可输出这些命令，非常方便。
+```
+# 克隆仓库到本地 ~/.oh-my-zsh/custom/plugins 路径下
+git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+# 用 vim  ~/.zshrc 打开文件，下滑找到插件设置命令，默认是 plugins=(git) 
+plugins=(zsh-autosuggestions git)
+```
+
 ## 常用快捷键
 ```
 command + t 新建标签

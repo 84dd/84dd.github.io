@@ -60,6 +60,7 @@ const Shell = [
     sidebarDepth: 3,
     children: [
       '',
+      '快捷键',
       '常用命令',
       'man',
       'tldr',
