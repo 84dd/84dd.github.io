@@ -14,6 +14,14 @@ export default ({
         getGitalk.call(this, siteData)
         //copy()
         MyConsole()
+
+
+        let footer = document.createElement("a");
+        footer.innerText = 'MIT Licensed | Copyright © 2019 84dd 备案号：粤ICP备19139608号-1';
+        footer.href = 'http://www.beian.miit.gov.cn';
+        footer.target = '_blink';
+        footer.style = 'color: #fff;font-size: 12px;width: 100%;text-align: center;padding: 50px 0;background: #282c34;display: block;';
+        document.body.appendChild(footer);
       })()
     } catch (e) {
       console.error(e.message)

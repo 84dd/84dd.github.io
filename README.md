@@ -14,7 +14,6 @@ features:
     details: 😂
   - title: 后端
     details: Java / Spring-Boot / jFinal / MySql / Redis / MongoDB / Python
-footer: MIT Licensed | Copyright © 2019 84dd
 ---
 
 ### [84dd] 像数 1, 2, 3 一样容易
