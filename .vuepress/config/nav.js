@@ -1,5 +1,6 @@
 module.exports = [
-  { text: 'Me', link: '/about/' },
+  { text: '关于', link: '/about/' },
+  { text: '简历', link: '/docs/resume/' },
   { text: '练手项目', link: '/docs/boss/' },
   {
     text: "工具",
