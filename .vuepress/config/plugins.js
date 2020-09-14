@@ -1,4 +1,5 @@
 module.exports = [
+  ['flowchart'],
   require('../plugins/my-router'),
   require('../plugins/my-loader'),
   ['@vuepress/active-header-links'],
