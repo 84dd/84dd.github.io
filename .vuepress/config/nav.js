@@ -1,5 +1,6 @@
 module.exports = [
   { text: 'Me', link: '/about/' },
+  { text: '练手项目', link: '/docs/boss/' },
   {
     text: "工具",
     items: [

@@ -10,10 +10,10 @@ actionLink: "/about/"
 features:
   - title: 前端
     details: Vue / 小程序 / jQuery
-  - title: 中端
-    details: 😂
   - title: 后端
-    details: Java / Spring-Boot / jFinal / MySql / Redis / MongoDB / Python
+    details: Java / Spring Boot / JFinal / MySql / MyBatis / Mycat / Redis / MongoDB / Elastic / RabbitMQ / Python
+  - title: Linux
+    details: 熟悉
 ---
 
 ### [84dd] 像数 1, 2, 3 一样容易

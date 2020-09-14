@@ -84,6 +84,19 @@ const diverse = [
   }
 ];
 
+const boss = [
+  {
+    title: 'Boss-练手项目',
+    collapsable: false,
+    sidebarDepth: 3,
+    children: [
+      '',
+      'boss后端',
+      'boss前端',
+    ]
+  }
+];
+
 module.exports = {
   '/docs/idea/': idea,
   '/docs/WebStorm/': WebStorm,
@@ -91,4 +104,5 @@ module.exports = {
   '/docs/Python/': Python,
   '/docs/Shell/': Shell,
   '/docs/diverse/': diverse,
+  '/docs/boss/': boss,
 };
