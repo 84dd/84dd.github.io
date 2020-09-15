@@ -11,7 +11,7 @@ pip 是一个安装和管理 Python 包的工具，python安装包的工具有ea
 pip -V
 # pip 19.0.3 from c:\users\lym\appdata\local\programs\python\python37\lib\site-packages\pip (python 3.7)
 ```
-![pip版本](http://qiniu.84dd.xyz/python/win_pip_v.png!84dd)
+![pip版本](https://qiniu.84dd.xyz/python/win_pip_v.png!84dd)
 > 由于Python2.x不在提供维护，所以Windows环境下不介绍pip2和pip3的兼容
 
 ## 版本
@@ -45,7 +45,7 @@ if __name__ == '__main__':
 cd /usr/local/bin/
 ls -l pip*
 ```
-![lspip](http://qiniu.84dd.xyz/python/lspip.png!84dd)
+![lspip](https://qiniu.84dd.xyz/python/lspip.png!84dd)
 原来这个pip是默认的版本，默认使用python2.7，此时pip = pip2 = pip2.7。下面我们备份一下pip，并将pip3复制到pip
 
 ## 更新到python3

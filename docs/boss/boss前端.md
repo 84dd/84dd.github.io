@@ -4,4 +4,4 @@
 
 ## 项目地址
 [boss-admin](https://gitee.com/84dd/boss-admin/tree/master)
-![前端预览](http://qiniu.84dd.xyz/hF6RU8.png)
+![前端预览](https://qiniu.84dd.xyz/hF6RU8.png)

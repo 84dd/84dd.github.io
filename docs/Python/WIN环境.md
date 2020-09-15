@@ -8,7 +8,7 @@
 python -V
 # 'python' 不是内部或外部命令，也不是可运行的程序或批处理文件。
 ```
-![版本](http://qiniu.84dd.xyz/python/win_python_v.png!84dd)
+![版本](https://qiniu.84dd.xyz/python/win_python_v.png!84dd)
 
 ## 下载
 Windows 下的安装包可以去[官网](https://www.python.org/)下载最新版本，请注意自己使用的是32位还是64位机器。
@@ -17,7 +17,7 @@ Windows 下的安装包可以去[官网](https://www.python.org/)下载最新版
 
 ## 安装
 点击安装包一路默认安装就可以了，不过记得勾上设置环境变量，如果忘记勾选了，可以重新安装一次。
-![win_py_install](http://qiniu.84dd.xyz/python/win_py_install_1.png!84dd)
+![win_py_install](https://qiniu.84dd.xyz/python/win_py_install_1.png!84dd)
 
 ## 再次查看
 ```
@@ -33,7 +33,7 @@ python
 
 print 'Hello World'
 ```
-![Hello World](http://qiniu.84dd.xyz/python/win_py_hello.png!84dd)
+![Hello World](https://qiniu.84dd.xyz/python/win_py_hello.png!84dd)
 
 ::: tip
 好了，Windows下的环境也安装好了，是不是so easy？  

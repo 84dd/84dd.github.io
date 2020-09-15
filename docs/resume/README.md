@@ -1,1 +1,1 @@
-<iframe src="http://qiniu.84dd.xyz/resume/lym.pdf" width="100%" height="1100px"></iframe>
+<iframe src="https://qiniu.84dd.xyz/resume/lym.pdf" width="100%" height="1100px"></iframe>

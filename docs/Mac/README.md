@@ -23,16 +23,16 @@ sudo mv /etc/pam.d/sudo.bak /etc/pam.d/sudo
 ```
 :::
 设置完，自带的终端可以使用Touch ID授权了
-![终端](http://qiniu.84dd.xyz/mac/shellpam.png!84dd)
+![终端](https://qiniu.84dd.xyz/mac/shellpam.png!84dd)
 但是iTerm2还是没有生效，好，我们看下iTerm2的设置 iTerm2 > preferences > advanced，我们搜索下有没有sudo
-![搜索sudo](http://qiniu.84dd.xyz/mac/iTerm2_search_sudo.png!84dd)
+![搜索sudo](https://qiniu.84dd.xyz/mac/iTerm2_search_sudo.png!84dd)
 我们改成`no`重启iTerm2，果然生效了。
-![搜索sudo](http://qiniu.84dd.xyz/mac/iTerm2pam.png!84dd)
+![搜索sudo](https://qiniu.84dd.xyz/mac/iTerm2pam.png!84dd)
 > 每次MacOs大版本更新，会重新覆盖`sudo`文件，所以如果不生效就要重新处理
 
 ## Read-only file system
 当系统从`macOs Mojave`10.14升级到`macOs Catalina`10.15的时候，会出现一些安全性的建议。我们看一下Catalina的介绍
-![catalina](http://qiniu.84dd.xyz/mac/catalina.png!84dd)
+![catalina](https://qiniu.84dd.xyz/mac/catalina.png!84dd)
 Catalina 分离了系统文件和用户文件，系统文件都被`mount`到了只读分区，当然好处是显而易见的，防止系统文件被恶意篡改，但对于我们程序员来说确实一场在灾难。
 因为系统安全性提高了，所以根目录`/`下我们没有权限写内容了，
 升级的时候会把根目录下的用户文件转移到桌面，
@@ -102,4 +102,4 @@ ln -v
 # 将用户下的data目录，指向根目录
 sudo ln -s /Users/lym/data /
 ```
-![ln_data](http://qiniu.84dd.xyz/mac/ln_data.png!84dd)
+![ln_data](https://qiniu.84dd.xyz/mac/ln_data.png!84dd)
