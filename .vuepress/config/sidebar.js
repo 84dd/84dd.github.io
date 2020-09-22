@@ -98,6 +98,18 @@ const boss = [
   }
 ];
 
+const mall = [
+  {
+    title: '微服务商城',
+    collapsable: false,
+    sidebarDepth: 3,
+    children: [
+      '',
+      '安装环境',
+    ]
+  }
+];
+
 module.exports = {
   '/docs/idea/': idea,
   '/docs/WebStorm/': WebStorm,
@@ -106,4 +118,5 @@ module.exports = {
   '/docs/Shell/': Shell,
   '/docs/diverse/': diverse,
   '/docs/boss/': boss,
+  '/docs/mall/': mall,
 };
