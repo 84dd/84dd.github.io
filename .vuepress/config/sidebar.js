@@ -81,6 +81,7 @@ const diverse = [
       'Markdown',
       'Flow',
       'Git',
+      '阴阳师',
     ]
   }
 ];
