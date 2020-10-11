@@ -111,6 +111,7 @@ const mall = [
       '初始化数据库',
       '整合人人开源',
       '代码生成',
+      'SpringCloudAlibaba',
     ]
   }
 ];
