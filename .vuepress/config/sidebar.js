@@ -116,6 +116,17 @@ const mall = [
   }
 ];
 
+const docker = [
+  {
+    title: 'Docker',
+    collapsable: false,
+    sidebarDepth: 3,
+    children: [
+      '',
+    ]
+  }
+];
+
 module.exports = {
   '/docs/idea/': idea,
   '/docs/WebStorm/': WebStorm,
@@ -125,4 +136,5 @@ module.exports = {
   '/docs/diverse/': diverse,
   '/docs/boss/': boss,
   '/docs/mall/': mall,
+  '/docs/docker/': docker,
 };
