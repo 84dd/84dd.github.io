@@ -17,8 +17,20 @@ docker ps -a
 # 假如我们安装了一个redis容器，叫做redis，用交互模式进入容器内的终端
 docker exec -it redis /bin/bash
 
+# docker 查看redis容器的log
+docker logs redis
+
 # 更新某容器的参数，举例
 docker container update --restart=always 容器名字
+
+# 创建一个网络，名字为somenetwork
+docker network create somenetwork
+
+# 查看所有的网络
+docker network ls
+
+# 查看网络信息
+docker network inspect bridge
 ```
 > 为了方便管理，建议用一个目录存放docker各种容器的目录映射，比如我放在 `/data/docker-data`
 - `-v` 映射目录或文件到宿主，格式为 `宿主目录:容器目录`，例如
@@ -55,7 +67,7 @@ docker run -p 3306:3306 --name mysql5.6 -v /data/docker-data/mysql5.6/log:/var/l
 ```
 
 ## Redis
-> 安装最新版
+> 安装最新版，可以按照教程修改部分配置或者[下载我改好的配置](/docker/redis.conf)
 ```shell
 docker pull redis
 
@@ -65,15 +77,17 @@ cd /data/docker-data/redis
 mkdir data
 # 下载最新配置文件
 curl  -k --tlsv1 -O https://raw.githubusercontent.com/redis/redis/6.0/redis.conf
-# 修改 appendonly yes
+# 修改 redis持久化 appendonly yes
 sed -i '' 's/^appendonly no/appendonly yes/' redis.conf
 # 修改 允许远程访问
 sed -i '' 's/^bind 127.0.0.1/bind 0.0.0.0/' redis.conf
+# 修改密码
+sed -i '' 's/^# requirepass foobared/requirepass 123456/' redis.conf
 
 # 启动
-docker run -p 6379:6379 --name redis -v /data/docker-data/redis/redis.conf:/etc/redis/redis.conf -v /data/docker-data/redis/data:/data --restart always -d redis redis-server /etc/redis/redis.conf
+docker run -p 6379:6379 --name redis -v /data/docker-data/redis/redis.conf:/etc/redis/redis.conf -v /data/docker-data/redis/data:/data --restart always --privileged=true -d redis redis-server /etc/redis/redis.conf
 
-# 设置密码
+# 另外一种设置密码的方式
 # 进入容器命令行
 docker exec -it redis /bin/bash
 # 进入redis命令行
