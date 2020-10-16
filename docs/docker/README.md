@@ -1,8 +1,8 @@
 # README
 ***
-这里只记录基本的启动命令
+这里只记录基本的启动命令。网上的教程比较多，也可以看一下这个[比较系统的教程](https://www.cntofu.com/book/139/readme.html)
 
-## docker
+## Docker
 > 现在很流行用docker安装环境，所以docker的基本命令一定要会，起码通过百度后要知道有这么一回事。[docker镜像库](https://hub.docker.com/)
 ```shell
 # 查看安装的镜像
@@ -49,7 +49,15 @@ mkdir log conf data
 cd conf
 touch my.cnf
 echo '[mysqld]' >> my.cnf
-docker run -p 3307:3306 --name mysql5.7 -v /data/docker-data/mysql5.7/log:/var/log/mysql -v /data/docker-data/mysql5.7/data:/var/lib/mysql -v /data/docker-data/mysql5.7/confmy.cnf:/usr/my.cnf -e MYSQL_ROOT_PASSWORD=123456 --restart always -d mysql:5.7
+docker run -d \
+  -p 3307:3306 \
+  -v /data/docker-data/mysql5.7/log:/var/log/mysql \
+  -v /data/docker-data/mysql5.7/data:/var/lib/mysql \
+  -v /data/docker-data/mysql5.7/confmy.cnf:/usr/my.cnf \
+  -e MYSQL_ROOT_PASSWORD=123456 \
+  --restart always \
+  --name mysql5.7 \
+  mysql:5.7
 ```
 
 ## MySQL5.6
@@ -63,10 +71,20 @@ cd conf
 touch my.cnf
 echo '[mysqld]' >> my.cnf
 # 5.6的启动命令
-docker run -p 3306:3306 --name mysql5.6 -v /data/docker-data/mysql5.6/log:/var/log/mysql -v /data/docker-data/mysql5.6/data:/var/lib/mysql -v /data/docker-data/mysql5.6/conf/my.cnf:/usr/my.cnf -e MYSQL_ROOT_PASSWORD=123456 --restart always -d mysql:5.6
+docker run -d \
+  -p 3306:3306 \
+  -v /data/docker-data/mysql5.6/log:/var/log/mysql \
+  -v /data/docker-data/mysql5.6/data:/var/lib/mysql \
+  -v /data/docker-data/mysql5.6/conf/my.cnf:/usr/my.cnf \
+  -e MYSQL_ROOT_PASSWORD=123456 \
+  --restart always \
+  --name mysql5.6 \
+  mysql:5.6
 ```
 
 ## Redis
+
+### Redis 单机
 > 安装最新版，可以按照教程修改部分配置或者[下载我改好的配置](/docker/redis.conf)
 ```shell
 docker pull redis
@@ -85,7 +103,15 @@ sed -i '' 's/^bind 127.0.0.1/bind 0.0.0.0/' redis.conf
 sed -i '' 's/^# requirepass foobared/requirepass 123456/' redis.conf
 
 # 启动
-docker run -p 6379:6379 --name redis -v /data/docker-data/redis/redis.conf:/etc/redis/redis.conf -v /data/docker-data/redis/data:/data --restart always --privileged=true -d redis redis-server /etc/redis/redis.conf
+docker run -d \
+  -p 6379:6379 \
+  -v /data/docker-data/redis/redis.conf:/etc/redis/redis.conf \
+  -v /data/docker-data/redis/data:/data \
+  --restart always \
+  --privileged=true \
+  --name redis \
+  redis-server /etc/redis/redis.conf \
+  redis
 
 # 另外一种设置密码的方式
 # 进入容器命令行
@@ -113,7 +139,13 @@ touch mongod.conf
 # 将配置文件保存到 mongod.conf
 
 # 启动
-docker run -p 27017:27017 --name mongodb -v /data/docker-data/mongodb/mongod.conf:/etc/mongod.conf -v /data/docker-data/mongodb/data:/data/db --restart always -d mongo
+docker run -d \
+  -p 27017:27017 \
+  -v /data/docker-data/mongodb/mongod.conf:/etc/mongod.conf \
+  -v /data/docker-data/mongodb/data:/data/db \
+  --restart always \
+  --name mongodb \
+  mongo
 
 # 设置密码
 # 进入容器命令行
@@ -158,15 +190,96 @@ mkdir -p /data/docker-data/nacos/conf /data/docker-data/nacos/logs
 echo 'management.endpoints.web.exposure.include=*' > /data/docker-data/nacos/conf/custom.properties
 
 # 启动
-docker run -d -p 8848:8848 -e MODE=standalone -v /data/docker-data/nacos/conf:/home/nacos/init.d -v /data/docker-data/nacos/logs:/home/nacos/logs --restart always --name nacos nacos/nacos-server
+docker run -d \
+  -p 8848:8848 \
+  -v /data/docker-data/nacos/conf:/home/nacos/init.d \
+  -v /data/docker-data/nacos/logs:/home/nacos/logs \
+  -e MODE=standalone \
+  --restart always \
+  --name nacos \
+  nacos/nacos-server
 
 # 访问
 # http://127.0.0.1:8848/nacos
 ```
 
-## ES
-> 安装最新版
+## Elasticsearch && Kibana
+> Elasticsearch 一般都是和 Kibana 一起搭配使用，所以两个容器间需要通讯，我们用`docker network`来实现
+```shell
+# 创建一个网络
+docker network create somenetwork
+# 使用网络
+# --net somenetwork
+```
+
+### Elasticsearch
+> Elasticsearch没有Elasticsearch的tag，所以需要指定一个版本，比如7.9.2。ES是比较吃内存的东西，所以docker默认的2G内存，会导致ES启动闪退，所以必须增大以下docker的内存。
+Elasticsearch 有3个重要的配置文件需要配置的，参考百度或者下载我配置好的文件
+- [elasticsearch.yml](/docker/es/elasticsearch.yml)
+- [jvm.options](/docker/es/jvm.options)
+- [log4j2.properties](/docker/es/log4j2.properties)
 ```shell
 docker pull elasticsearch:7.9.2
 
+# 创建一些映射目录
+mkdir -p /data/docker-data/elasticsearch
+cd /data/docker-data/elasticsearch
+mkdir data logs config
+
+# 启动
+docker run -d \
+  --net somenetwork \
+  -p 9200:9200 \
+  -p 9300:9300 \
+  -v  /data/docker-data/elasticsearch/data:/usr/share/elasticsearch/data \
+  -v  /data/docker-data/elasticsearch/logs:/usr/share/elasticsearch/logs \
+  -v  /data/docker-data/elasticsearch/config:/usr/share/elasticsearch/config \
+  -e "discovery.type=single-node" \
+  --restart always \
+  --name elasticsearch \
+  elasticsearch:7.9.2
+
+# 启动成功后，访问 http://127.0.0.1:9200/ 试一下
+```
+
+### Kibana
+> Kibana同样需要指定一个版本，而且建议和Elasticsearch的版本一致，比如7.9.2。[7.9的官方配置](https://www.elastic.co/guide/en/kibana/current/settings.html)。
+> Kibana没有用户管理，一般需要搭配nginx来设置。
+```shell
+docker pull kibana:7.9.2
+
+# 创建相关目录
+mkdir -p /data/docker-data/kibana/config /data/docker-data/kibana/data
+# 创建配置文件，并设置必要的参数
+cd /data/docker-data/kibana/config
+touch kibana.yml
+echo 'server.name: kibana' >> kibana.yml
+echo 'server.host: "0"' >> kibana.yml
+echo 'elasticsearch.hosts: [ "http://elasticsearch:9200" ]' >> kibana.yml
+echo 'i18n.locale: zh-CN' >> kibana.yml
+
+# 启动
+docker run -d \
+  --net somenetwork \
+  -p 5601:5601 \
+  -v /data/docker-data/kibana/config:/usr/share/kibana/config \
+  -v /data/docker-data/kibana/data:/usr/share/kibana/data \
+  --name kibana \
+  kibana:7.9.2
+
+# 启动成功后，访问 http://127.0.0.1:5601/ 试一下
+```
+
+## Grafana
+> 这个比Kibana好用，虽然这个不是Elasticsearch官方推荐的，但是Grafana是基于Kibana的分支，而且支持多数据源。而且Grafana体积小阿，这点很诱人
+```shell
+docker pull grafana/grafana
+
+# 启动
+docker run -d \
+  -p 3000:3000 \
+  --name=grafana \
+  grafana/grafana
+
+# 启动成功后，访问 http://127.0.0.1:3000/ 试一下，账号admin，密码admin
 ```
