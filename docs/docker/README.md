@@ -242,6 +242,22 @@ docker run -d \
 # 启动成功后，访问 http://127.0.0.1:9200/ 试一下
 ```
 
+#### [IK分词器](https://github.com/medcl/elasticsearch-analysis-ik)
+> 有两种分词方式
+- `ik_smart` 最少切分
+- `ik_max_word` 最细粒度划分，穷尽词库的可能。
+ik分词的配置在`elasticsearch/config/analysis-ik`
+```shell
+# 进入es容器
+docker exec -it elasticsearch bash
+
+# 安装对应版本的ik分词器
+./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.9.2/elasticsearch-analysis-ik-7.9.2.zip
+
+# 重启es
+docker restart elasticsearch
+```
+
 ### ElasticHD
 > 安装Elasticsearch的可视化界面，觉得没必要的可以跳过。因ElasticHD近期不维护了，无法通过`--net`共享网络，所以要使用`--link`。链接到Elasticsearch有如下两种方式。比如我的链接输入`http://elasticsearch:9200`
 - 无权限：http://host:port
