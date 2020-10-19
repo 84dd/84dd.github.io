@@ -203,7 +203,7 @@ docker run -d \
 # http://127.0.0.1:8848/nacos
 ```
 
-## Elasticsearch && Kibana
+## ES 及配套
 > Elasticsearch 一般都是和 Kibana 一起搭配使用，所以两个容器间需要通讯，我们用`docker network`来实现
 ```shell
 # 创建一个网络
@@ -240,6 +240,25 @@ docker run -d \
   elasticsearch:7.9.2
 
 # 启动成功后，访问 http://127.0.0.1:9200/ 试一下
+```
+
+### ElasticHD
+> 安装Elasticsearch的可视化界面，觉得没必要的可以跳过。因ElasticHD近期不维护了，无法通过`--net`共享网络，所以要使用`--link`。链接到Elasticsearch有如下两种方式。比如我的链接输入`http://elasticsearch:9200`
+- 无权限：http://host:port
+- 有权限：http://user:password@host:port
+```
+docker pull containerize/elastichd
+
+# 启动
+docker run -d \
+  --net somenetwork \
+  --link elasticsearch:elasticsearch \
+  -p 9800:9800 \
+  --restart always \
+  --name elastichd \
+  containerize/elastichd
+
+# 启动成功后，访问 http://127.0.0.1:9800/ 试一下
 ```
 
 ### Kibana
