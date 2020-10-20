@@ -25,25 +25,25 @@ PUT /yinyangshi
 {
   "mappings": {
     "properties": {
-      "yysId": {
-        "type": "long"
-      },
-      "name": {
-        "type": "text"
-      },
-      "level": {
-        "type": "text"
+        "ssId": {
+          "type": "long"
+        },
+        "name": {
+          "type": "text"
+        },
+        "level": {
+          "type": "text"
+        }
       }
     }
-  }
 }
 ```
 ### 插入数据
 > 用POST方式插入数据，或者用bulk语法批量插入数据，可以参考 [批量插入所有式神脚本](/yinyangshi/yys.txt)。如果需要重复执行并覆盖的数据，请指定`_id`
 ```
-POST /yinyangshi/_doc
+POST /yinyangshi/_doc_/266
 {
-   "yysId": 266,
+   "ssId": 266,
    "name": "青行灯",
    "level": "SSR"
 }
@@ -52,4 +52,6 @@ POST /yinyangshi/_doc
 ```
 # 查看文档信息
 GET /yinyangshi
+# 查询数据
+GET /yinyangshi/_doc/_search?q=name:青行灯
 ```
