@@ -1,6 +1,15 @@
 module.exports = [
   { text: '关于', link: '/about/' },
   { text: '简历', link: '/docs/resume/' },
+  {
+    text: "学不死",
+    items: [
+      {
+        text: "ES",
+        link: "/docs/es/"
+      },
+    ]
+  },
   { text: '微服务商城', link: '/docs/mall/' },
   { text: '练手项目', link: '/docs/boss/' },
   { text: 'Docker', link: '/docs/docker/' },

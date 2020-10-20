@@ -259,22 +259,21 @@ docker restart elasticsearch
 ```
 
 ### ElasticHD
-> 安装Elasticsearch的可视化界面，觉得没必要的可以跳过。因ElasticHD近期不维护了，无法通过`--net`共享网络，所以要使用`--link`。链接到Elasticsearch有如下两种方式。比如我的链接输入`http://elasticsearch:9200`
+> 安装Elasticsearch的可视化界面，觉得没必要的可以跳过。
 - 无权限：http://host:port
 - 有权限：http://user:password@host:port
 ```
-docker pull containerize/elastichd
+docker pull mobz/elasticsearch-head:5
 
 # 启动
 docker run -d \
   --net somenetwork \
-  --link elasticsearch:elasticsearch \
-  -p 9800:9800 \
+  -p 9100:9100 \
   --restart always \
   --name elastichd \
-  containerize/elastichd
+  mobz/elasticsearch-head:5
 
-# 启动成功后，访问 http://127.0.0.1:9800/ 试一下
+# 启动成功后，访问 http://127.0.0.1:9100/ 试一下
 ```
 
 ### Kibana
