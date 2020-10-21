@@ -49,9 +49,84 @@ POST /yinyangshi/_doc_/266
 }
 ```
 ### 查看信息
+- term 精确查询，直接通过倒排索引指定的词条进行精确的查找
+- match 会使用分词器解析，相当于模糊匹配（字段类型text会被分词解析，而keyword不会）
 ```
 # 查看文档信息
 GET /yinyangshi
 # 查询数据
 GET /yinyangshi/_doc/_search?q=name:青行灯
+
+# 查询SSR，涉及结果过滤，排序，分页
+GET yinyangshi/_doc/_search
+{
+  "query": {
+    "match": {
+      "level": "SSR"
+    }
+  },
+  "_source": ["name", "level"],
+  "sort": [
+    {
+      "ssId": "asc"
+    }
+  ],
+  "from": 0,
+  "size": 5
+}
+
+# 多条件查询， must， must_not, should
+GET yinyangshi/_doc/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "level": "SR"
+          }
+        },
+        {
+          "match": {
+            "name": "桃花妖"
+          }
+        }]
+      }
+    }
+}
+```
+### 高亮
+> 通过`highlight`指定字段进行高亮显示，并且用`pre_tags`和`post_tags`自定义前后标签
+```
+# 高亮查询
+GET yinyangshi/_doc/_search
+{
+  "query": {
+    "match": {
+      "name": "茨木"
+    }
+  },
+  "highlight": {
+    "fields": {
+      "name": {}
+    }
+  }
+}
+
+# 自定义高亮
+GET yinyangshi/_doc/_search
+{
+  "query": {
+    "match": {
+      "name": "茨木"
+    }
+  },
+  "highlight": {
+    "pre_tags": "<span class='my-highlight'>",
+    "post_tags": "</span>",
+    "fields": {
+      "name": {}
+    }
+  }
+}
 ```
