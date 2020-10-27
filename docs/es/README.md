@@ -94,6 +94,23 @@ GET yinyangshi/_doc/_search
       }
     }
 }
+
+# 批量删除字段
+POST /food/_doc/_update_by_query
+{
+  "script" : "ctx._source.remove(\"title_alias\")",
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "exists": {
+            "field": "title_alias"
+          }
+        }
+      ]
+    }
+  }
+}
 ```
 ### 高亮
 > 通过`highlight`指定字段进行高亮显示，并且用`pre_tags`和`post_tags`自定义前后标签
@@ -130,3 +147,47 @@ GET yinyangshi/_doc/_search
   }
 }
 ```
+
+## SpringBoot整合
+> 项目地址：[Java端](https://gitee.com/84dd/es)[VUE端](https://gitee.com/84dd/es-vue)
+- 整合最新的Elasticsearch 7.9.2
+- 爬取柚宝宝中的食材数据
+- 简单的搜索例子
+### 分析数据源
+- [柚宝宝食物分类](http://tools-node.seeyouyima.com/data-api/taboo/category) http://tools-node.seeyouyima.com/data-api/taboo/category
+![](https://qiniu.84dd.xyz/TZZwHz.png)
+- [柚宝宝食物](http://tools-node.seeyouyima.com/data-api/taboo/food?id=1) http://tools-node.seeyouyima.com/data-api/taboo/food?id=1
+![](https://qiniu.84dd.xyz/KJEZwX.png)
+根据分析，我们起码要有两个实体，分类(Category)和食物(Food)
+### 创建项目
+pom.xml关键代码。发现`2.3.4.RELEASE`版本的elasticsearch使用的是7.6.2的，所以使用版本也要改一下。完整pom请查看项目。
+```xml
+<properties>
+    <java.version>1.8</java.version>
+    <elasticsearch.version>7.9.2</elasticsearch.version>
+</properties>
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+    <version>2.3.4.RELEASE</version>
+</dependency>
+```
+application.yml
+```
+server:
+  port: 8700
+
+spring:
+  application:
+    name: es
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      # 9200为http端口，9300为tcp端口
+      cluster-nodes: 127.0.0.1:9300
+```
+### 爬取数据
+- ~~线程池爬取数据`asyncService.executePoolAsyncFoodTask`~~ 这样爬取容易被封IP
+- 单线程爬取数据`asyncService.executeSingleAsyncFoodTask`
+- 这里附上3份原始的数据，可以通过kibana进行导入 [阴阳师](/es/yinyangshi.csv) [食物分类](/es/category.csv) [食物](/es/food.csv)

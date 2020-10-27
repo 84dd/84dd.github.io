@@ -1,0 +1,10 @@
+"_class","_id","_index","_score","_type",del,icon,id,sort,title
+"com.lym.demo.es.entity.Category",29,category,0,"_doc",false,"https://sc.seeyouyima.com/prepackage/5cdeab5b34f52_138_138.png",29,1,"水果"
+"com.lym.demo.es.entity.Category",23,category,0,"_doc",false,"https://sc.seeyouyima.com/prepackage/5cdeaba0433f4_138_138.png",23,2,"蔬菜/菌藻"
+"com.lym.demo.es.entity.Category",30,category,0,"_doc",false,"https://sc.seeyouyima.com/prepackage/5cdeab5055180_138_138.png",30,3,"饮品"
+"com.lym.demo.es.entity.Category",24,category,0,"_doc",false,"https://sc.seeyouyima.com/prepackage/5cdeab96aca23_138_138.png",24,4,"水产"
+"com.lym.demo.es.entity.Category",31,category,0,"_doc",false,"https://sc.seeyouyima.com/prepackage/5cdeab46df75c_138_138.png",31,5,"零食/甜品"
+"com.lym.demo.es.entity.Category",27,category,0,"_doc",false,"https://sc.seeyouyima.com/prepackage/5cdeab74e6ac4_138_138.png",27,6,"肉/蛋类"
+"com.lym.demo.es.entity.Category",22,category,0,"_doc",false,"https://sc.seeyouyima.com/prepackage/5cdeabaa0b4b3_138_138.png",22,7,"主食"
+"com.lym.demo.es.entity.Category",28,category,0,"_doc",false,"https://sc.seeyouyima.com/prepackage/5cdeab65372d4_138_138.png",28,8,"大豆/干果"
+"com.lym.demo.es.entity.Category",32,category,0,"_doc",false,"https://sc.seeyouyima.com/prepackage/5cdeab37740b1_138_138.png",32,9,"菜肴/小吃"
