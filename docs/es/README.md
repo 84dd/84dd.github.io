@@ -191,3 +191,127 @@ spring:
 - ~~线程池爬取数据`asyncService.executePoolAsyncFoodTask`~~ 这样爬取容易被封IP
 - 单线程爬取数据`asyncService.executeSingleAsyncFoodTask`
 - 这里附上3份原始的数据，可以通过kibana进行导入 [阴阳师](/es/yinyangshi.csv) [食物分类](/es/category.csv) [食物](/es/food.csv)
+
+### 查询数据
+#### 获取热门数据
+代码位置 com.lym.demo.es.service.FoodService#getRecommendFoods
+```java
+public SearchHits<Food> getRecommendFoods() {
+    String[] fields = {"id", "title", "icon", "img",  "alias",
+            "pregnant_notice",  "puerpera_notice", "lactation_notice", "baby_notice"
+    };
+
+    // 检索条件 : 必须是孕妇，产妇，哺乳和宝宝都适宜的食物
+    BoolQueryBuilder bqb = QueryBuilders.boolQuery();
+    bqb.must(QueryBuilders.matchQuery("pregnant_notice", FoodNotice.SUCCESS.code))
+            .must(QueryBuilders.matchQuery("puerpera_notice", FoodNotice.SUCCESS.code))
+            .must(QueryBuilders.matchQuery("lactation_notice", FoodNotice.SUCCESS.code))
+            .must(QueryBuilders.matchQuery("baby_notice", FoodNotice.SUCCESS.code));
+    //构建查询
+    NativeSearchQuery query = new NativeSearchQueryBuilder()
+            .withQuery(bqb)
+            .withSort(SortBuilders.fieldSort("sort").order(SortOrder.DESC))
+            .withPageable(PageRequest.of(0, 20))
+            .withFields(fields)
+            .build();
+
+    return elasticsearchRestTemplate.search(query, Food.class);
+}
+```
+#### 搜索数据
+代码位置 com.lym.demo.es.service.FoodService#searchFoods
+```java
+public PageUtils searchFoods(FoodParam param) {
+    // 分页下标从0开始，所以下面分页要减去1
+    int currPage = Optional.of(param.getCurrPage()).orElse(1);
+    int pageSize = Optional.of(param.getPageSize()).orElse(20);
+
+    String[] fields = {"id", "title", "icon", "img",  "alias",
+            "pregnant_notice",  "puerpera_notice", "lactation_notice", "baby_notice"
+    };
+
+    BoolQueryBuilder bqb = QueryBuilders.boolQuery();
+
+    // 查询名字，别名
+    HighlightBuilder hBuilder = new HighlightBuilder();
+    String keyword = param.getKeyword();
+    if (StringUtils.isNotBlank(keyword)) {
+        bqb.must(QueryBuilders.multiMatchQuery(keyword, "title", "alias"));
+        // 设置文字高亮
+        hBuilder.preTags("<span class='my-highlight'>");
+        hBuilder.postTags("</span>");
+        hBuilder.field("title");
+        hBuilder.field("alias");
+    }
+
+    // 分类查询
+    int categoryId = Optional.of(param.getCategoryId()).orElse(0);
+    if (categoryId > 0) {
+        bqb.must(QueryBuilders.termQuery("category_id", categoryId));
+    }
+
+    // 适宜程度查询
+    int[] pregnantNoticeArray = param.getPregnantNoticeArray();
+    if (pregnantNoticeArray.length > 0) {
+        bqb.must(QueryBuilders.termsQuery("pregnant_notice", pregnantNoticeArray));
+    }
+    int[] puerperaNoticeArray = param.getPuerperaNoticeArray();
+    if (puerperaNoticeArray.length > 0) {
+        bqb.must(QueryBuilders.termsQuery("puerpera_notice", puerperaNoticeArray));
+    }
+    int[] lactationNoticeArray = param.getLactationNoticeArray();
+    if (lactationNoticeArray.length > 0) {
+        bqb.must(QueryBuilders.termsQuery("lactation_notice", lactationNoticeArray));
+    }
+    int[] babyNoticeArray = param.getBabyNoticeArray();
+    if (babyNoticeArray.length > 0) {
+        bqb.must(QueryBuilders.termsQuery("baby_notice", babyNoticeArray));
+    }
+
+    //构建查询
+    NativeSearchQuery query = new NativeSearchQueryBuilder()
+            // 搜索条件
+            .withQuery(bqb)
+            // 排序
+            .withSort(SortBuilders.fieldSort("sort").order(SortOrder.DESC))
+            // 分页
+            .withPageable(PageRequest.of(currPage-1, pageSize))
+            // 过滤字段
+            .withFields(fields)
+            // 高亮字段
+            .withHighlightBuilder(hBuilder)
+            .build();
+
+    SearchHits<Food> res = elasticsearchRestTemplate.search(query, Food.class);
+    int totalCount = (int)res.getTotalHits();
+
+    // 处理高亮结果
+    List<SearchHit<Food>> list = new ArrayList<>();
+    for (SearchHit<Food> hit : res.toList()) {
+        Map<String, List<String>> highlightFieldMap = hit.getHighlightFields();
+        Food food = hit.getContent();
+
+        // 如果标题中有高亮，重置标题内容
+        if(highlightFieldMap.containsKey("title")) {
+            String title = StringUtils.join(highlightFieldMap.get("title"), "");
+            food.setTitle(title);
+        }
+
+        if(highlightFieldMap.containsKey("alias")) {
+            List<String> texts = highlightFieldMap.get("alias");
+            Set<String> aliasSet = texts.stream()
+                    .map(HtmlUtil::cleanHtmlTag)
+                    .collect(Collectors.toSet());
+            List<String> aliasList = new ArrayList<>(texts);
+            List<String> others = food.getAlias()
+                    .stream()
+                    .filter(a -> !aliasSet.contains(a))
+                    .collect(Collectors.toList());
+            aliasList.addAll(others);
+            food.setAlias(aliasList);
+        }
+    }
+
+    return new PageUtils(res.toList(), totalCount, pageSize, currPage);
+}
+```
