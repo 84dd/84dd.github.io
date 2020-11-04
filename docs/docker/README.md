@@ -38,6 +38,29 @@ docker network inspect bridge
 - `--name` 容器名字
 - `--restart always` 容器自启动
 
+## MySQL8
+```shell
+# 或者 docker pull mysql
+docker pull mysql:8
+
+# 启动 影射端口到宿主的3308端口
+mkdir -p /data/docker-data/mysql8
+cd /data/docker-data/mysql8
+mkdir log conf data
+cd conf
+touch my.cnf
+echo '[mysqld]' >> my.cnf
+docker run -d \
+  -p 3308:3306 \
+  -v /data/docker-data/mysql8/log:/var/log/mysql \
+  -v /data/docker-data/mysql8/data:/var/lib/mysql \
+  -v /data/docker-data/mysql8/conf/my.cnf:/usr/my.cnf \
+  -e MYSQL_ROOT_PASSWORD=123456 \
+  --restart always \
+  --name mysql8 \
+  mysql:8
+```
+
 ## MySQL5.7
 ```shell
 docker pull mysql:5.7
@@ -53,7 +76,7 @@ docker run -d \
   -p 3307:3306 \
   -v /data/docker-data/mysql5.7/log:/var/log/mysql \
   -v /data/docker-data/mysql5.7/data:/var/lib/mysql \
-  -v /data/docker-data/mysql5.7/confmy.cnf:/usr/my.cnf \
+  -v /data/docker-data/mysql5.7/conf/my.cnf:/usr/my.cnf \
   -e MYSQL_ROOT_PASSWORD=123456 \
   --restart always \
   --name mysql5.7 \
