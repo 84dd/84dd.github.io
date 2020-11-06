@@ -192,13 +192,13 @@ spring:
 - 单线程爬取数据`asyncService.executeSingleAsyncFoodTask`
 - 这里附上3份原始的数据，可以通过kibana进行导入 [阴阳师](/es/yinyangshi.csv) [食物分类](/es/category.csv) [食物](/es/food.csv)
 
-### 查询数据
+### CRUD
 #### 获取热门数据
 代码位置 com.lym.demo.es.service.FoodService#getRecommendFoods
 ```java
 public SearchHits<Food> getRecommendFoods() {
     String[] fields = {"id", "title", "icon", "img",  "alias",
-            "pregnant_notice",  "puerpera_notice", "lactation_notice", "baby_notice"
+            "pregnant_notice",  "puerpera_notice", "lactation_notice", "baby_notice", "baby_notice_month"
     };
 
     // 检索条件 : 必须是孕妇，产妇，哺乳和宝宝都适宜的食物
@@ -227,7 +227,7 @@ public PageUtils searchFoods(FoodParam param) {
     int pageSize = Optional.of(param.getPageSize()).orElse(20);
 
     String[] fields = {"id", "title", "icon", "img",  "alias",
-            "pregnant_notice",  "puerpera_notice", "lactation_notice", "baby_notice"
+            "pregnant_notice",  "puerpera_notice", "lactation_notice", "baby_notice", "baby_notice_month"
     };
 
     BoolQueryBuilder bqb = QueryBuilders.boolQuery();
@@ -313,5 +313,23 @@ public PageUtils searchFoods(FoodParam param) {
     }
 
     return new PageUtils(res.toList(), totalCount, pageSize, currPage);
+}
+```
+#### 根据ID查找
+```java
+public Food getFood(Long id) {
+    Optional<Food> food = baseRepository.findById(id);
+    return food.orElse(null);
+}
+```
+#### 编辑和删除
+都是使用Repository提供的方法
+```java
+public void deleteFood(Long id) {
+    baseRepository.deleteById(id);
+}
+
+public Food saveFood(Food food) {
+    return baseRepository.save(food);
 }
 ```
