@@ -127,6 +127,25 @@ const docker = [
   }
 ];
 
+const java = [
+  {
+    title: 'JAVA系列',
+    collapsable: false,
+    sidebarDepth: 3,
+    children: [
+      '',
+      {
+        title: '第一阶段 开源框架源码剖析',
+        collapsable: false,
+        sidebarDepth: 3,
+        children: [
+          '11mybatis',
+        ]
+      }
+    ]
+  }
+];
+
 module.exports = {
   '/docs/idea/': idea,
   '/docs/WebStorm/': WebStorm,
@@ -137,4 +156,5 @@ module.exports = {
   '/docs/boss/': boss,
   '/docs/mall/': mall,
   '/docs/docker/': docker,
+  '/docs/java/': java,
 };
