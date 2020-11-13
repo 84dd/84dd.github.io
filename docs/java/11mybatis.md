@@ -827,7 +827,7 @@ public class MyPlugin implements Interceptor {
 :::
 
 ## 视频验证
-
+<my-video src="http://lagou.84dd.xyz/mybatis.mov" poster="http://lagou.84dd.xyz/SSR_266_-2.png"></my-video>
 
 
 
