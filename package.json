@@ -16,7 +16,8 @@
     "vuepress-plugin-flowchart": "^1.4.3"
   },
   "devDependencies": {
-    "gh-pages": "^2.1.1"
+    "gh-pages": "^2.1.1",
+    "vuepress-plugin-element-tabs": "^0.2.8"
   },
   "scripts": {
     "dev": "vuepress dev .",

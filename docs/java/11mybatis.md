@@ -61,7 +61,7 @@ public static void main(String[] args) {
    - 执行sql
    - 使用反射或者内省，根据数据库表和实体的对应关系，完成封装
    
-**对用的代码如下**
+**对应的代码如下**
 ```java
 InputStream resourceAsSteam = Resources.getResourceAsSteam("sqlMapConfig.xml");
 SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsSteam);
@@ -72,6 +72,10 @@ List<User> allUser = userDao.findAll();
 
 ### 关键代码
 ![IPersistence](https://qiniu.84dd.xyz/g61Bix.png)
+
+:::: tabs
+
+::: tab 第一步
 **1、读取配置xml，并以流的形式返回**<br/>
 在应用例子中的<strong style="color:red;">第一行</strong>`InputStream resourceAsSteam = Resources.getResourceAsSteam("sqlMapConfig.xml");`
 ```java
@@ -79,6 +83,9 @@ public static InputStream getResourceAsSteam(String path) {
     return Resources.class.getClassLoader().getResourceAsStream(path);
 }
 ```
+:::
+
+::: tab 第二步
 2、**SqlSessionFactoryBuilder**接收配置xml的字符流，并将内容解析到Configuration，并返回SqlSessionFactory工厂类，以便稍后生产SqlSession<br/>
 在应用例子中的<strong style="color:red;">第二行</strong>`SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsSteam);`
 ```java
@@ -91,7 +98,7 @@ public SqlSessionFactory build(InputStream in) throws DocumentException, Propert
     return new DefaultSqlSessionFactory(configuration);
 }
 ```
-::: details XMLMapperBuilder关键代码，解析insert、select、update、delete等标签，并在MappedStatement中存储命令类型
+XMLMapperBuilder关键代码，解析insert、select、update、delete等标签，并在MappedStatement中存储命令类型
 ```java{28}
 public void parse(InputStream in) throws DocumentException {
     Document document = new SAXReader().read(in);
@@ -128,6 +135,7 @@ private void parse(Element rootElement, String operation, SqlCommandType command
 ```
 :::
 
+::: tab 第三步
 **3、利用工厂类生产SqlSession**<br/>
 在应用例子中的<strong style="color:red;">第三行</strong>`SqlSession sqlSession = sqlSessionFactory.openSession();`
 ```java
@@ -135,7 +143,7 @@ public SqlSession openSession() {
     return new DefaultSqlSession(configuration);
 }
 ```
-::: details SqlSession的实现类DefaultSqlSession，指定了不同的接口，调用Executor的不同方法，insert、update、delete最终调用的都是preparedStatement.executeUpdate()
+SqlSession的实现类DefaultSqlSession，指定了不同的接口，调用Executor的不同方法，insert、update、delete最终调用的都是preparedStatement.executeUpdate()
 ![](https://qiniu.84dd.xyz/lSohiz.png)
 ```java
 @Override
@@ -183,6 +191,7 @@ public int delete(String statementid, Object... params) throws Exception {
 ```
 :::
 
+::: tab 第四步
 **4、获取Mapper接口对象**<br/>
 在应用例子中的<strong style="color:red;">第四行</strong>`IUserDao userDao = sqlSession.getMapper(IUserDao.class);`<br/>
 这里用到了JDK的动态代理，所以最终返回的是Mapper的代理对象，而最终要实现的就是invoke方法。这里要根据MappedStatement对象中存储的不同命令 类型来判断调用哪个方法
@@ -237,7 +246,9 @@ public <T> T getMapper(Class<?> mapperClass) {
     return (T) proxyInstance;
 }
 ```
+:::
 
+::: tab 第五步
 **5、Executor中执行sql操作**<br/>
 在应用例子中的<strong style="color:red;">第五行</strong>`List<User> allUser = userDao.findAll();`<br/>
 由于用到了mapper的代理，userDao.findAll方法，会进入invoke，然后根据findAll的配置，进入到`selectList(statementid, args);`，这个方法最终会在SimpleExecutor中执行。
@@ -338,6 +349,9 @@ private PreparedStatement parse(Configuration configuration, MappedStatement map
     return preparedStatement;
 }
 ```
+:::
+
+::::
 
 ### 测试用例
 ::: details 测试用例
@@ -828,8 +842,3 @@ public class MyPlugin implements Interceptor {
 
 ## 视频验证
 <video src="http://lagou.84dd.xyz/mybatis.mov" controls="controls" width="700"></video>
-
-
-
-
-
