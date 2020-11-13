@@ -80,7 +80,6 @@ const diverse = [
       '',
       'Markdown',
       'Flow',
-      'video',
       'Git',
       '阴阳师',
     ]

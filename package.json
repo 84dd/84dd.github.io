@@ -11,8 +11,8 @@
     "@vuepress/plugin-pwa": "^1.0.0-rc.1",
     "mermaid": "^8.8.0",
     "moment": "^2.24.0",
-    "vue-video-player": "^5.0.2",
-    "vuepress": "^1.5.4",
+    "vuepress": "^1.7.1",
+    "vuepress-plugin-code-copy": "^1.0.6",
     "vuepress-plugin-flowchart": "^1.4.3"
   },
   "devDependencies": {

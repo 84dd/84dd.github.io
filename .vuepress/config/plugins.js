@@ -31,5 +31,6 @@ module.exports = [
         return moment(timestamp).fromNow()
       }
     }
-  ]
+  ],
+  ['vuepress-plugin-code-copy', true]
 ]
