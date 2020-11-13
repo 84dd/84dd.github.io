@@ -488,6 +488,8 @@ MyBatis所允许拦截的方法如下：
 - SQL语法构建器StatementHandler (prepare、parameterize、batch、updates query等方 法)；
 - 参数处理器ParameterHandler (getParameterObject、setParameters方法)；
 - 结果集处理器ResultSetHandler (handleResultSets、handleOutputParameters等方法)；
+
+### 分页插件
 ::: details pageHelper分页插件
 pom.xml
 ```xml
@@ -525,7 +527,12 @@ public void testPageHelper() {
 ```
 :::
 
+### tk.mybatis
 ::: details 通用mapper（tk.mybatis）
+通用 [Mapper4](https://gitee.com/free/Mapper/wikis/Home) 是一个可以实现任意 MyBatis 通用方法的框架，
+项目提供了常规的增删改查操作以及Example 相关的单表操作。通用 Mapper 是为了解决 MyBatis 使用中 90% 的基本操作，
+使用它可以很方便的进行开发，可以节省开发人员大量的时间。<br/>
+
 pom.xml
 ```xml
 <dependency>
@@ -558,6 +565,14 @@ public interface UserMapper extends Mapper<User> {
 
 }
 ```
+:::
+
+### Mybatis-Plus
+::: details MyBatis-Plus
+[MyBatis-Plus](https://baomidou.com/guide/)（简称 MP）是一个 MyBatis 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。
+<br/>
+<br/>
+看官方例子可以很容易上手
 :::
 
 ## 简答题
