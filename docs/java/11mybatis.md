@@ -627,6 +627,16 @@ public interface UserMapper extends Mapper<User> {
 <br/>
 <br/>
 看官方例子可以很容易上手
+- AR模式
+- 执行分析插件`SqlExplainInterceptor`，可用作阻断全表更新、删除的操作，注意:该插件仅适用于开发环境，不适用于生产环境。
+- 性能分析插件`PerformanceInterceptor`，用于输出每条 SQL 语句及其执行时间，可以设置最大执行时间，超过时间会抛出异常。注意:该插件仅适用于开发环境，不适用于生产环境。
+- 乐观锁插件`OptimisticLockerInterceptor` 版本号字段加上 `@Version`
+- 自定义SQL注入器（编写扩充公共方法）
+- 自动填充功能`@TableField`
+- 逻辑删除`@TableLogic` 配置的默认值如下
+   - 逻辑已删除值(默认为 1) mybatis-plus.global-config.db-config.logic-delete-value=1
+   - 逻辑未删除值(默认为 0) mybatis-plus.global-config.db-config.logic-not-delete-value=0
+- 代码生成器`AutoGenerator`
 :::
 
 ## 简答题
@@ -841,4 +851,4 @@ public class MyPlugin implements Interceptor {
 :::
 
 ## 视频验证
-<video src="http://lagou.84dd.xyz/mybatis.mov" controls="controls" width="700"></video>
+<video src="https://lagou.84dd.xyz/mybatis.mov" controls="controls" width="700"></video>
