@@ -974,3 +974,4 @@ AOP就是Aspect oriented Programming，面向切面编程的意思。
 ::::
 
 ## 视频验证
+<video src="https://lagou.84dd.xyz/myiocaop720.mov" controls="controls" width="700"></video>
