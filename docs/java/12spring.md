@@ -965,6 +965,12 @@ AOP就是Aspect oriented Programming，面向切面编程的意思。
 - 方法修饰符不是 public
 - 吞掉了异常或者抛出的异常不在rollbackFor里。默认RuntimeException
 
-## 简答题
+## 循环依赖时序图
+:::: details Spring IOC 循环依赖时序图 svg
+<embed src="https://lagou.84dd.xyz/ioc%4084dd.svg" type="image/svg+xml" />
+::::
+:::: details Spring IOC 循环依赖时序图 jpg
+![循环依赖](https://lagou.84dd.xyz/SpringIOCUml.jpg)
+::::
 
 ## 视频验证
