@@ -17,23 +17,42 @@ features:
 ---
 
 ### [84dd] 像数 1, 2, 3 一样容易
+<CodeSwitcher :languages="{java:'java',js:'js',python:'python',sql:'sql'}">
 
-``` javascript
-console.log('蓝'.charCodeAt().toString(16));
-```
+<template v-slot:java>
 
-``` java
+```java
 System.out.println(Integer.toHexString("蓝".charAt(0)));
 ```
 
-``` python
+</template>
+
+<template v-slot:js>
+
+```javascript
+console.log('蓝'.charCodeAt().toString(16));
+```
+
+</template>
+
+<template v-slot:python>
+
+```python
 import json
 print json.dumps('蓝')
 ```
 
-``` sql
+</template>
+
+<template v-slot:sql>
+
+```sql
 SELECT HEX(ORD(CONVERT('蓝' USING ucs2)))
 ```
+
+</template>
+
+</CodeSwitcher>
 
 ::: warning 注意
 请确保你的浏览器为现代浏览器。

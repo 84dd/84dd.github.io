@@ -137,9 +137,10 @@ const java = [
       {
         title: '第一阶段 开源框架源码剖析',
         collapsable: false,
-        sidebarDepth: 3,
+        sidebarDepth: 2,
         children: [
           '11mybatis',
+          '12spring',
         ]
       }
     ]

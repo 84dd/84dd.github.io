@@ -1,5 +1,5 @@
 # 持久层框架设计实现及MyBatis源码分析
-MyBatis是一款优秀的基于ORM的半自动轻量级持久层框架，是对JDBC的一种封装，并对JDBC的一些问题进行了规避。
+***MyBatis***是一款优秀的基于ORM的半自动轻量级持久层框架，是对JDBC的一种封装，并对JDBC的一些问题进行了规避。
 ## JDBC问题分析
 ::: details 人类早期驯服JDBC的高清有码例子
 ```java
@@ -61,6 +61,7 @@ public static void main(String[] args) {
    - 执行sql
    - 使用反射或者内省，根据数据库表和实体的对应关系，完成封装
    
+
 **对应的代码如下**
 ```java
 InputStream resourceAsSteam = Resources.getResourceAsSteam("sqlMapConfig.xml");
@@ -723,7 +724,7 @@ EnhancedResultObjectProxyImpl#invoke拦截方法来真正加载延迟数据
 ![](https://qiniu.84dd.xyz/8PLsI8.png)
 :::
 
-::: details 简述下Mybatis的一级、二级缓存（分别从存储结构、范围、失效场景。三个方面来作答）？
+::: details 简述下Mybatis的一级、**二级缓存**（分别从存储结构、范围、失效场景。三个方面来作答）？
 - 一级缓存也叫查询缓存，MyBatis默认开启的
    - 存储结构：HashMap key为statementid+参数等组成，值就是结果
    - 范围：SqlSession。因为存储在PerpetualCache的一个HashMap，而每次SqlSessionFactory创建SqlSession的时候，会创建执行器Executor，而执行器会初始化PerpetualCache。

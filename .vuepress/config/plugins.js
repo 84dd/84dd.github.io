@@ -33,5 +33,6 @@ module.exports = [
     }
   ],
   ['vuepress-plugin-code-copy', true],
-  ['vuepress-plugin-element-tabs']
+  ['vuepress-plugin-element-tabs'],
+  ['vuepress-plugin-code-switcher']
 ]
