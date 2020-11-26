@@ -1,5 +1,5 @@
-# 持久层框架设计实现及MyBatis源码分析
-***MyBatis***是一款优秀的基于ORM的半自动轻量级持久层框架，是对JDBC的一种封装，并对JDBC的一些问题进行了规避。
+# MyBatis
+**MyBatis**是一款优秀的基于ORM的半自动轻量级持久层框架，是对JDBC的一种封装，并对JDBC的一些问题进行了规避。
 ## JDBC问题分析
 ::: details 人类早期驯服JDBC的高清有码例子
 ```java
@@ -853,3 +853,6 @@ public class MyPlugin implements Interceptor {
 
 ## 视频验证
 <video src="https://lagou.84dd.xyz/mybatis.mov" controls="controls" width="700"></video>
+
+## 其他
+- ErrorContext 记录了执行过程中的每一步信息，用于日志输出
