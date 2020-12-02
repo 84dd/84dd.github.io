@@ -730,3 +730,4 @@ public void testSpecficationMultiCon(){
 ::::
 
 ## 视频验证
+<video src="https://lagou.84dd.xyz/mymvc.mp4" controls="controls" width="700"></video>
