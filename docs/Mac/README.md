@@ -12,6 +12,7 @@ sidebar: auto
 sudo sed -i ".bak" '2s/^/auth       sufficient     pam_tid.so\'$'\n/g' /etc/pam.d/sudo
 ```
 ::: tip 命令说明
+**每次更新系统都会重置**
 该命令的作用是把 /etc/pam.d/sudo 备份为 /etc/pam.d/sudo.bak，然后在 /etc/pam.d/sudo 的第二行前面加入 auth sufficient pam_tid.so 这个字符串。
 
 pam_tid.so就是支持touch_id的库，如果你学习过linux的认证的PAM框架，你就很容易理解。
@@ -63,6 +64,7 @@ sudo mount -uw /
 csrutil enable
 ```
 ### ln <Badge text="推荐"/>
+**经测试，该方法在Big Sur下无效**
 我们先认识一下`ln`，ln即link，链接的意思，ln分为下面两种
 - 硬链接
   - 硬链接文件跟源文件拥有相同的i(inode)节点和存储block块，它们可以看作是同一个文件
@@ -103,3 +105,11 @@ ln -v
 sudo ln -s /Users/lym/data /
 ```
 ![ln_data](https://qiniu.84dd.xyz/mac/ln_data.png!84dd)
+
+### Big Sur支持
+比如上面ln的需求，在 Big Sur下使用ln同样会报`Read-only file system`，这时候需要换另一种方法
+```
+sudo touch /etc/synthetic.conf
+sudo echo 'data            /Users/lym/data' > /etc/synthetic.conf
+sudo rebooot
+```

@@ -130,19 +130,24 @@ const docker = [
 const java = [
   {
     title: 'JAVA系列',
-    collapsable: false,
     sidebarDepth: 3,
     children: [
       '',
       {
         title: '第一阶段 开源框架源码剖析',
-        collapsable: false,
         sidebarDepth: 2,
         children: [
           '11mybatis',
           '12spring',
           '13mvc',
           '14springboot',
+        ]
+      },
+      {
+        title: '第二阶段 Web服务器深度应用及调优',
+        sidebarDepth: 2,
+        children: [
+          '21tomcat_nginx',
         ]
       }
     ]
