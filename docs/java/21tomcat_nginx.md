@@ -1363,4 +1363,4 @@ public class RequestProcessor extends Thread {
 ::::
 
 ## 视频验证
-
+<video src="https://lagou.84dd.xyz/minicat.mp4" controls="controls" width="700"></video>
