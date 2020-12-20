@@ -340,3 +340,12 @@ docker run -d \
 
 # 启动成功后，访问 http://127.0.0.1:3000/ 试一下，账号admin，密码admin
 ```
+
+## zookeeper
+```shell
+docker pull zookeeper
+
+# 单实例
+参考官网
+
+```

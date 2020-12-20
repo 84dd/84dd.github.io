@@ -635,6 +635,23 @@ upstream my-tomcat{
 ```
 :::
 
+::: tab 一致性HASH
+ngx_http_upstream_consistent_hash 模块是一个负载均衡器，使用一个内部一致性hash算法来选择合适的后端节点。
+该模块可以根据配置参数采取不同的方式将请求均匀映射到后端机器，
+- `consistent_hash $remote_addr` 可以根据客户端ip映射
+- `consistent_hash $request_uri` 根据客户端请求的uri映射
+- `consistent_hash $args` 根据客户端携带的参数进行映
+
+[ngx_http_upstream_consistent_hash](https://github.com/replay/ngx_http_consistent_hash) 模块是一个第三方模块，需要我们下载安装后使用
+```
+upstream my-tomcat{
+   consistent_hash $request_uri;
+   server    127.0.0.1:8080 weight=1;
+   server    127.0.0.1:8081 weight=2;
+}
+```
+:::
+
 ::: tab 最少连接
 将请求分配到连接数最少的服务上
 ```

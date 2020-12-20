@@ -148,6 +148,7 @@ const java = [
         sidebarDepth: 2,
         children: [
           '21tomcat_nginx',
+          '22cluster',
         ]
       }
     ]
