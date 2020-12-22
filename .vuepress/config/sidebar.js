@@ -150,6 +150,13 @@ const java = [
           '21tomcat_nginx',
           '22cluster',
         ]
+      },
+      {
+        title: '第三阶段 分布式&微服务',
+        sidebarDepth: 2,
+        children: [
+          '31cloud1',
+        ]
       }
     ]
   }
