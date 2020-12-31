@@ -156,6 +156,7 @@ const java = [
         sidebarDepth: 2,
         children: [
           '31cloud1',
+          '32zookeeper',
         ]
       }
     ]

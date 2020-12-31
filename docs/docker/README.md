@@ -346,6 +346,27 @@ docker run -d \
 docker pull zookeeper
 
 # 单实例
-参考官网
+# 配置文件和映射目录
+mkdir -p /data/docker-data/zookeeper/zk
+cd /data/docker-data/zookeeper/zk
+mkdir data logs conf
+# 下载默认配置
+# https://github.com/apache/zookeeper/blob/master/conf/zoo_sample.cfg
+# 根据具体情况修改以下3个值
+dataDir=/tmp/zookeeper/data
+dataLogDir=/tmp/zookeeper/logs
+clientPort=2181
 
+# 启动
+docker run -d \
+  -p 2181:2181 \
+  -v /data/docker-data/zookeeper/zk/data:/tmp/zookeeper/data \
+  -v /data/docker-data/zookeeper/zk/logs:/tmp/zookeeper/logs \
+  -v /data/docker-data/zookeeper/zk/conf/zoo.cfg:/conf/zoo.cfg \
+  --restart always \
+  --name zk \
+  zookeeper
+
+# 集群
+参考官方例子即可
 ```
