@@ -157,6 +157,7 @@ const java = [
         children: [
           '31cloud1',
           '32zookeeper',
+          '33dubbo',
         ]
       }
     ]

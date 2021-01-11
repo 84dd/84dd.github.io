@@ -370,3 +370,15 @@ docker run -d \
 # 集群
 参考官方例子即可
 ```
+
+## dubbo-admin
+```
+docker run -d \
+-p 8080:8080 \
+-e dubbo.registry.address=zookeeper://192.168.1.12:2181 \
+-e dubbo.admin.root.password=root \
+-e dubbo.admin.guest.password=guest \
+--restart always \
+--name dubbo-admin \
+chenchuxin/dubbo-admin
+```
