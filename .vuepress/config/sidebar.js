@@ -158,6 +158,7 @@ const java = [
           '31cloud1',
           '32zookeeper',
           '33dubbo',
+          '34springcloud',
         ]
       }
     ]
