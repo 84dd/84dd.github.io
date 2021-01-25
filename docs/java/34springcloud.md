@@ -1007,7 +1007,7 @@ public class ConfigApplication {
 :::
 
 ::: tab application.yml
-将原来项目的`application.yml`重命名为`bootstra.yml`， 因为bootstrap.yml是系统级别的，优先级比application.yml高，应用启动时会检查这个配置文件，在这个配置文件中指定配置中心的服务地址，会自动拉取所有应用配置 并且启用。
+将原来项目的`application.yml`重命名为`bootstrap.yml`， 因为bootstrap.yml是系统级别的，优先级比application.yml高，应用启动时会检查这个配置文件，在这个配置文件中指定配置中心的服务地址，会自动拉取所有应用配置 并且启用。
 (主要是把与统一配置中心连接的配置信息放到bootstrap.yml)
 
 启动的时候配置中心的配置会覆盖本地的配置，所以本地无需额外的配置，可以只保留如下即可
@@ -1083,6 +1083,34 @@ management:
 :::
 
 ::::
+
+### SSH改进
+上面配置文件是存储在git（github或者gitee等），并且配置了账号密码，这会造成一定的泄密，我们可以改成`privateKey`的形式。
+- 1）[设置公钥](https://gitee.com/help/articles/4191)为安全起见，建议设置为项目公钥。
+```shell
+# 码云不接受以-----BEGIN OPENSSH PRIVATE KEY开头的私钥形式，所以用以下命令生成
+ssh-keygen -m PEM -t rsa -b 4096 -C 744177242@qq.com -f gitee
+```
+- 2）private-key空格后加一个真实的 | 才行
+```yaml
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@gitee.com:84dd/fast-scn-config.git #配置git服务地址
+          ignoreLocalSshSettings: true
+          privateKey: |
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIJKAIBAAKCAgEA1Vlm0QgQeM2ymh/WEs8KQiWhgfs3D3gyw3B5OC8tdvWN3byu
+            ...
+            1uRVgm7FUO9pAk+vJufzZciPDOX/nTVOE98s8G/0d8ZMajdI3rl46r6RyFo=
+            -----END RSA PRIVATE KEY-----
+          search-paths:
+            - fast-scn-config
+      # 读取分支
+      label: master
+```
 
 ## Stream消息驱动
 <span id="Stream"></span>
