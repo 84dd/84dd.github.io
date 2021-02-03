@@ -1,8 +1,12 @@
-# Spring Cloud(SCN)
+---
+sidebarDepth: 1
+---
+
+# Spring Cloud(SCN + SCA)
 Spring Cloud提供了一站式的微服务解决方案。
 Spring Cloud 规范及实现意图要解决的问题其实就是微服务架构实施过程中存在的一些问题，比如微服务架构中的服务注册发现问题、网络问题(比如熔断场景)、 统一认证安全授权问题、负载均衡问题、链路追踪等问题。
 
-## Spring Cloud 核心组件
+## Spring Cloud核心组件
 Spring Cloud 一二代对比，可以说第一代是现在Spring Cloud的主流，而Spring Cloud Alibaba是现在的发展潮流
 |#<img width=110/>|第一代Spring Cloud（Netflix，SCN）|第二代Spring Cloud（Spring Cloud Alibaba，SCA）|
 |-|-|-|
@@ -13,7 +17,8 @@ Spring Cloud 一二代对比，可以说第一代是现在Spring Cloud的主流�
 |配置中心|[官方 Spring Cloud Config](#Config)|阿里巴巴 Nacos、携程 Apollo|
 |服务调用|[Netflix Feign](#Feign)|阿里巴巴 Dubbo RPC|
 |消息驱动|[官方 Spring Cloud Stream](#Stream)|-|
-|链路追踪|官方 Spring Cloud Sleuth/Zipkin|-|
+|链路追踪|官方 [Spring Cloud Sleuth/Zipkin](#Sleuth)|-|
+|安全认证|官方 [Spring Cloud OAuth2](#OAuth2)|-|
 |事务|-|阿里巴巴 seata 分布式事务方案|
 
 ## Eureka服务注册中心
@@ -427,7 +432,7 @@ public ServletRegistrationBean getServlet(){
 
 ::::
 
-#### Hystrix Turbine聚合监控
+## Turbine聚合监控
 在Hystrix Dashboard的基础上做扩展，新建一个监控服务工程，并注册到eureka
 :::: tabs
 
@@ -665,142 +670,89 @@ Filter在“pre”类型过滤器中可以做参数校验、权限校验、流�
 
 ::: tab pom
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.example</groupId>
-    <artifactId>fast-gateway</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <description>网关，独立于项目之外，所以这里的依赖需要独立引入</description>
-
-    <!--spring boot 父启动器依赖-->
-    <parent>
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-commons</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+    <!--GateWay 网关-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-gateway</artifactId>
+    </dependency>
+    <!--引入webflux-->
+    <dependency>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
-    </parent>
+        <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <!--日志依赖-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-logging</artifactId>
+    </dependency>
+    <!--测试依赖-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <!--lombok工具-->
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.4</version>
+        <scope>provided</scope>
+    </dependency>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <!--GateWay 网关-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-        </dependency>
-        <!--引入webflux-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <!--日志依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
-        </dependency>
-        <!--测试依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!--lombok工具-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
-            <scope>provided</scope>
-        </dependency>
+    <!--引入Jaxb，开始-->
+    <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-core</artifactId>
+        <version>2.2.11</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>2.2.11</version>
+    </dependency>
+    <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>jaxb-runtime</artifactId>
+        <version>2.2.10-b140310.1920</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.activation</groupId>
+        <artifactId>activation</artifactId>
+        <version>1.1.1</version>
+    </dependency>
+    <!--引入Jaxb，结束-->
 
-        <!--引入Jaxb，开始-->
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-            <version>2.2.11</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.2.11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>2.2.10-b140310.1920</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <!--引入Jaxb，结束-->
+    <!-- Actuator可以帮助你监控和管理Spring Boot应用-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <!--热部署-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
 
-        <!-- Actuator可以帮助你监控和管理Spring Boot应用-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <!--热部署-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!--链路追踪-->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-sleuth</artifactId>
-        </dependency>-->
-    </dependencies>
-
-    <dependencyManagement>
-        <!--spring cloud依赖版本管理-->
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <build>
-        <plugins>
-            <!--编译插件-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <encoding>utf-8</encoding>
-                </configuration>
-            </plugin>
-            <!--打包插件-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
-</project>
+    <!--链路追踪-->
+    <!--<dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>-->
+</dependencies>
 ```
 :::
 
@@ -1335,6 +1287,736 @@ bindings:
   outputLog:
     destination: eduExchange
 ```
+
+## Sleuth + Zipkin链路追踪
+<span id="Sleuth"></span>
+[Spring Cloud Sleuth](https://github.com/spring-cloud/spring-cloud-sleuth)通过记录日志的方式来记录踪迹数据，并把数据信息发送给[Zipkin](https://github.com/openzipkin/zipkin)进行聚合，利用 Zipkin 存储并展示数据。
+
+Spring Cloud Sleuth (追踪服务框架)可以追踪服务之间的调用，
+Sleuth可以记录 一个服务请求经过哪些服务、服务处理时⻓等，根据这些，我们能够理清各微服务 间的调用关系及进行问题追踪分析。
+- 耗时分析:通过 Sleuth 了解采样请求的耗时，分析服务性能问题(哪些服务调 用比较耗时)
+- 链路优化:发现频繁调用的服务，针对性优化等 Sleuth就是通过记录日志的方式来记录踪迹数据的
+
+### Sleuth
+1)每一个需要被追踪踪迹的微服务工程都引入依赖坐标
+```xml
+<!--链路追踪-->
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+```
+2)每一个微服务都修改application.yml配置文件，添加日志级别
+```yaml
+#分布式链路追踪 logging:
+level:
+  org.springframework.web.servlet.DispatcherServlet: debug
+  org.springframework.cloud.sleuth: debug
+```
+请求到来时，我们在控制台可以观察到 Sleuth 输出的日志(全局 TraceId、SpanId 等)。
+![](https://qiniu.84dd.xyz/32uY0M.png)
+这样的日志首先不容易阅读观察，另外日志分散在各个微服务服务器上，接下来我 们使用zipkin统一聚合轨迹日志并进行存储展示。
+
+### Zipkin
+Zipkin 包括Zipkin Server和 Zipkin Client两部分，Zipkin Server是一个单独的服务，Zipkin Client就是具体的微服务
+#### Zipkin Server 构建
+:::: tabs
+
+::: tab 持久化
+Zipkin 持久化方案可以选择`ES`或者`MySql`，可以上github看他的[storage模块](https://github.com/openzipkin/zipkin/tree/master/zipkin-storage)，
+其中[mysql语句](https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/mysql-v1/src/main/resources/mysql.sql)在这里。
+:::
+
+::: tab pom
+```xml
+<dependencies>
+    <!--zipkin-server的依赖坐标-->
+    <dependency>
+        <groupId>io.zipkin.java</groupId>
+        <artifactId>zipkin-server</artifactId>
+        <version>2.12.3</version>
+        <exclusions>
+            <!--排除掉log4j2的传递依赖，避免和springboot依赖的日志组件冲突-->
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+
+    <!--zipkin-server ui界面依赖坐标-->
+    <dependency>
+        <groupId>io.zipkin.java</groupId>
+        <artifactId>zipkin-autoconfigure-ui</artifactId>
+        <version>2.12.3</version>
+    </dependency>
+
+
+    <!--zipkin针对mysql持久化的依赖-->
+    <dependency>
+        <groupId>io.zipkin.java</groupId>
+        <artifactId>zipkin-autoconfigure-storage-mysql</artifactId>
+        <version>2.12.3</version>
+    </dependency>
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>1.1.10</version>
+    </dependency>
+    <!--操作数据库需要事务控制-->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+    </dependency>
+</dependencies>
+```
+:::
+
+::: tab application.yml
+```yaml
+server:
+  port: 9411
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false # 关闭自动检测
+spring:
+  application:
+    name: zipkin-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3308/fast-cloud-zipkin?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: 123456
+    druid:
+      initialSize: 10
+      minIdle: 10
+      maxActive: 30
+      maxWait: 50000
+# 指定zipkin持久化介质为mysql
+zipkin:
+  storage:
+    type: mysql
+
+#注册到Eureka服务中心
+eureka:
+  client:
+    service-url:
+      # 注册到集群，就把多个Eurekaserver地址使用逗号连接起来即可；注册到单实例（非集群模式），那就写一个就ok
+      defaultZone: http://eureka8761:8761/eureka,http://eureka8762:8762/eureka
+  instance:
+    prefer-ip-address: true  #服务实例中显示ip，而不是显示主机名（兼容老的eureka版本）
+    # 实例名称： 192.168.1.103:lagou-service-resume:8080，我们可以自定义它
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+```
+:::
+
+::: tab 启动
+```Java
+@SpringBootApplication
+@EnableDiscoveryClient
+@EnableZipkinServer // 开启Zipkin Server功能
+public class ZipkinApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ZipkinApplication.class, args);
+    }
+
+    // 注入事务控制器
+    @Bean
+    public PlatformTransactionManager txManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+}
+```
+:::
+
+::::
+#### Zipkin Client 构建
+在具体微服务中修改
+:::: tabs
+
+::: tab pom
+```xml
+<dependencys>
+    <!--链路追踪-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+    <!-- zipkin 客户端依赖 -->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-zipkin</artifactId>
+    </dependency>
+</dependencys>
+```
+:::
+
+::: tab application.yml
+```yaml
+spring:
+  zipkin:
+    base-url: http://127.0.0.1:9411 # zipkin server的请求地址
+    sender:
+      # web 客户端将踪迹日志数据通过网络请求的方式传送到服务端，另外还有配置
+      # kafka/rabbit 客户端将踪迹日志数据传递到mq进行中转
+      type: web
+    sleuth:
+      sampler:
+        # 采样率 1 代表100%全部采集 ，默认0.1 代表10% 的请求踪迹数据会被采集
+        # 生产环境下，请求量非常大，没有必要所有请求的踪迹数据都采集分析，对于网络包括server端压力都是比较大的，可以配置采样率采集一定比例的请求的踪迹数据进行分析即可
+        probability: 1
+```
+:::
+
+::: tab 查看
+浏览器访问 [http://127.0.0.1:9411](http://127.0.0.1:9411)
+:::
+
+::::
+
+## OAuth2安全认证
+<span id="OAuth2"></span>
+OAuth2的颁发Token授权方式
+- 1)授权码(authorization-code) 
+- 2)密码式(password)提供用户名+密码换取token令牌 
+- 3)隐藏式(implicit)
+- 4)客户端凭证(client credentials)
+
+Spring Cloud OAuth2 是 Spring Cloud 体系对OAuth2协议的实现，可以用来做多个微服务的统一认证(验证身份合法性)授权(验证权限)。通过向OAuth2服务 (统一认证授权服务)发送某个类型的grant_type进行集中认证和授权，从而获得 access_token(访问令牌)，而这个token是受其他微服务信任的。
+
+### 搭建认证服务器(Authorization Server)
+:::: tabs
+
+::: tab 说明
+OAuth2 可以使用token的形式，数据可以储存在redis、mysql或者内存等地方
+
+也可以使用[jwt](http://jwt.io)形式，这样就无需存储，交由客户端自行验证即可
+:::
+
+::: tab pom
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.fast</groupId>
+        <artifactId>fast-common</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fast</groupId>
+        <artifactId>fast-db</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <!--导入Eureka Client依赖-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+
+    <!--导入spring cloud oauth2依赖-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-oauth2</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.security.oauth.boot</groupId>
+        <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+        <version>2.1.11.RELEASE</version>
+    </dependency>
+    <!--引入security对oauth2的支持-->
+    <dependency>
+        <groupId>org.springframework.security.oauth</groupId>
+        <artifactId>spring-security-oauth2</artifactId>
+        <version>2.3.4.RELEASE</version>
+    </dependency>
+
+</dependencies>
+```
+:::
+
+::: tab appliaction.yml
+```yaml
+server:
+  port: 9999
+Spring:
+  application:
+    name: oauth-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3308/fast-cloud-oauth?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: 123456
+    druid:
+      initialSize: 10
+      minIdle: 10
+      maxActive: 30
+      maxWait: 50000
+eureka:
+  client:
+    serviceUrl: # eureka server的路径
+      defaultZone: http://eureka8761:8761/eureka,http://eureka8762:8762/eureka #把 eureka 集群中的所有 url 都填写了进来，也可以只写一台，因为各个 eureka server 可以同步注册表
+  instance:
+    #使用ip注册，否则会使用主机名注册了（此处考虑到对老版本的兼容，新版本经过实验都是ip）
+    prefer-ip-address: true
+    #自定义实例显示格式，加上版本号，便于多版本管理，注意是ip-address，早期版本是ipAddress
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+```
+:::
+
+::: tab config
+**OauthServerConfiger**
+```Java
+/**
+ * 当前类为Oauth2 server的配置类（需要继承特定的父类 AuthorizationServerConfigurerAdapter）
+ */
+@Configuration
+@EnableAuthorizationServer  // 开启认证服务器功能
+public class OauthServerConfiger extends AuthorizationServerConfigurerAdapter {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private FastAccessTokenConvertor fastAccessTokenConvertor;
+
+    private String sign_key = "fast123"; // jwt签名密钥
+
+    /**
+     * 认证服务器最终是以api接口的方式对外提供服务（校验合法性并生成令牌、校验令牌等）
+     * 那么，以api接口方式对外的话，就涉及到接口的访问权限，我们需要在这里进行必要的配置
+     * @param security
+     * @throws Exception
+     */
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        super.configure(security);
+        // 相当于打开endpoints 访问接口的开关，这样的话后期我们能够访问该接口
+        security
+                // 允许客户端表单认证
+                .allowFormAuthenticationForClients()
+                // 开启端口/oauth/token_key的访问权限（允许）
+                .tokenKeyAccess("permitAll()")
+                // 开启端口/oauth/check_token的访问权限（允许）
+                .checkTokenAccess("permitAll()");
+    }
+
+    /**
+     * 客户端详情配置，
+     *  比如client_id，secret
+     *  当前这个服务就如同QQ平台，拉勾网作为客户端需要qq平台进行登录授权认证等，提前需要到QQ平台注册，QQ平台会给拉勾网
+     *  颁发client_id等必要参数，表明客户端是谁
+     * @param clients
+     * @throws Exception
+     */
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        super.configure(clients);
+
+        // 从内存中加载客户端详情
+        /*clients.inMemory()// 客户端信息存储在什么地方，可以在内存中，可以在数据库里
+                .withClient("client_lagou")  // 添加一个client配置,指定其client_id
+                .secret("abcxyz")                   // 指定客户端的密码/安全码
+                .resourceIds("autodeliver")         // 指定客户端所能访问资源id清单，此处的资源id是需要在具体的资源服务器上也配置一样
+                // 认证类型/令牌颁发模式，可以配置多个在这里，但是不一定都用，具体使用哪种方式颁发token，需要客户端调用的时候传递参数指定
+                .authorizedGrantTypes("password","refresh_token")
+                // 客户端的权限范围，此处配置为all全部即可
+                .scopes("all");*/
+
+        // 从数据库中加载客户端详情
+        clients.withClientDetails(createJdbcClientDetailsService());
+    }
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Bean
+    public JdbcClientDetailsService createJdbcClientDetailsService() {
+        JdbcClientDetailsService jdbcClientDetailsService = new JdbcClientDetailsService(dataSource);
+        return jdbcClientDetailsService;
+    }
+
+    /**
+     * 认证服务器是玩转token的，那么这里配置token令牌管理相关（token此时就是一个字符串，当下的token需要在服务器端存储，
+     * 那么存储在哪里呢？都是在这里配置）
+     * @param endpoints
+     * @throws Exception
+     */
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        super.configure(endpoints);
+        endpoints
+                .tokenStore(tokenStore())  // 指定token的存储方法
+                .tokenServices(authorizationServerTokenServices())   // token服务的一个描述，可以认为是token生成细节的描述，比如有效时间多少等
+                .authenticationManager(authenticationManager) // 指定认证管理器，随后注入一个到当前类使用即可
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET,HttpMethod.POST);
+    }
+
+    /*
+        该方法用于创建tokenStore对象（令牌存储对象）
+        token以什么形式存储
+     */
+    public TokenStore tokenStore(){
+        //return new InMemoryTokenStore();
+        // 使用jwt令牌
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    /**
+     * 返回jwt令牌转换器（帮助我们生成jwt令牌的）
+     * 在这里，我们可以把签名密钥传递进去给转换器对象
+     * @return
+     */
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        jwtAccessTokenConverter.setSigningKey(sign_key);  // 签名密钥
+        jwtAccessTokenConverter.setVerifier(new MacSigner(sign_key));  // 验证时使用的密钥，和签名密钥保持一致
+        jwtAccessTokenConverter.setAccessTokenConverter(fastAccessTokenConvertor);
+
+        return jwtAccessTokenConverter;
+    }
+
+    /**
+     * 该方法用户获取一个token服务对象（该对象描述了token有效期等信息）
+     */
+    public AuthorizationServerTokenServices authorizationServerTokenServices() {
+        // 使用默认实现
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setSupportRefreshToken(true); // 是否开启令牌刷新
+        defaultTokenServices.setTokenStore(tokenStore());
+
+        // 针对jwt令牌的添加
+        defaultTokenServices.setTokenEnhancer(jwtAccessTokenConverter());
+
+        // 设置令牌有效时间（一般设置为2个小时）
+        defaultTokenServices.setAccessTokenValiditySeconds(7200); // access_token就是我们请求资源需要携带的令牌
+        // 设置刷新令牌的有效时间
+        defaultTokenServices.setRefreshTokenValiditySeconds(259200); // 3天
+
+        return defaultTokenServices;
+    }
+}
+```
+**FastAccessTokenConvertor**
+```Java
+@Component
+public class FastAccessTokenConvertor extends DefaultAccessTokenConverter {
+
+    /**
+     * 添加自定义数据
+     * @param token
+     * @param authentication
+     * @return
+     */
+    @Override
+    public Map<String, ?> convertAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
+        // 获取到request对象
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.getRequestAttributes())).getRequest();
+        // 获取客户端ip（注意：如果是经过代理之后到达当前服务的话，那么这种方式获取的并不是真实的浏览器客户端ip）
+        String remoteAddr = request.getRemoteAddr();
+        Map<String, String> stringMap = (Map<String, String>) super.convertAccessToken(token, authentication);
+        stringMap.put("clientIp",remoteAddr);
+        return stringMap;
+    }
+}
+```
+**SecurityConfiger**
+```Java
+
+/**
+ * 该配置类，主要处理用户名和密码的校验等事宜
+ */
+@Configuration
+public class SecurityConfiger extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private OauthUserServiceImpl oauthUserServiceImpl;
+
+    /**
+     * 注册一个认证管理器对象到容器
+     */
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    /**
+     * 密码编码对象（密码不进行加密处理）
+     * @return
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    /**
+     * 处理用户名和密码验证事宜
+     * 1）客户端传递username和password参数到认证服务器
+     * 2）一般来说，username和password会存储在数据库中的用户表中
+     * 3）根据用户表中数据，验证当前传递过来的用户信息的合法性
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // 在这个方法中就可以去关联数据库了，当前我们先把用户信息配置在内存中
+        // 实例化一个用户对象(相当于数据表中的一条用户记录)
+        /*UserDetails user = new User("admin","123456",new ArrayList<>());
+        auth.inMemoryAuthentication()
+                .withUser(user).passwordEncoder(passwordEncoder);*/
+
+        auth.userDetailsService(oauthUserServiceImpl).passwordEncoder(passwordEncoder);
+    }
+}
+```
+**UserDetailsService**
+````Java
+@Service
+public class OauthUserServiceImpl extends ServiceImpl<OauthUserMapper, OauthUser> implements OauthUserService, UserDetailsService {
+
+    /**
+     * 根据username查询出该用户的所有信息，封装成UserDetails类型的对象返回，至于密码，框架会自动匹配
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        OauthUser queryUser = new OauthUser();
+        queryUser.setUsername(username);
+        QueryWrapper<OauthUser> queryWrapper = new QueryWrapper<>(queryUser);
+        OauthUser user = baseMapper.selectOne(queryWrapper);
+        return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+    }
+}
+````
+:::
+
+::: tab sql
+```sql
+DROP TABLE IF EXISTS `oauth_user`;
+CREATE TABLE `oauth_user` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '⾃增主键',
+  `username` varchar(64) NOT NULL COMMENT '用户名',
+  `password` varchar(255) NOT NULL COMMENT '密码',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+-- https://github.com/spring-projects/spring-security-oauth/blob/master/spring-security-oauth2/src/test/resources/schema.sql
+create table oauth_client_details (
+  client_id VARCHAR(256) PRIMARY KEY,
+  resource_ids VARCHAR(256),
+  client_secret VARCHAR(256),
+  scope VARCHAR(256),
+  authorized_grant_types VARCHAR(256),
+  web_server_redirect_uri VARCHAR(256),
+  authorities VARCHAR(256),
+  access_token_validity INTEGER,
+  refresh_token_validity INTEGER,
+  additional_information VARCHAR(4096),
+  autoapprove VARCHAR(256)
+);
+```
+:::
+
+::: tab 使用
+- 获取token
+```
+http://localhost:9999/oauth/token?client_secret=fast123&grant_type=password&username=admin&password=123456&client_id=fast-user
+```
+- 刷新token
+```
+http://localhost:9999/oauth/token?grant_type=refresh_token&client_id=fast-user&client_secret=fast123&refresh_token=xxxxxxxx
+```
+:::
+
+::::
+
+### 客户端改造
+:::: tabs 
+
+::: tab pom
+```xml
+<dependencys>
+    <!--导入spring cloud oauth2依赖-->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-oauth2</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.security.oauth.boot</groupId>
+        <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+        <version>2.1.11.RELEASE</version>
+    </dependency>
+    <!--引入security对oauth2的支持-->
+    <dependency>
+        <groupId>org.springframework.security.oauth</groupId>
+        <artifactId>spring-security-oauth2</artifactId>
+        <version>2.3.4.RELEASE</version>
+    </dependency>
+</dependencys>
+```
+:::
+
+::: tab application.yml
+```yaml
+oauth2:
+  server:
+    check-token-url: http://localhost:9999/oauth/check_token
+```
+:::
+
+::: tab config
+**FastAccessTokenConvertor**
+```Java
+@Component
+public class FastAccessTokenConvertor extends DefaultAccessTokenConverter {
+
+    @Override
+    public OAuth2Authentication extractAuthentication(Map<String, ?> map) {
+        OAuth2Authentication oAuth2Authentication = super.extractAuthentication(map);
+        oAuth2Authentication.setDetails(map);  // 将map放入认证对象中，认证对象在controller中可以拿到
+        return oAuth2Authentication;
+    }
+}
+```
+**ResourceServerConfiger**
+```Java
+@Configuration
+@EnableResourceServer  // 开启资源服务器功能
+@EnableWebSecurity  // 开启web访问安全
+public class ResourceServerConfiger extends ResourceServerConfigurerAdapter {
+
+    private String sign_key = "fast123"; // jwt签名密钥
+
+    @Autowired
+    private FastAccessTokenConvertor fastAccessTokenConvertor;
+
+    /**
+     * 该方法用于定义资源服务器向远程认证服务器发起请求，进行token校验等事宜
+     * @param resources
+     * @throws Exception
+     */
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+
+        /*// 设置当前资源服务的资源id
+        resources.resourceId("autodeliver");
+        // 定义token服务对象（token校验就应该靠token服务对象）
+        RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
+        // 校验端点/接口设置
+        remoteTokenServices.setCheckTokenEndpointUrl("http://localhost:9999/oauth/check_token");
+        // 携带客户端id和客户端安全码
+        remoteTokenServices.setClientId("client_lagou");
+        remoteTokenServices.setClientSecret("abcxyz");
+
+        // 别忘了这一步
+        resources.tokenServices(remoteTokenServices);*/
+
+        // jwt令牌改造
+        resources.resourceId("fast-email").tokenStore(tokenStore()).stateless(true);// 无状态设置
+    }
+
+    /**
+     * 场景：一个服务中可能有很多资源（API接口）
+     *    某一些API接口，需要先认证，才能访问
+     *    某一些API接口，压根就不需要认证，本来就是对外开放的接口
+     *    我们就需要对不同特点的接口区分对待（在当前configure方法中完成），设置是否需要经过认证
+     *
+     * @param http
+     * @throws Exception
+     */
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http    // 设置session的创建策略（根据需要创建即可）
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and()
+                .authorizeRequests()
+                .antMatchers("/**").authenticated() // autodeliver为前缀的请求需要认证
+                .anyRequest().permitAll();  //  其他请求不认证
+    }
+
+    /*
+       该方法用于创建tokenStore对象（令牌存储对象）
+       token以什么形式存储
+    */
+    public TokenStore tokenStore(){
+        //return new InMemoryTokenStore();
+
+        // 使用jwt令牌
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    /**
+     * 返回jwt令牌转换器（帮助我们生成jwt令牌的）
+     * 在这里，我们可以把签名密钥传递进去给转换器对象
+     * @return
+     */
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        jwtAccessTokenConverter.setSigningKey(sign_key);  // 签名密钥
+        jwtAccessTokenConverter.setVerifier(new MacSigner(sign_key));  // 验证时使用的密钥，和签名密钥保持一致
+        jwtAccessTokenConverter.setAccessTokenConverter(fastAccessTokenConvertor);
+        return jwtAccessTokenConverter;
+    }
+
+}
+```
+:::
+
+::: tab 使用
+- 1）在登录的时候，同时请求OAuth服务器，获取token(`access_token` 和 `refresh_token`)
+- 2）前段将`access_token`存储于cookie等地方，在访问资源（api）的时候，带上该参数，例如`http://localhost:9002/api/user/demo/oauth2?access_token=xxxxxxx`
+- 3）如果token过期，使用`refresh_token`刷新获取新的`access_token`，这一步系统应该自动获取续约
+:::
+
+::::
+
+## Nacos配置中心、注册中心
+
+## Sentinel流量防卫兵
+
+## Dubbo整合
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 源代码
 以上工程代码在[https://gitee.com/84dd/scn-cloud](https://gitee.com/84dd/scn-cloud)
