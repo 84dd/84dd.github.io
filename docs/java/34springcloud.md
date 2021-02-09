@@ -1997,26 +1997,446 @@ public class ResourceServerConfiger extends ResourceServerConfigurerAdapter {
 
 ::::
 
-## Nacos配置中心、注册中心
+## Nacos注册中心、配置中心
+Nacos可以作为注册中心（代替Eureka）、配置中心（代替config+Bus），并且无需我们编写代码，直接去下载发行版，启动即可使用。
+### 安装
+- 1）[https://github.com/alibaba/nacos/releases](https://github.com/alibaba/nacos/releases) 下载最新的zip包
+- 2）解压到目录
+- 3）修改 nacos/config/application.properties  db相关的
+- 4）初始化数据库（nacos/nacos-mysql.sql）
+- 5）单机版启动 `./nacos/bin/startup.sh -m standalone &`
+
+mac升级到bigsur后，nacos中startup.sh启动失败，日志显示
+**nohup: /Library/Internet: No such file or directory**
+mac自带了一个jdk，在.bash_profile声明自己安装的jdk的JAVA_HOME
+
+`vi ~/.bash_profile`
+```
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
+PATH=$JAVA_HOME/bin:$PATH:.
+CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:.
+export JAVA_HOME
+export PATH
+export CLASSPATH
+```
+`source ~/.bash_profile`
+
+### 使用
+:::: tabs
+
+::: tab 父工程
+在使用SCA前，需要引入alibaba的相关依赖
+```xml
+<!--SCA -->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+    <version>2.1.0.RELEASE</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+<!--SCA -->
+```
+:::
+
+::: tab pom
+配置中心和注册中心可以任意使用一个或两个一起使用
+```xml
+<dependencies>
+    <!--nacos service discovery client依赖-->
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+    </dependency>
+
+    <!--nacos config client 依赖-->
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+    </dependency>
+</dependencies>
+```
+:::
+
+::: tab yml
+配置示例如下，其中namespace和group是为了配置隔离的。配置优先级为：
+- 1）{项目名}.{file-extension}
+- 2）ext-config[n]
+- 3）ext-config[...]
+- 4）ext-config[2]
+- 5）ext-config[1]
+```yaml
+spring:
+  cloud:
+    nacos:
+      # nacos 注册中心配置
+      discovery:
+        # 集群中各节点信息都配置在这里（域名-VIP-绑定映射到各个实例的地址信息）
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+        group: com.fast
+      # nacos config 配置
+      config:
+        server-addr: 127.0.0.1:8848
+        # 锁定server端的配置文件（读取它的配置项）
+        namespace: dev  # 命名空间id
+        group: com.fast  # 默认分组就是DEFAULT_GROUP，如果使用默认分组可以不配置
+        file-extension: yaml   #默认properties 根据规则拼接出来的dataId效果：{项目名}.{file-extension} 比如 fast-gateway.yaml
+        ext-config[0]:
+          data-id: fast-cloud-public.yml
+          group: com.fast
+          namespace: dev
+          refresh: true  #开启扩展dataId的动态刷新
+```
+:::
+
+::: tab mysql配置
+1）在安装目录修改文件 `nacos/conf/application.properties`
+```properties
+#*************** Config Module Related Configurations ***************#
+### If use MySQL as datasource:
+spring.datasource.platform=mysql
+
+### Count of DB:
+db.num=1
+
+### Connect URL of DB:
+db.url.0=jdbc:mysql://127.0.0.1:3308/fast-cloud-nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
+db.user.0=root
+db.password.0=123456
+```
+2）执行sql文件 `nacos-mysql.sql`
+:::
+
+::: tab 领域模型
+Namespace命名空间、Group分组、集群这些都是为了进行归类管理，把服务和配置文件进行归类，归类之后就可以实现一定的效果，比如隔离
+
+比如，对于服务来说，不同命名空间中的服务不能够互相访问调用
+![](https://qiniu.84dd.xyz/cnb4dg.png)
+- Namespace:命名空间，对不同的环境进行隔离，比如隔离开发环境、测试环境和 生产环境
+- Group:分组，将若干个服务或者若干个配置集归为一组，通常习惯一个系统归为 一个组
+- Service:某一个服务，比如简历微服务 DataId:配置集或者可以认为是一个配置文件
+
+**Namespace + Group + Service 如同 Maven 中的GAV坐标，GAV坐标是为了锁定 Jar，二这里是为了锁定服务**
+
+**Namespace + Group + DataId 如同 Maven 中的GAV坐标，GAV坐标是为了锁定 Jar，二这里是为了锁定配置文件**
+
+Nacos抽象出了Namespace、Group、Service、DataId等概念，具体代表什么取决 于怎么用(非常灵活)，推荐用法如下
+|概念|描述|
+|-|-|
+|Namespace|代表不同的环境，如开发dev、测试test、生产环境prod|
+|Group|代表某项目|
+|Service|某个项目中具体xxx服务|
+|DataId|某个项目中具体的xxx配置文件|
+:::
+
+::::
 
 ## Sentinel流量防卫兵
+### 安装
+- 1）[https://github.com/alibaba/Sentinel/releases](https://github.com/alibaba/Sentinel/releases) 下载最新的zip包
+- 2）放在喜欢的目录下
+- 3）指定端口启动 `java -jar sentinel-dashboard-1.8.0.jar --server.port=8000 &`
+- 4）登录 http://127.0.0.1:8000   sentinel/sentinel
+
+### 使用
+:::: tabs
+
+::: tab pom
+```xml
+<dependencys>
+    <!--sentinel 核心环境 依赖-->
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+    </dependency>
+
+    <!-- Sentinel支持采用 Nacos 作为规则配置数据源，引入该适配依赖 -->
+    <dependency>
+        <groupId>com.alibaba.csp</groupId>
+        <artifactId>sentinel-datasource-nacos</artifactId>
+    </dependency>
+</dependencys>
+```
+:::
+
+::: tab yml
+```yaml
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8000 # sentinel dashboard/console 地址
+        port: 8782   #  sentinel会在该端口启动http server，那么这样的话，控制台定义的一些限流等规则才能发送传递过来，
+        #如果8719端口被占用，那么会依次+1
+      # Sentinel Nacos数据源配置，Nacos中的规则会自动同步到sentinel流控规则中
+      datasource:
+        # 自定义的流控规则数据源名称
+        flow:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            data-id: ${spring.application.name}-flow-rules
+            groupId: DEFAULT_GROUP
+            namespace: dev
+            data-type: json
+            rule-type: flow  # 类型来自RuleType类
+        # 自定义的降级规则数据源名称
+        degrade:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            data-id: ${spring.application.name}-degrade-rules
+            groupId: DEFAULT_GROUP
+            namespace: dev
+            data-type: json
+            rule-type: degrade  # 类型来自RuleType类
+```
+:::
+
+::: tab 暴露断点
+```Java
+@RequestMapping("/create/{email}")
+@SentinelResource(
+        value = "createCode",
+        blockHandlerClass = SentinelHandlersClass.class, blockHandler = "handleException",
+        fallbackClass = SentinelHandlersClass.class, fallback = "handleError")
+public R createCode(@PathVariable String email) {
+    ...
+}
+```
+```Java
+public class SentinelHandlersClass {
+
+    // 整体要求和当时Hystrix一样，这里还需要在形参中添加BlockException参数，用于接收异常
+    // 注意：方法是静态的
+    public static Integer handleException(Long userId, BlockException blockException) {
+        return -100;
+    }
+
+    public static Integer handleError(Long userId) {
+        return -500;
+    }
+
+}
+```
+:::
+
+::: tab 规则设置
+- 1）可以在ui界面的【簇点链路】中设置。不过重启后，规则会丢失
+- 2）也可以nacos中设置规则，sentinel会自动同步过来。
+
+**限流规则**
+- resource:资源名称
+- limitApp:来源应用
+- grade:阈值类型 0 线程数 1 QPS
+- count:单机阈值
+- strategy:流控模式，0 直接 1 关联 2 链路 
+- controlBehavior:流控效果，0 快速失败 1 Warm Up 2 排队等待 
+- clusterMode:true/false 是否集群
+- 具体查看源码`com.alibaba.csp.sentinel.slots.block.flow.FlowRule`
+```json
+[
+  {
+    "resource":"createCode",
+    "limitApp":"default",
+    "grade":1,
+    "count":1,
+    "strategy":0,
+    "controlBehavior":0,
+    "clusterMode":false
+  }
+]
+```
+
+**降级规则**
+- resource:资源名称
+- grade:降级策略 0 RT 1 异常比例 2 异常数 
+- count:阈值
+- timeWindow:时间窗
+- 具体查看源码`com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule`
+```json
+[
+  {
+    "resource":"createCode",
+    "grade":2,
+    "count":1,
+    "timeWindow":5
+  }
+]
+```
+:::
+
+::::
+
+### Gateway中使用
+Sentinel同样支持在Gateway中使用
+
+:::: tabs
+
+::: tab pom
+需要新增以下依赖
+```xml
+<dependency>
+    <groupId>com.alibaba.csp</groupId>
+    <artifactId>sentinel-spring-cloud-gateway-adapter</artifactId>
+    <version>1.8.1</version>
+</dependency>
+```
+:::
+
+::: tab yml
+类似其他微服务的配置
+:::
+
+::: tab config
+编写配置类和自定义返回
+**GatewayConfiguration**
+```Java
+@Configuration
+public class GatewayConfiguration {
+
+    private final List<ViewResolver> views;
+    private final ServerCodecConfigurer configurer;
+
+    public GatewayConfiguration(ObjectProvider<List<ViewResolver>> views,
+                                ServerCodecConfigurer config) {
+        this.views = views.getIfAvailable(Collections::emptyList);
+        this.configurer = config;
+    }
+
+    /**
+     * 配置SentinelGatewayBlockExceptionHandler，限流后异常处理
+     * @return
+     */
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public JsonSentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler() {
+        //return new SentinelGatewayBlockExceptionHandler(views, configurer);
+        return new JsonSentinelGatewayBlockExceptionHandler(views, configurer);
+    }
+
+    /**
+     * Sentinel 过滤器
+     * @return
+     */
+    @Bean
+    @Order(-1)
+    public GlobalFilter sentinelGatewayFilter() {
+        return new SentinelGatewayFilter();
+    }
+
+}
+```
+**JsonSentinelGatewayBlockExceptionHandler**
+```Java
+public class JsonSentinelGatewayBlockExceptionHandler implements WebExceptionHandler {
+
+    private List<ViewResolver> viewResolvers;
+    private List<HttpMessageWriter<?>> messageWriters;
+
+    public JsonSentinelGatewayBlockExceptionHandler(
+            List<ViewResolver> viewResolvers, ServerCodecConfigurer serverCodecConfigurer) {
+        this.viewResolvers = viewResolvers;
+        this.messageWriters = serverCodecConfigurer.getWriters();
+    }
+    /**
+     * 自定义返回
+     * @param response
+     * @param exchange
+     * @return
+     */
+    private Mono<Void> writeResponse(ServerResponse response, ServerWebExchange exchange) {
+        ServerHttpResponse resp = exchange.getResponse();
+        resp.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
+        String json = "{\"code\": -1, \"data\": null, \"msg\": \"系统限流\"}";
+        DataBuffer buffer = resp.bufferFactory().wrap(json.getBytes(StandardCharsets.UTF_8));
+        return resp.writeWith(Mono.just(buffer));
+    }
+
+    @Override
+    public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
+        if (exchange.getResponse().isCommitted()) {
+            return Mono.error(ex);
+        }
+        if (!BlockException.isBlockException(ex)) {
+            return Mono.error(ex);
+        }
+        return handleBlockedRequest(exchange, ex)
+                .flatMap(response -> writeResponse(response, exchange));
+    }
+    private Mono<ServerResponse> handleBlockedRequest(ServerWebExchange exchange, Throwable throwable) {
+        return GatewayCallbackManager.getBlockHandler().handleRequest(exchange, throwable);
+    }
+    private final Supplier<ServerResponse.Context> contextSupplier = () -> new ServerResponse.Context() {
+        @Override
+        public List<HttpMessageWriter<?>> messageWriters() {
+            return JsonSentinelGatewayBlockExceptionHandler.this.messageWriters;
+        }
+        @Override
+        public List<ViewResolver> viewResolvers() {
+            return JsonSentinelGatewayBlockExceptionHandler.this.viewResolvers;
+        }
+    };
+}
+```
+:::
+
+::::
 
 ## Dubbo整合
+进行dubbo整合，先要按照dubbo的套路修改一下
+- 1）抽取接口到公共API模块，并在有需要的模块中引入API依赖
+- 2）编写dubbo实现，并在类上加上注解`@Service`(org.apache.dubbo.config.annotation.Service)
 
+改造完毕后，开始整合
+:::: tabs
 
+::: tab pom
+由于项目使用了sentinel，所以也需要引入dubbo的适配依赖
+```xml
+<dependencys>
+    <!--spring cloud+dubbo 依赖-->
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-dubbo</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.alibaba.csp</groupId>
+        <artifactId>sentinel-apache-dubbo-adapter</artifactId>
+    </dependency>
+</dependencys>
+```
+:::
 
+::: tab yml
+```yaml
+dubbo:
+  scan:
+    # dubbo 服务扫描基准包
+    base-packages: com.fast.service.impl
+  protocol:
+    # dubbo 协议
+    name: dubbo
+    # dubbo 协议端口（ -1 表示自增端口，从 20880 开始）
+    port: -1
+    host: 127.0.0.1
+  registry:
+    # 挂载到 Spring Cloud 注册中心
+    address: spring-cloud://localhost
+  consumer:
+    check: false
+```
+:::
 
+::: tab 使用
+```Java
+@Reference(check = false, timeout = 10000, retries = 0)
+private EmailService emailService;
+```
+:::
 
-
-
-
-
-
-
-
-
-
+::::
 
 
 ## 源代码
-以上工程代码在[https://gitee.com/84dd/scn-cloud](https://gitee.com/84dd/scn-cloud)
+SCN工程代码在[https://gitee.com/84dd/scn-cloud](https://gitee.com/84dd/scn-cloud)
+SCA工程代码在[https://gitee.com/84dd/fast-cloud](https://gitee.com/84dd/fast-cloud)

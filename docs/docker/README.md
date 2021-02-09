@@ -204,6 +204,7 @@ db.auth('myDbUser', 'myDbPwd')
 - `dbAdminAnyDatabase`只在admin数据库中可用，赋予用户所有数据库的dbAdmin权限。不能在其他数据库中建数据集合root：只在admin数据库中可用。超级账号，超级权限,可以删除其他用户(删除用户的时候只能在admin数据库下删),而且root用户还能在其他数据库中建数据集合
 
 ## Nacos
+> 建议参考官方文档 https://nacos.io/zh-cn/docs/quick-start-docker.html
 > 安装最新版
 ```shell
 docker pull nacos/nacos-server
