@@ -10,12 +10,12 @@ Spring Cloud 规范及实现意图要解决的问题其实就是微服务架构�
 Spring Cloud 一二代对比，可以说第一代是现在Spring Cloud的主流，而Spring Cloud Alibaba是现在的发展潮流
 |#<img width=110/>|第一代Spring Cloud（Netflix，SCN）|第二代Spring Cloud（Spring Cloud Alibaba，SCA）|
 |-|-|-|
-|注册中心|[Netflix Eureka](#Eureka)|阿里巴巴Nacos|
-|负载均衡|[Netflix Ribbon](#Ribbon)|阿里巴巴 Dubbo LB、Spring Cloud Loadbalancer|
-|熔断器|[Netflix Hystrix](#Hystrix)|阿里巴巴 Sentinel|
+|注册中心|[Netflix Eureka](#Eureka)|[阿里巴巴 Nacos](#Naccos)|
+|负载均衡|[Netflix Ribbon](#Ribbon)|[阿里巴巴 Dubbo LB](#Dubbo)、Spring Cloud Loadbalancer|
+|熔断器|[Netflix Hystrix](#Hystrix)|[阿里巴巴Sentinel](#Sentinel)|
 |网关|~~Netflix Zuul:性能一般，未来将退出Spring Cloud生态圈~~|[官方 Spring Cloud Gateway](#GateWay)|
-|配置中心|[官方 Spring Cloud Config](#Config)|阿里巴巴 Nacos、携程 Apollo|
-|服务调用|[Netflix Feign](#Feign)|阿里巴巴 Dubbo RPC|
+|配置中心|[官方 Spring Cloud Config](#Config)|[阿里巴巴 Nacos](#Naccos)、携程 Apollo|
+|服务调用|[Netflix Feign](#Feign)|[阿里巴巴 Dubbo RPC](#Dubbo)|
 |消息驱动|[官方 Spring Cloud Stream](#Stream)|-|
 |链路追踪|官方 [Spring Cloud Sleuth/Zipkin](#Sleuth)|-|
 |安全认证|官方 [Spring Cloud OAuth2](#OAuth2)|-|
@@ -1998,6 +1998,7 @@ public class ResourceServerConfiger extends ResourceServerConfigurerAdapter {
 ::::
 
 ## Nacos注册中心、配置中心
+<span id="Nacos"></span>
 Nacos可以作为注册中心（代替Eureka）、配置中心（代替config+Bus），并且无需我们编写代码，直接去下载发行版，启动即可使用。
 ### 安装
 - 1）[https://github.com/alibaba/nacos/releases](https://github.com/alibaba/nacos/releases) 下载最新的zip包
@@ -2133,6 +2134,7 @@ Nacos抽象出了Namespace、Group、Service、DataId等概念，具体代表什
 ::::
 
 ## Sentinel流量防卫兵
+<span id="Sentinel"></span>
 ### 安装
 - 1）[https://github.com/alibaba/Sentinel/releases](https://github.com/alibaba/Sentinel/releases) 下载最新的zip包
 - 2）放在喜欢的目录下
@@ -2383,6 +2385,7 @@ public class JsonSentinelGatewayBlockExceptionHandler implements WebExceptionHan
 ::::
 
 ## Dubbo整合
+<span id="Dubbo"></span>
 进行dubbo整合，先要按照dubbo的套路修改一下
 - 1）抽取接口到公共API模块，并在有需要的模块中引入API依赖
 - 2）编写dubbo实现，并在类上加上注解`@Service`(org.apache.dubbo.config.annotation.Service)
