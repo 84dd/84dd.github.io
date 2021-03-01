@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MHA高可用 | 84dd</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.02e0ec98.css" as="style"><link rel="preload" href="/assets/js/app.1b6a3e43.js" as="script"><link rel="preload" href="/assets/js/3.b8d8f798.js" as="script"><link rel="preload" href="/assets/js/60.ce1a3d68.js" as="script"><link rel="preload" href="/assets/js/5.3e753ed6.js" as="script"><link rel="prefetch" href="/assets/js/10.ce645f17.js"><link rel="prefetch" href="/assets/js/11.b79a8e7f.js"><link rel="prefetch" href="/assets/js/12.ff887566.js"><link rel="prefetch" href="/assets/js/13.fca9b07e.js"><link rel="prefetch" href="/assets/js/14.3a93a454.js"><link rel="prefetch" href="/assets/js/15.11a97f3c.js"><link rel="prefetch" href="/assets/js/16.ffb8f61f.js"><link rel="prefetch" href="/assets/js/17.87142238.js"><link rel="prefetch" href="/assets/js/18.1759a653.js"><link rel="prefetch" href="/assets/js/19.2b9d624f.js"><link rel="prefetch" href="/assets/js/20.23f9e721.js"><link rel="prefetch" href="/assets/js/21.045f7a8d.js"><link rel="prefetch" href="/assets/js/22.d98b92b9.js"><link rel="prefetch" href="/assets/js/23.a831c715.js"><link rel="prefetch" href="/assets/js/24.80966fcb.js"><link rel="prefetch" href="/assets/js/25.6a15b804.js"><link rel="prefetch" href="/assets/js/26.71b1d4e8.js"><link rel="prefetch" href="/assets/js/27.6e95bf5b.js"><link rel="prefetch" href="/assets/js/28.2d763d1b.js"><link rel="prefetch" href="/assets/js/29.c25c3775.js"><link rel="prefetch" href="/assets/js/30.04fb5a3a.js"><link rel="prefetch" href="/assets/js/31.27a86097.js"><link rel="prefetch" href="/assets/js/32.8f1dd21c.js"><link rel="prefetch" href="/assets/js/33.7a67efba.js"><link rel="prefetch" href="/assets/js/34.8b68d022.js"><link rel="prefetch" href="/assets/js/35.f5edc9d9.js"><link rel="prefetch" href="/assets/js/36.dc503c20.js"><link rel="prefetch" href="/assets/js/37.5a8fa831.js"><link rel="prefetch" href="/assets/js/38.a94e9477.js"><link rel="prefetch" href="/assets/js/39.3b56b590.js"><link rel="prefetch" href="/assets/js/4.b14329a0.js"><link rel="prefetch" href="/assets/js/40.87c9a833.js"><link rel="prefetch" href="/assets/js/41.f9435b76.js"><link rel="prefetch" href="/assets/js/42.2b898295.js"><link rel="prefetch" href="/assets/js/43.6e0e6d8f.js"><link rel="prefetch" href="/assets/js/44.76ab7ba4.js"><link rel="prefetch" href="/assets/js/45.c6e339fa.js"><link rel="prefetch" href="/assets/js/46.b7733bda.js"><link rel="prefetch" href="/assets/js/47.acfd450c.js"><link rel="prefetch" href="/assets/js/48.6ae53a10.js"><link rel="prefetch" href="/assets/js/49.a16cd271.js"><link rel="prefetch" href="/assets/js/50.339cb458.js"><link rel="prefetch" href="/assets/js/51.8337ec9f.js"><link rel="prefetch" href="/assets/js/52.c5998b96.js"><link rel="prefetch" href="/assets/js/53.094e53df.js"><link rel="prefetch" href="/assets/js/54.734652e2.js"><link rel="prefetch" href="/assets/js/55.6bf0f71e.js"><link rel="prefetch" href="/assets/js/56.38196fe2.js"><link rel="prefetch" href="/assets/js/57.1bf23b50.js"><link rel="prefetch" href="/assets/js/58.fa645f25.js"><link rel="prefetch" href="/assets/js/59.66a5b392.js"><link rel="prefetch" href="/assets/js/6.df0c871b.js"><link rel="prefetch" href="/assets/js/61.444c554a.js"><link rel="prefetch" href="/assets/js/62.308f9e3a.js"><link rel="prefetch" href="/assets/js/63.3644864d.js"><link rel="prefetch" href="/assets/js/64.34c56e3c.js"><link rel="prefetch" href="/assets/js/65.8dbc27b1.js"><link rel="prefetch" href="/assets/js/66.152c11f5.js"><link rel="prefetch" href="/assets/js/67.bf84eb42.js"><link rel="prefetch" href="/assets/js/68.5060edd7.js"><link rel="prefetch" href="/assets/js/69.b9c446f8.js"><link rel="prefetch" href="/assets/js/7.730ace58.js"><link rel="prefetch" href="/assets/js/70.0b8f9bcd.js"><link rel="prefetch" href="/assets/js/71.5ca44bc1.js"><link rel="prefetch" href="/assets/js/72.8eb223fa.js"><link rel="prefetch" href="/assets/js/73.3d27b47e.js"><link rel="prefetch" href="/assets/js/74.0a11af10.js"><link rel="prefetch" href="/assets/js/8.9650268c.js"><link rel="prefetch" href="/assets/js/9.4ad6d511.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.96975ae0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.02e0ec98.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">84dd</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="/docs/resume/" class="nav-link">
+  简历
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="学不死" class="dropdown-title"><span class="title">学不死</span> <span class="arrow down"></span></button> <button type="button" aria-label="学不死" class="mobile-dropdown-title"><span class="title">学不死</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/java/" class="nav-link router-link-active">
+  JAVA系列
+</a></li><li class="dropdown-item"><!----> <a href="/docs/es/" class="nav-link">
+  ES
+</a></li></ul></div></div><div class="nav-item"><a href="/docs/docker/" class="nav-link">
+  Docker
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具" class="dropdown-title"><span class="title">工具</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具" class="mobile-dropdown-title"><span class="title">工具</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/Mac/" class="nav-link">
+  Mac
+</a></li><li class="dropdown-item"><!----> <a href="/docs/iTerm2/" class="nav-link">
+  iTerm2
+</a></li><li class="dropdown-item"><!----> <a href="/docs/chrome/" class="nav-link">
+  Chrome
+</a></li><li class="dropdown-item"><!----> <a href="/docs/idea/" class="nav-link">
+  IntelliJ IDEA
+</a></li><li class="dropdown-item"><!----> <a href="/docs/WebStorm/" class="nav-link">
+  WebStorm
+</a></li></ul></div></div><div class="nav-item"><a href="/docs/JavaPlugin/" class="nav-link">
+  Java插件
+</a></div><div class="nav-item"><a href="/docs/Python/" class="nav-link">
+  Python
+</a></div><div class="nav-item"><a href="/docs/Shell/" class="nav-link">
+  命令行
+</a></div><div class="nav-item"><a href="/docs/diverse/" class="nav-link">
+  杂项
+</a></div> <a href="https://github.com/84dd/84dd.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    源码
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="/docs/resume/" class="nav-link">
+  简历
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="学不死" class="dropdown-title"><span class="title">学不死</span> <span class="arrow down"></span></button> <button type="button" aria-label="学不死" class="mobile-dropdown-title"><span class="title">学不死</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/java/" class="nav-link router-link-active">
+  JAVA系列
+</a></li><li class="dropdown-item"><!----> <a href="/docs/es/" class="nav-link">
+  ES
+</a></li></ul></div></div><div class="nav-item"><a href="/docs/docker/" class="nav-link">
+  Docker
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="工具" class="dropdown-title"><span class="title">工具</span> <span class="arrow down"></span></button> <button type="button" aria-label="工具" class="mobile-dropdown-title"><span class="title">工具</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/Mac/" class="nav-link">
+  Mac
+</a></li><li class="dropdown-item"><!----> <a href="/docs/iTerm2/" class="nav-link">
+  iTerm2
+</a></li><li class="dropdown-item"><!----> <a href="/docs/chrome/" class="nav-link">
+  Chrome
+</a></li><li class="dropdown-item"><!----> <a href="/docs/idea/" class="nav-link">
+  IntelliJ IDEA
+</a></li><li class="dropdown-item"><!----> <a href="/docs/WebStorm/" class="nav-link">
+  WebStorm
+</a></li></ul></div></div><div class="nav-item"><a href="/docs/JavaPlugin/" class="nav-link">
+  Java插件
+</a></div><div class="nav-item"><a href="/docs/Python/" class="nav-link">
+  Python
+</a></div><div class="nav-item"><a href="/docs/Shell/" class="nav-link">
+  命令行
+</a></div><div class="nav-item"><a href="/docs/diverse/" class="nav-link">
+  杂项
+</a></div> <a href="https://github.com/84dd/84dd.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    源码
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>JAVA系列</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/java/" aria-current="page" class="sidebar-link">介绍</a></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>第一阶段 开源框架源码剖析</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>第二阶段 Web服务器深度应用及调优</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>第三阶段 分布式&amp;微服务</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading open"><span>第四阶段 大型分布式存储系统架构进阶</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/java/41mysql.html" class="sidebar-link">MySQL</a></li><li><a href="/docs/java/41mha.html" aria-current="page" class="active sidebar-link">MHA高可用</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#环境" class="sidebar-link">环境</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#软件版本" class="sidebar-link">软件版本</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#架构介绍" class="sidebar-link">架构介绍</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#设置网络" class="sidebar-link">设置网络</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#关闭防火墙" class="sidebar-link">关闭防火墙</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#安装mysql5-7" class="sidebar-link">安装MySQL5.7</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#同步配置" class="sidebar-link">同步配置</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#主从复制机制" class="sidebar-link">主从复制机制</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#配置主从-异步" class="sidebar-link">配置主从（异步）</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#配置主从-半同步" class="sidebar-link">配置主从（半同步）</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#同步演示" class="sidebar-link">同步演示</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#mha高可用-2" class="sidebar-link">MHA高可用</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#安装环境" class="sidebar-link">安装环境</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#准备ssh互通环境" class="sidebar-link">准备ssh互通环境</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#配置" class="sidebar-link">配置</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#启动mha" class="sidebar-link">启动MHA</a></li></ul></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#高可用演示" class="sidebar-link">高可用演示</a></li><li class="sidebar-sub-header"><a href="/docs/java/41mha.html#问题" class="sidebar-link">问题</a></li></ul></li></ul></section></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="mha高可用"><a href="#mha高可用" class="header-anchor">#</a> MHA高可用</h1> <h2 id="环境"><a href="#环境" class="header-anchor">#</a> 环境</h2> <p>本次实验例子运行在 <em>Parallels</em> Desktop + Centos 7</p> <p>PD安装的Centos7默认是没有激活root用户的，通过以下方式激活，密码必须大于8位</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>sudo passwd root
+Password：你当前的密码
+Enter new UNIX password：这个是root的密码
+Retype new UNIX password：重复root的密码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="软件版本"><a href="#软件版本" class="header-anchor">#</a> 软件版本</h3> <ul><li><code>Parallels Desktop</code>16.1.3</li> <li><code>CentOS</code> centos-release-7-4.1708.el7.centos.x86_64</li> <li><code>MySQL</code> 5.7.28</li> <li><code>mha4mysql</code> 0.58</li></ul> <h3 id="架构介绍"><a href="#架构介绍" class="header-anchor">#</a> 架构介绍</h3> <p>本次实验搭建一个MySQL高可用架构集群环境（一主多从），共使用4台虚拟机，分别为</p> <ul><li>一台MHA manager节点，用于监控和管理个mysql节点的情况</li> <li>一台MySQL Master 服务器，用于读写分离的写请求</li> <li>两台MySQL Slave 服务器，用于读写分离的读请求，数据从Master中同步</li></ul> <p>当Master出现故障的时候，由MHA自动进行故障转移，将Master角色转移到其中一台Slave上。</p> <h3 id="设置网络"><a href="#设置网络" class="header-anchor">#</a> 设置网络</h3> <p>根据架构设计，这里部署了4台centos，网络分别为</p> <ul><li><p><code>192.168.1.200</code> MHA</p></li> <li><p><code>192.168.1.201</code> Master1</p></li> <li><p><code>192.268.1.204</code> Slave1</p></li> <li><p><code>192.168.1.205</code> Slave2</p></li></ul> <p>设置静态网络的方法如下</p> <ul><li><p>1）PD网络模式改为wifi</p></li> <li><p>2）进入centos，vi /etc/sysconfig/network-scripts/ifcfg-eth0，增加或修改以下几项</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># 从dhcp改成static
+BOOTPROTO=static
+# 从no改成yes。系统将在启动时自动开启该接口
+ONBOOT=yes
+# 设置IP地址
+IPADDR=192.168.1.200
+# 设置子网掩码
+NETMASK=255.255.255.0
+# 设置网关
+GATEWAY=192.168.1.1
+# 设置DNS
+DNS1=211.167.230.100
+DNS2=211.167.230.200
+# 表示该接口将通过该配置文件进行设置，而不是通过网络管理器进行管理
+NM_CONTROLLED=no
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div></li> <li><p>3）重启网络服务 <code>service network restart</code></p></li> <li><p>4）假如重启网络不生效，重启机器吧<code>reboot</code></p></li></ul> <h3 id="关闭防火墙"><a href="#关闭防火墙" class="header-anchor">#</a> 关闭防火墙</h3> <h4 id="firewalld"><a href="#firewalld" class="header-anchor">#</a> firewalld</h4> <p>这个是centos7默认的</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 查看防火墙状态</span>
+systemctl status firewalld
+<span class="token comment"># 查看防火墙服务状态</span>
+systemctl status firewalld.service
+<span class="token comment"># 临时关闭防火墙</span>
+systemctl stop firewalld
+<span class="token comment"># 永久关闭防火墙</span>
+systemctl disable firewalld.service
+<span class="token comment"># 查看服务是否开机启动</span>
+systemctl is-enabled firewalld.service
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h4 id="iptables"><a href="#iptables" class="header-anchor">#</a> iptables</h4> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 查看防火墙状态</span>
+systemctl status iptables
+<span class="token comment"># 查看防火墙服务状态</span>
+systemctl status iptables.service
+<span class="token comment"># 临时关闭防火墙</span>
+systemctl stop iptables
+<span class="token comment"># 永久关闭防火墙</span>
+systemctl disable iptables.service
+<span class="token comment"># 查看服务是否开机启动</span>
+systemctl is-enabled iptables.service
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="安装mysql5-7"><a href="#安装mysql5-7" class="header-anchor">#</a> 安装MySQL5.7</h3> <h4 id="下载资源包"><a href="#下载资源包" class="header-anchor">#</a> 下载资源包</h4> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">wget</span> https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.28-1.el7.x86_64.rpm-bundle.tar
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h4 id="卸载mariadb"><a href="#卸载mariadb" class="header-anchor">#</a> 卸载Mariadb</h4> <p>Centos7默认自带了MySQL的一个分支产品Mariadb，在安装MySQL前，我们对其进行卸载。</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 检查是否安装了Mariadb</span>
+<span class="token function">rpm</span> -qa<span class="token operator">|</span><span class="token function">grep</span> mariadb
+<span class="token comment"># 会显示例如 mariadb-libs-5.5.56-2.el7.x86_64</span>
+
+<span class="token comment"># 卸载Mariadb</span>
+<span class="token function">rpm</span> -e mariadb-libs-5.5.56-2.el7.x86_64 --nodeps
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h4 id="安装"><a href="#安装" class="header-anchor">#</a> 安装</h4> <ul><li><p>1）解压</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">tar</span> -xvf mysql-5.7.28-1.el7.x86_64.rpm-bundle.tar
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li> <li><p>2）资源包说明</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>mysql-community-client-5.7.28-1.el7.x86_64.rpm
+mysql-community-common-5.7.28-1.el7.x86_64.rpm
+mysql-community-devel-5.7.28-1.el7.x86_64.rpm
+mysql-community-embedded-5.7.28-1.el7.x86_64.rpm
+mysql-community-embedded-compat-5.7.28-1.el7.x86_64.rpm
+mysql-community-embedded-devel-5.7.28-1.el7.x86_64.rpm
+mysql-community-libs-5.7.28-1.el7.x86_64.rpm
+mysql-community-libs-compat-5.7.28-1.el7.x86_64.rpm
+mysql-community-server-5.7.28-1.el7.x86_64.rpm
+mysql-community-test-5.7.28-1.el7.x86_64.rpm
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div></li> <li><p>3）安装</p> <p>每个rpm之间是有依赖关系的，安装顺序安装以下包即可满足日常的需求</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 安装通用包</span>
+<span class="token function">rpm</span> -ivh mysql-community-common-5.7.28-1.el7.x86_64.rpm
+<span class="token comment"># 安装组件包</span>
+<span class="token function">rpm</span> -ivh mysql-community-libs-5.7.28-1.el7.x86_64.rpm
+<span class="token comment"># 安装组件包</span>
+<span class="token function">rpm</span> -ivh mysql-community-libs-compat-5.7.28-1.el7.x86_64.rpm
+<span class="token comment"># 安装client</span>
+<span class="token function">rpm</span> -ivh mysql-community-client-5.7.28-1.el7.x86_64.rpm
+<span class="token comment"># 安装server</span>
+<span class="token function">rpm</span> -ivh mysql-community-server-5.7.28-1.el7.x86_64.rpm
+<span class="token comment"># 安装开发工具包</span>
+<span class="token function">rpm</span> -ivh mysql-community-devel-5.7.28-1.el7.x86_64.rpm
+
+<span class="token comment"># 设置mysql开机启动</span>
+systemctl start mysqld.service
+<span class="token comment"># 查看是否设置生效</span>
+systemctl is-enabled mysqld.service
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div></li> <li><p>4）初始化mysql</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 初始化</span>
+mysqld --initialize --user<span class="token operator">=</span>mysql
+<span class="token comment"># 查看初始化的root用户的密码</span>
+<span class="token function">cat</span> /var/log/mysqld.log
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p><img src="http://qiniu.84dd.xyz/image-20210225145240431.png" alt="#"></p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 登录到mysql</span>
+mysql -uroot -p
+
+<span class="token comment"># 进入到mysql命令行后，修改密码</span>
+<span class="token builtin class-name">set</span> <span class="token assign-left variable">password</span><span class="token operator">=</span>password<span class="token punctuation">(</span><span class="token string">'root'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></li></ul> <h2 id="同步配置"><a href="#同步配置" class="header-anchor">#</a> 同步配置</h2> <h3 id="主从复制机制"><a href="#主从复制机制" class="header-anchor">#</a> 主从复制机制</h3> <ul><li><p>异步复制
+当Slave准备好才会向Master请求binlog。Master不用等Slave，就不用阻塞。</p> <p>缺点：不能保证一切事件都能够被所有的Slave所接收。</p></li> <li><p>全同步复制</p> <p>Master提交事务，直到事务在所有的Slave都已提交，此时才会返回客户端，事务执行完毕。</p> <p>缺点：完成一个事务可能会有很大的延迟。</p></li> <li><p>半同步复制</p> <p>半同步复制工作的机制处于同步和异步之间，Master的事务提交阻塞，只要一个Slave已收到该事务的事件且已记录。它不会等待所有的Slave都告知已收到，且它只是接收，并不用等其完全执行且提交。</p> <p>半同步复制是同步和异步的一个折中，损失一点性能来维持数据完整性和一致性。</p></li></ul> <h3 id="配置主从-异步"><a href="#配置主从-异步" class="header-anchor">#</a> 配置主从（异步）</h3> <p>【半同步复制】在Master和Slave都要开启，才会起作用；否则，它依然为异步复制。修改文件<code>/etc/my.cnf</code>，在<code>[mysqld]</code>下进行修改</p> <h5 id="主库master"><a href="#主库master" class="header-anchor">#</a> 主库Master</h5> <div class="language- line-numbers-mode"><pre class="language-text"><code># 开启binlog，设置binlog日志文件名称
+log_bin=mysql-bin
+# 设置binlog的日志格式，mysql默认采用statement，建议使用mixed
+binlog_format=MIXED
+# 设置server的id
+server-id=1
+# 设置binlog的同步机制，1或N，表示每发生多少次事务才进行同步
+sync-binlog=1
+# 设置忽略同步的库
+binlog-ignore-db=information_schema
+binlog-ignore-db=performance_schema
+binlog-ignore-db=sys
+# 也可以设置要同步什么库
+#binlog-do-db=...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>修改完配置后，重启服务<code>systemctl restart mysqld</code>，然后进入mysql命令行授权</p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code><span class="token keyword">grant</span> <span class="token keyword">replication</span> slave <span class="token keyword">on</span> <span class="token operator">*</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">to</span> <span class="token string">'root'</span><span class="token variable">@'%'</span> identified <span class="token keyword">by</span> <span class="token string">'root'</span><span class="token punctuation">;</span>
+<span class="token keyword">grant</span> <span class="token keyword">all</span> <span class="token keyword">privileges</span> <span class="token keyword">on</span> <span class="token operator">*</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">to</span> <span class="token string">'root'</span><span class="token variable">@'%'</span> identified <span class="token keyword">by</span> <span class="token string">'root'</span><span class="token punctuation">;</span>
+flush <span class="token keyword">privileges</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 查看binlog状态，记住 File 和 Position 的值，等下有用</span>
+<span class="token keyword">show</span> master <span class="token keyword">status</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h5 id="从库slave"><a href="#从库slave" class="header-anchor">#</a> 从库Slave</h5> <div class="language- line-numbers-mode"><pre class="language-text"><code># 设置server的id
+server-id=2
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>修改完配置后，重启服务<code>systemctl restart mysqld</code>，然后进入mysql命令行授</p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code><span class="token comment"># 查看slave状态</span>
+<span class="token keyword">show</span> slave <span class="token keyword">status</span><span class="token punctuation">;</span>
+<span class="token comment"># 如果还没有设置过，会显示Empty set (0.00 sec)</span>
+
+<span class="token comment"># 设置master信息，表明从哪里复制数据，其中部分数据在主库通过命令  show master status;  查看</span>
+change master <span class="token keyword">to</span> master_host<span class="token operator">=</span><span class="token string">'192.168.1.201'</span><span class="token punctuation">,</span> master_port<span class="token operator">=</span><span class="token number">3306</span><span class="token punctuation">,</span> master_user<span class="token operator">=</span><span class="token string">'root'</span><span class="token punctuation">,</span> master_password<span class="token operator">=</span><span class="token string">'root'</span><span class="token punctuation">,</span> master_log_file<span class="token operator">=</span><span class="token string">'mysql-bin.000009'</span><span class="token punctuation">,</span> master_log_pos<span class="token operator">=</span><span class="token number">154</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 启动salve，开始同步数据</span>
+<span class="token keyword">start</span> slave<span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>正常同步时显示如下</p> <p><img src="http://qiniu.84dd.xyz/image-20210225173038276.png" alt="image-20210225173038276"></p> <h3 id="配置主从-半同步"><a href="#配置主从-半同步" class="header-anchor">#</a> 配置主从（半同步）</h3> <p>在异步（mysql默认为异步）的配置基础上，进行下面操作，将同步机制改为半同步复制。</p> <h4 id="主库master-2"><a href="#主库master-2" class="header-anchor">#</a> 主库Master</h4> <p>进入mysql命令行</p> <div class="language-mysql line-numbers-mode"><pre class="language-text"><code># 安装master的半同步插件
+install plugin rpl_semi_sync_master soname 'semisync_master.so';
+# 设置master上开启半同步复制
+set global rpl_semi_sync_master_enabled = 1;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h4 id="从库slave-2"><a href="#从库slave-2" class="header-anchor">#</a> 从库Slave</h4> <p>进入mysql命令行</p> <div class="language-mysql line-numbers-mode"><pre class="language-text"><code># 安装slave的半同步插件
+install plugin rpl_semi_sync_slave soname 'semisync_slave.so';
+# 设置slave上开启半同步复制
+set global rpl_semi_sync_slave_enabled = 1;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h2 id="同步演示"><a href="#同步演示" class="header-anchor">#</a> 同步演示</h2> <ul><li><p>1）master下创建数据库，并创建表</p> <div class="language-mysql line-numbers-mode"><pre class="language-text"><code>create database mall;
+
+use mall;
+
+create table product(
+	id int primary key auto_increment,
+  name varchar(20),
+  category varchar(20)
+)engine=innodb charset=utf8;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div></li> <li><p>2）slave下查看数据库和数据表</p> <div class="language-mysql line-numbers-mode"><pre class="language-text"><code>show databases;
+
+use mall;
+
+show tables;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></li> <li><p>3）验证数据同步</p> <div class="language-mysql line-numbers-mode"><pre class="language-text"><code># 主库master插入数据
+insert into product(name, category)values('华为P40', '手机');
+
+# 从库slave查询数据
+select * from product;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></li> <li><p>4）查看同步日志</p> <p>linux命令行下查看mysql日志，默认位置在 <code>/var/log/mysqld.log</code></p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 主库master服务器上查看</span>
+<span class="token function">tail</span> -n <span class="token number">100</span> /var/log/mysqld.log
+
+<span class="token comment"># 从库slave服务器上查看</span>
+<span class="token function">tail</span> -n <span class="token number">100</span> /var/log/mysqld.log
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></li></ul> <h2 id="mha高可用-2"><a href="#mha高可用-2" class="header-anchor">#</a> MHA高可用</h2> <p>MHA（Master HA）是一款开源的 MySQL 的高可用程序，它为 MySQL主从复制架构提供了 automating master failover （自动化主故障转移）功能。MHA 在监控到 master 节点故障时，会提升其中拥有最新数据的 slave 节点成为新的master 节点，在此期间，MHA 会通过于其它从节点获取额外信息来避免一致性方面的问题。MHA 还提供了 master 节点的在线切换功能，即按需切换 master/slave 节点。</p> <p>MHA工作原理总结为以下几条：</p> <ul><li><p>1） 获取从宕机崩溃的 master 保存二进制日志事件（binlog events）；</p></li> <li><p>2） 识别含有最新更新的 slave ；</p></li> <li><p>3） 将差异的中继日志(relay log)应用到其他 slave ；</p></li> <li><p>4） 将 master 保存的二进制日志事件(binlog events)应用到要提升为master节点的slave；</p></li> <li><p>5） 将这 slave 只读模式解除并提升为新 master ，重新部署主从关系；</p></li></ul> <h3 id="安装环境"><a href="#安装环境" class="header-anchor">#</a> 安装环境</h3> <p>在Master主库，Slave从库和MHA Manager服务器上均需要下载安装</p> <p>node下载地址 <code>https://github.com/yoshinorim/mha4mysql-node/releases/download/v0.58/mha4mysql-node-0.58-0.el7.centos.noarch.rpm</code></p> <p>manager下载地址<code>https://github.com/yoshinorim/mha4mysql-manager/releases/download/v0.58/mha4mysql-manager-0.58-0.el7.centos.noarch.rpm</code></p> <ul><li><p>1）各个节点安装node包</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 安装必要的依赖</span>
+yum <span class="token function">install</span> perl-DBD-MySQL -y
+<span class="token comment"># 安装包</span>
+<span class="token function">rpm</span> -ivh mha4mysql-node-0.58-0.el7.centos.noarch.rpm
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div></li> <li><p>2）在管理节点（MHA服务器）安装node包和manager包</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 安装依赖</span>
+yum <span class="token function">install</span> -y epel-release
+yum <span class="token function">install</span> -y perl-Config-Tiny perl-Log-Dispatch perl-Parallel-ForkManager perl-Time-HiRes
+
+<span class="token comment"># 先安装node</span>
+<span class="token function">rpm</span> -ivh mha4mysql-node-0.58-0.el7.centos.noarch.rpm
+<span class="token comment"># 再安装manager</span>
+<span class="token function">rpm</span> -ivh mha4mysql-manager-0.58-0.el7.centos.noarch.rpm
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div></li></ul> <h3 id="准备ssh互通环境"><a href="#准备ssh互通环境" class="header-anchor">#</a> 准备ssh互通环境</h3> <p>MHA集群中的各节点彼此之间均需要基于ssh互信通信，以实现远程控制及数据管理功能。简单起见，可在Manager节点生成密钥对儿，并设置其可远程连接本地主机后， 将私钥文件及authorized_keys文件复制给余下的所有节点即可。</p> <p>在Manager节点和所有Master、Slave节点上操作</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment"># 生成公私钥对</span>
+ssh-keygen -t rsa
+<span class="token comment"># Master、Slave节点上将公钥复制到远程机器中</span>
+ssh-copy-id -i .ssh/id_rsa.pub root@192.168.1.200
+
+<span class="token comment"># 操作完上一步后，各个机器的公钥就会存在于Manager节点 .ssh/authorized_keys 文件中</span>
+<span class="token comment"># 此时，将该文件复制到每个节点，那么每个节点之间就可以实现ssh无密码互通了</span>
+<span class="token function">scp</span> ~/.ssh/authorized_keys root@192.168.1.201
+<span class="token function">scp</span> ~/.ssh/authorized_keys root@192.168.1.204
+<span class="token function">scp</span> ~/.ssh/authorized_keys root@192.168.1.205
+
+<span class="token comment"># 验证是否成功，如果不用输密码就配置成功了</span>
+<span class="token function">ssh</span> root@192.1691.1201
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="配置"><a href="#配置" class="header-anchor">#</a> 配置</h3> <p>在Manager上配置</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">mkdir</span> /etc/mha_master
+<span class="token function">vi</span> /etc/mha_master/mha.cnf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>配置文件内容如下</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>[server default]
+# mha管理用户
+user=root
+# mha管理密码
+password=1qaz2wsx
+# mha_master自己的工作路径
+manager_workdir=/etc/mha_master/app1
+# mha_master自己的日志文件
+manager_log=/etc/mha_master/manager.log
+# 每个远程主机的工作目录在何处
+remote_workdir=/mydata/mha_master/app1
+# 基于ssh的密钥认证
+ssh_user=root
+# 数据库用户名
+repl_user=root
+# 数据库密码
+repl_password=root
+# ping间隔时长
+ping_interval=1
+[server1]
+# 节点主机地址
+hostname=192.168.1.201
+# 节点的ssh端口
+ssh_port=22
+# 将来可不可以成为master候选节点/主节点
+candidate_master=1
+[server2]
+hostname=192.168.1.204
+ssh_port=22
+candidate_master=1
+[server3]
+hostname=192.168.1.205
+ssh_port=22
+candidate_master=1
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br></div></div><ul><li><p>1）检测各节点间 ssh 互信通信配置是否 ok</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code>masterha_check_ssh -conf<span class="token operator">=</span>/etc/mha_master/mha.cnf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>如果最后一行显示为<code>[info]All SSH connection tests passed successfully.</code>则表示成功。</p></li> <li><p>2）检查管理的MySQL复制集群的连接配置参数是否OK</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code>masterha_check_repl -conf<span class="token operator">=</span>/etc/mha_master/mha.cnf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>如果显示有如下信息，则表示从节点没有配置好，不能转换为master节点</p> <p>Sat Feb 27 00:15:56 2021 - [warning]  relay_log_purge=0 is not set on slave 192.168.1.205(192.168.1.205:3306).
+Sat Feb 27 00:15:56 2021 - [warning]  log-bin is not set on slave 192.168.1.205(192.168.1.205:3306). This host cannot be a master.</p> <p>这时候需要我们为从节点设置binlog等信息</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># 开启binlog，设置binlog日志文件名称
+log_bin=mysql-bin
+# 设置binlog的日志格式，mysql默认采用statement，建议使用mixed
+binlog_format=MIXED
+# 设置server的id
+server-id=xxx
+# 设置binlog的同步机制，1或N，表示每发生多少次事务才进行同步
+sync-binlog=1
+# 设置忽略同步的库
+binlog-ignore-db=information_schema
+binlog-ignore-db=performance_schema
+binlog-ignore-db=sys
+# 也可以设置要同步什么库
+#binlog-do-db=...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>如果显示<code>MySQL Replication Health is OK.</code>则表示成功。</p></li></ul> <h3 id="启动mha"><a href="#启动mha" class="header-anchor">#</a> 启动MHA</h3> <p>我们在 manager 节点上执行以下命令来启动 MHA：</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">nohup</span> masterha_manager -conf<span class="token operator">=</span>/etc/mha_master/mha.cnf <span class="token operator">&amp;&gt;</span> /etc/mha_master/manager.log <span class="token operator">&amp;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>启动成功以后，我们来查看一下 master 节点的状态：</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code>masterha_check_status -conf<span class="token operator">=</span>/etc/mha_master/mha.cnf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>如果启动成功会显示 <code>mha (pid:13959) is running(0:PING_OK), master:192.168.1.201</code></p> <p>如果我们想要停止 MHA ，则需要使用 stop 命令：</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code>masterha_stop -conf<span class="token operator">=</span>/etc/mha_master/mha.cnf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h2 id="高可用演示"><a href="#高可用演示" class="header-anchor">#</a> 高可用演示</h2> <ul><li><p>1）在manager（192.168.1.200）上观察日志</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">tail</span> -f /etc/mha_master/manager.log
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li> <li><p>2）停止master（192.168.1.201）上的mysql服务</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>systemctl stop mysqld.service
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li> <li><p>3）日志上会显示master转移信息</p> <p><img src="http://qiniu.84dd.xyz/image-20210227004422701.png" alt="image-20210227004422701"></p></li> <li><p>4）将旧master（192.168.1.201）上的mysql重启，检查数据是否同步到</p> <p>此时并不会同步到，因为原来master没有设置slave。</p> <p>为避免同步的各种问题，我们将给节点统一设置，并从现在的master同步数据</p> <ul><li><p>a）配置成为master的信息</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># 开启binlog，设置binlog日志文件名称
+log_bin=mysql-bin
+# 设置binlog的日志格式，mysql默认采用statement，建议使用mixed
+binlog_format=MIXED
+# 设置server的id
+server-id=xxxxxxxxxx # 注意这个数字要唯一
+# 设置binlog的同步机制，1或N，表示每发生多少次事务才进行同步
+sync-binlog=1
+# 设置忽略同步的库
+binlog-ignore-db=information_schema
+binlog-ignore-db=performance_schema
+binlog-ignore-db=sys
+# 也可以设置要同步什么库
+#binlog-do-db=...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div></li> <li><p>b）mysql命令行中授权</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>grant replication slave on *.* to 'root'@'%' identified by 'root';
+grant all privileges on *.* to 'root'@'%' identified by 'root';
+flush privileges;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div></li> <li><p>c）设置slave（设置过的节点可忽略）</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># 查看slave状态
+show slave status;
+# 如果还没有设置过，会显示Empty set (0.00 sec)
+
+# 设置master信息，表明从哪里复制数据，其中部分数据在主库通过命令  show master status;  查看
+change master to master_host='192.168.1.204', master_port=3306, master_user='root', master_password='root', master_log_file='mysql-bin.000003', master_log_pos=499;
+
+change master to master_host='192.168.1.201', master_port=3306, master_user='root', master_password='root', master_log_file='mysql-bin.000015', master_log_pos=154;
+
+
+# 启动salve，开始同步数据
+start slave;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div></li> <li><p>d）设置半同步复制</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># 安装master的半同步插件
+install plugin rpl_semi_sync_master soname 'semisync_master.so';
+# 设置master上开启半同步复制
+set global rpl_semi_sync_master_enabled = 1;
+
+
+# 安装slave的半同步插件
+install plugin rpl_semi_sync_slave soname 'semisync_slave.so';
+# 设置slave上开启半同步复制
+set global rpl_semi_sync_slave_enabled = 1;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div></li></ul></li></ul> <h2 id="问题"><a href="#问题" class="header-anchor">#</a> 问题</h2> <ul><li><p>1）start slave 启动的时候报错<code>Fatal error: The slave I/O thread stops because master and slave have equal MySQL server UUIDs; these UUIDs must be different for replication to work.</code></p> <p>解决：修改 <code>/var/lib/mysql/auto.cnf</code> 下的server-uuid字段，然后重启mysql服务。</p></li> <li><p>2）[error][/usr/share/perl5/vendor_perl/MHA/MasterFailover.pm, ln310] Last failover was done at 2021/02/27 00:40:47. Current time is too early to do failover again. If you want to do failover, manually remove /etc/mha_master/app1/mha.failover.complete and run this script again.</p> <p>日志文件提示切换master过快，需要删除</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>rm -rf /etc/mha_master/app1/mha.failover.complete
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/84dd/84dd.github.io/edit/dev/docs/java/41mha.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">更新于:</span> <span class="time">a few seconds ago</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/docs/java/41mysql.html" class="prev">
+        MySQL
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><div class="my-loader center" style="display:none;" data-v-354e1a9e><div class="my-loader-circle" data-v-354e1a9e></div></div><!----><!----></div></div>
+    <script src="/assets/js/app.1b6a3e43.js" defer></script><script src="/assets/js/3.b8d8f798.js" defer></script><script src="/assets/js/60.ce1a3d68.js" defer></script><script src="/assets/js/5.3e753ed6.js" defer></script>
+  </body>
+</html>
