@@ -160,6 +160,14 @@ const java = [
           '33dubbo',
           '34springcloud',
         ]
+      },
+      {
+        title: '第四阶段 大型分布式存储系统架构进阶',
+        sidebarDepth: 2,
+        children: [
+          '41mysql',
+          '41mha',
+        ]
       }
     ]
   }

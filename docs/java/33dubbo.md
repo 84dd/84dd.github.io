@@ -437,3 +437,15 @@ Dubbo 主要提供了这样几种容错方式:
 - Failback Cluster - 失败自动恢复 请求失败后 会自动记录请求到失败队列中 
 - Forking Cluster - 并行调用多个服务提供者 其中有一个返回 则立即返回结果
 
+## 常见面试题
+- 什么是dubbo 特性 调用过程
+- 什么是SPI dubbo中的SPI做了哪些改进
+- dubbo的负载均衡策略 一致性hash
+- dubbo注册中心挂了之后 是否能进行服务调用
+- dubbo的架构层次（调用原理）
+- dubbo的服务注册和发现流程
+- dubbo的集群容错策略
+- dubbo的服务降级手段
+- dubbo支持的协议 特点 能否改进
+- dubbo如何处理粘包和拆包
+- 如何设计一个RPC框架
