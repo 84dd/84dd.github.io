@@ -167,6 +167,8 @@ const java = [
         children: [
           '41mysql',
           '41mha',
+          '42mysql',
+          '42shardingjdbc',
         ]
       }
     ]

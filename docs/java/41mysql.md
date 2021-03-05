@@ -306,6 +306,28 @@ explain select id from user order by abs(age); //对应(age)索引
 ```
 :::
 
+### SQL语句及索引优化
+- SQL语句中IN包含的值不应过多
+- SELECT语句务必指明字段名称
+- 当只需要一条数据的时候，使用limit 1
+- 排序字段加索引
+- 如果限制条件中其他字段没有索引，尽量少用or
+- 尽量用union all代替union
+- 不使用ORDER BY RAND()
+- 区分in和exists、not in和not exists  
+  区分in和exists主要是造成了驱动顺序的改变(这是性能变化的关键)，如果是exists，那么以外层表为 驱动表，先被访问，如果是IN，那么先执行子查询。所以IN适合于外表大而内表小的情况;EXISTS适合 于外表小而内表大的情况。 关于not in和not exists，推荐使用not exists，不仅仅是效率问题，not in可能存在逻辑问题。
+- 使用合理的分页方式以提高分页的效率
+- 分段查询
+- 不建议使用%前缀模糊查询
+- 避免在where子句中对字段进行表达式操作
+- 避免隐式类型转换
+- 对于联合索引来说，要遵守最左前缀法则
+- 必要时可以使用force index来强制查询走某个索引
+- 注意范围查询语句  
+  对于联合索引来说，如果存在范围查询，比如between、>、<等条件时，会造成后面的索引字段失效。
+- 使用JOIN优化  
+  LEFT JOIN A表为驱动表，INNER JOIN MySQL会自动找出那个数据少的表作用驱动表，RIGHT JOIN B 表为驱动表。
+
 ## 事务和锁
 |事务隔离级别<img width=115/>|回滚覆盖|脏读|不可重复读|提交覆盖|幻读|
 |-|-|-|-|-|-|
@@ -522,56 +544,51 @@ select * from user where id>= (select id from user limit 10000,1) limit 100;
 - ChangeBuffer占用BufferPool空间，默认占25%，最大允许占50%，可以根据读写业务量来 进行调整。参数innodb_change_buffer_max_size;
 - 将innodb_log_buffer_size参数调大，减少磁盘IO频率。
 - 根据需要修改innodb_flush_log_at_trx_commit参数控制日志刷新行为。
+### 数据预热
+默认情况，仅仅有某条数据被读取一次，才会缓存在 innodb_buffer_pool。 所以，数据库刚刚启动，须要进行数据预热，将磁盘上的全部数据缓存到内存中。 数据预热能够提高读取速度。
 
-
-
-
-
-
-show proling
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+对于InnoDB数据库，进行数据预热的脚本是:
+```sql
+SELECT DISTINCT
+    CONCAT('SELECT ',ndxcollist,' FROM ',db,'.',tb,
+    ' ORDER BY ',ndxcollist,';') SelectQueryToLoadCache
+    FROM
+    (
+SELECT
+            engine,table_schema db,table_name tb,
+            index_name,GROUP_CONCAT(column_name ORDER BY seq_in_index)
+ndxcollist
+FROM
+(
+SELECT
+    B.engine,A.table_schema,A.table_name,
+    A.index_name,A.column_name,A.seq_in_index
+FROM
+    information_schema.statistics A INNER JOIN
+    (
+        SELECT engine,table_schema,table_name
+        FROM information_schema.tables WHERE
+        engine='InnoDB'
+                ) B USING (table_schema,table_name)
+            WHERE B.table_schema NOT IN ('information_schema','mysql')
+ORDER BY table_schema,table_name,index_name,seq_in_index )A
+        GROUP BY table_schema,table_name,index_name
+    ) AA
+ORDER BY db,tb;
+```
+- 1）将该脚本保存为:loadtomem.sql
+- 2）执行命令
+```sql
+mysql -uroot -proot -AN < /root/loadtomem.sql > /root/loadtomem.sql
+```
+- 3）在需要数据预热时，比如重启数据库，执行命令:
+```sql
+mysql -uroot < /root/loadtomem.sql > /dev/null 2>&1
+```
+### 降低磁盘写入次数
+- 增大redolog，减少落盘次数  
+  innodb_log_file_size 设置为 0.25 * innodb_buffer_pool_size
+- 通用查询日志、慢查询日志可以不开 ，bin-log开  
+  生产中不开通用查询日志，遇到性能问题开慢查询日志
+- 写redolog策略 innodb_flush_log_at_trx_commit设置为0或2  
+  如果不涉及非常高的安全性 (金融系统)，或者基础架构足够安全，或者事务都非常小，都能够用 0 或者 2 来减少磁盘操作。
