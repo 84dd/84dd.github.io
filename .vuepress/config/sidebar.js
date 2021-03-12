@@ -169,6 +169,8 @@ const java = [
           '41mha',
           '42mysql',
           '42shardingjdbc',
+          '43mongodb',
+          '43mongodb1',
         ]
       }
     ]
